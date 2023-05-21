@@ -1,0 +1,14 @@
+.gradient-45deg-indigo-purple {
+    color: white;
+    background: #303f9f;
+    background: -webkit-linear-gradient(45deg, #303f9f, #7b1fa2) !important;
+    background: linear-gradient(45deg, #303f9f, #7b1fa2) !important;
+}
+
+/* Button modal Timeline add photo , avancer de chantier  */
+.btnAddTimeLine{
+    font-size: 35px !important;
+    border-radius: 50% !important;
+    --bs-btn-padding-x: 0.7rem !important;
+    --bs-btn-padding-y: 0.1rem !important;
+}
