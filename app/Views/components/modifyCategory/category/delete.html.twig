@@ -1,0 +1,43 @@
+<!-- Vertically Centered Modal -->
+<div class="col-12 pt-3"><!-- Button trigger modal -->
+    <button
+            type="button"
+            class="btn btn-danger"
+            data-bs-toggle="modal"
+            data-bs-target="#modalCenterdell{{ category.id }}">
+        Supprimer
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade modalCenter" id="modalCenterdell{{ category.id }}" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalCenterTitle">Suppresion de la category</h4>
+                    <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <p> Etes vous sur de vouloir supprimer definitivement la category {{ category.name }} ainsi que
+                            toute c'est sous category </p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
+                        fermer
+                    </button>
+                    <button type="button" class="btn btn-danger modaldeletecategory"
+                            id="deletecategory{{ category.id }}" data-idcategory="{{ category.id }}"
+                            data-bs-dismiss="modal">Supprimer definitivement
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

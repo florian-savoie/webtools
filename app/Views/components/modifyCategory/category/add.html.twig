@@ -1,0 +1,42 @@
+<!-- Vertically Centered Modal -->
+<div class="pt-3"><!-- Button trigger modal -->
+    <div class="d-flex justify-content-between">
+        <h3>test</h3>
+        <button
+                type="button"
+                class="btn btn-success"
+                data-bs-toggle="modal"
+                data-bs-target="#modalCenteraddcat">
+            ajouter
+        </button>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade modalCenter" id="modalCenteraddcat" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-center" id="modalCenterTitle">ajouter une  category</h4>
+                    <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <h4 class="text-center mt-4"> Definir une category et une couleur </h4>
+                <div class="modal-body"><div class="row">
+                        <div class="d-flex">
+                            <input id="category-input" class="form-control me-2" type="text" placeholder="Ajouter une catégorie">
+                            <input class="form-control" type="color" id="category-color">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
+                        fermer
+                    </button>
+                    <button type="button" class="btn btn-success" id="addcategory"  data-bs-dismiss="modal">ajouter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

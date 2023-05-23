@@ -37,6 +37,12 @@ $routes->post('/register', 'registerController::register');
 $routes->get('/logout', 'logoutController::logout');
 $routes->post('/moncompte', 'moncompteController::moncompte');
 $routes->get('/moncompte', 'moncompteController::moncompte');
+$routes->get('/showcategory', 'showcategoryController::category');
+$routes->post('/showcategory', 'showcategoryController::category');
+$routes->post('/delete-category', 'showcategoryController::deletecategory');
+$routes->post('/delete-souscategory', 'showcategoryController::deletesouscategory');
+$routes->post('/add-category', 'showcategoryController::addcategory');
+$routes->post('/update-category', 'showcategoryController::updatecategory');
 
 /*
  * --------------------------------------------------------------------
