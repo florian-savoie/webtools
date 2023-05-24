@@ -98,7 +98,8 @@
                                     <tr>
                                       <th style="color: {{ category.color }}">Sous-catégorie</th>
                                       <th></th>
-                                      <th>                                          <a href="#" class="btn btn-success">Ajouter</a>
+                                      <th>                                                                {% include "./components/modifyCategory/souscategory/add.html.twig" %}
+
                                       </th>
                                     </tr>
                                   </thead>
@@ -107,7 +108,7 @@
                                       <tr>
                                         <td style="color: {{ category.color }}">{{ subcategory }}</td>
                                         <td>
-                                          <a href="#" class="btn btn-primary">Modifier</a>
+                        {% include "./components/modifyCategory/souscategory/update.html.twig" %}
                                         </td>
                                         <td>
                         {% include "./components/modifyCategory/souscategory/delete.html.twig" %}
@@ -117,7 +118,8 @@
                                   </tbody>
                                 </table>
                               {% else %}
-                                Aucune sous-catégorie disponible.
+                                Aucune sous-catégorie disponible.                          {% include "./components/modifyCategory/souscategory/add.html.twig" %}
+
                               {% endif %}
                             </div>
                           </div>
@@ -205,7 +207,44 @@
 
 
 
+document.addEventListener('DOMContentLoaded', function() {
+        var modalUpdateCategoryButtons = document.querySelectorAll('.modalupdatecategory');
 
+        modalUpdateCategoryButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                var categoryId = this.dataset.idcategory;
+                var inputId = "updatecategory-input-" + categoryId;
+                var inputcolor = "category-color-" + categoryId;
+                var newCategoryName = document.getElementById(inputId).value;
+                var newCategorycolor = document.getElementById(inputcolor).value;
+
+                // Effectuer la requête Ajax
+                $.ajax({
+                    url: '/update-category',
+                    method: 'POST',
+                    data: {
+                        action: 'update-category',
+                        newname: newCategoryName,
+                        idligne: categoryId,
+                        color: newCategorycolor,
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.hasOwnProperty('error')) {
+                            console.log('Erreur lors de la modification :', response.error);
+                        } else {
+                            console.log(response);
+                                                    window.location.href = "/showcategory";
+
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Une erreur s\'est produite lors de la requête :', error);
+                    }
+                });
+            });
+        });
+    });
 
 
 
@@ -326,44 +365,83 @@
         });
     });
 
-  document.addEventListener('DOMContentLoaded', function() {
-        var modalUpdateCategoryButtons = document.querySelectorAll('.modalupdatecategory');
-
-        modalUpdateCategoryButtons.forEach(function(button) {
-            button.addEventListener('click', function() {
-                var categoryId = this.dataset.idcategory;
-                var inputId = "updatecategory-input-" + categoryId;
-                var inputcolor = "category-color-" + categoryId;
-                var newCategoryName = document.getElementById(inputId).value;
-                var newCategorycolor = document.getElementById(inputcolor).value;
-
-                // Effectuer la requête Ajax
-                $.ajax({
-                    url: '/update-category',
-                    method: 'POST',
-                    data: {
-                        action: 'update-category',
-                        newname: newCategoryName,
-                        idligne: categoryId,
-                        color: newCategorycolor,
-                    },
-                    dataType: 'json',
-                    success: function(response) {
-                        if (response.hasOwnProperty('error')) {
-                            console.log('Erreur lors de la modification :', response.error);
-                        } else {
-                            console.log(response);
-                                                    window.location.href = "/showcategory";
-
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('Une erreur s\'est produite lors de la requête :', error);
+document.addEventListener('DOMContentLoaded', function() {
+    var modalUpdatesousCategoryButtons = document.querySelectorAll('.modalupdatesouscategory');
+    modalUpdatesousCategoryButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            var categoryId = this.dataset.idcategory;
+            var namesouscat = this.dataset.namesouscategory;
+            var inputId = "updatesouscategory-input-" + categoryId + namesouscat;
+            var name = document.getElementById(inputId).value;
+console.log(namesouscat);
+console.log(name);
+console.log(categoryId);
+            // Effectuer la requête Ajax
+            $.ajax({
+                url: '/update-souscategory',
+                method: 'POST',
+                data: {
+                    action: 'update-souscategory',
+                    name: name,
+                    idcategory: categoryId,
+                    ancienname: namesouscat
+                },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.hasOwnProperty('error')) {
+                        console.log('Erreur lors de la modification :', response.error);
+                    } else {
+                        console.log(response);
+                        window.location.href = "/showcategory";
                     }
-                });
+                },
+                error: function(xhr, status, error) {
+                    console.error('Une erreur s\'est produite lors de la requête :', error);
+                }
             });
         });
     });
+});
+
+
+            document.querySelectorAll('.modalCenterdellsouscat').forEach(function (modaldelet) {
+    modaldelet.addEventListener('click', function () {
+        var name = this.dataset.idsouscategory;
+        var idcategory = this.dataset.idcategory;
+        console.log(name);
+        console.log(idcategory);
+        // Effectuer la requête Ajax
+        $.ajax({
+            url: '/delete-souscategory',
+            method: 'POST',
+            data: {
+                action: 'delete-souscategory',
+                name: name,
+                idcategory: idcategory,
+            },
+            dataType: 'json', // Attendre une réponse JSON du serveur
+            success: function (response) {
+                // Vérifier la réponse du serveur
+                if (response.hasOwnProperty('error')) {
+                    // Erreur lors de l'ajout du vote
+                    console.log('Erreur lors de l\'ajout du vote :', response.error);
+                } else {
+                    // Le vote a été ajouté avec succès
+
+                    console.log(response);
+                                                                                    window.location.href = "/showcategory";
+
+
+                }
+            },
+            error: function (xhr, status, error) {
+                // Gérer les erreurs lors de la requête Ajax
+                console.error('Une erreur s\'est produite lors de la requête :', error);
+            }
+        });
+    });
+});
+
 
 
         </script>

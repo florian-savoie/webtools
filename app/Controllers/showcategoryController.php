@@ -192,7 +192,70 @@ class ShowcategoryController extends BaseController
             echo json_encode($response);
         }
     }
+    public function updatesouscategory()
+    {
+        if (isset($_POST['action']) && $_POST['action'] === 'update-souscategory') {
+            $newnamesouscategory = $_POST['name'];
+            $idcategory = $_POST['idcategory'];
+            $ancienname = $_POST['ancienname'];
+            $data = ['name' => $newnamesouscategory
+                ];
+            $updated = $this->db->table('subcategories')->update($data, ['category_id' => $idcategory, 'name' => $ancienname ]);
 
+            // Vérifier si la mise à jour a réussi
+            if (!$updated) {
+                $error = $this->db->error();
+                $response = "Erreur lors de la mise à jour : " . $error['message'];
+            } else {
+                $response = "Mise à jour effectuée avec succès.";
+            }
+
+            // Renvoyer la réponse au format JSON
+            header('Content-Type: application/json');
+            echo json_encode($response);
+        }
+    }
+
+    public function addsouscategory()
+    {
+        if (isset($_POST['action']) && $_POST['action'] === 'add-souscategory') {
+            if(!empty($_POST['name']) && !empty($_POST['idcategory'])) {
+
+                $name = $_POST['name'];
+                $idcategory = $_POST['idcategory'];
+
+                $builder = $this->db->table('subcategories');
+
+                // Vérifier si la sous-catégorie existe déjà
+                $query = $builder->getWhere(['name' => $name, 'category_id' => $idcategory])->getResult();
+                if(!empty($query)) {
+                    $response = "La sous-catégorie existe déjà pour cette catégorie.";
+                } else {
+                    $insertok = $builder->insert([
+                        'name' => $name,
+                        'category_id' => $idcategory
+                    ]);
+                    // Vérifier si la mise à jour a réussi
+                    if (!$insertok) {
+                        $error = $this->db->error();
+                        $response = "Erreur lors de la mise à jour : " . $error['message'];
+                    } else {
+                        $response = "Mise à jour effectuée avec succès.";
+                    }
+                }
+
+                // Renvoyer la réponse au format JSON
+                header('Content-Type: application/json');
+                echo json_encode($response);
+            }
+            else {
+                $response = "Le nom et l'id de la catégorie doivent être renseignés.";
+                // Renvoyer la réponse au format JSON
+                header('Content-Type: application/json');
+                echo json_encode($response);
+            }
+        }
+    }
 }
 
 

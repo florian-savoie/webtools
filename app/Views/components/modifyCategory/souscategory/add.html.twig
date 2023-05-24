@@ -1,0 +1,28 @@
+<div class="pt-3"><!-- Button trigger modal -->
+    <div class="d-flex justify-content-between">
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalCenteraddsouscat{{ category.id }}">ajouter</button>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade modalCenter" id="modalCenteraddsouscat{{ category.id }}" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-center" id="modalCenterTitle">Ajouter une sous category</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <h4 class="text-center mt-4" style="color: {{ category.color }}"> definir le nom de la sous category pour la categorie {{ category.name }}</h4>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="d-flex">
+                            <input id="souscategory-input-{{ category.id }}" class="form-control me-2" type="text" placeholder="Ajouter une catégorie">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">fermer</button>
+                    <button type="button" class="btn btn-success addsouscategory" data-idcategory="{{ category.id }}" data-bs-dismiss="modal">ajouter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

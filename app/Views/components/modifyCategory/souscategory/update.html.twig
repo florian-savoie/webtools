@@ -1,0 +1,26 @@
+<div class="col-12 pt-3">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenterupdatesouscat{{ category.id }}{{ subcategory }}">
+        Modifier
+    </button>
+
+    <div class="modal fade modalCenter" id="modalCenterupdatesouscat{{ category.id }}{{ subcategory }}" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalCenterTitle" style="color: {{ category.color }}">modifier le nom de la sous category: {{ subcategory }} </h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-floating form-floating-outline mb-4">
+                        <input class="form-control" type="text" placeholder="{{ subcategory }}" id="updatesouscategory-input-{{ category.id }}{{ subcategory }}" value="{{ subcategory }}" />
+                        <label for="updatesouscategory-input-{{ souscategory.id }}">Modification de la sous catégorie {{ subcategory }}</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-primary modalupdatesouscategory"  data-namesouscategory="{{ subcategory }}" data-idcategory="{{ category.id }}" data-bs-dismiss="modal">Mise à jour</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

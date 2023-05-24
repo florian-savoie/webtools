@@ -12,7 +12,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-floating form-floating-outline mb-4">
-                        <input class="form-control" type="text" placeholder="{{ category.name }}" id="updatecategory-input-{{ category.id }}" />
+                        <input class="form-control" type="text" placeholder="{{ category.name }}" id="updatecategory-input-{{ category.id }}" value="{{ category.name }}" />
                         <label for="updatecategory-input-{{ category.id }}">Modification de la catégorie {{ category.name }}</label>
                         <input class="form-control" type="color" id="category-color-{{ category.id }}" value="{{ category.color }}">
 

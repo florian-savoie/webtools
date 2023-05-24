@@ -43,6 +43,8 @@ $routes->post('/delete-category', 'showcategoryController::deletecategory');
 $routes->post('/delete-souscategory', 'showcategoryController::deletesouscategory');
 $routes->post('/add-category', 'showcategoryController::addcategory');
 $routes->post('/update-category', 'showcategoryController::updatecategory');
+$routes->post('/add-souscategory', 'showcategoryController::addsouscategory');
+$routes->post('/update-souscategory', 'showcategoryController::updatesouscategory');
 
 /*
  * --------------------------------------------------------------------
