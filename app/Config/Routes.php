@@ -45,6 +45,9 @@ $routes->post('/add-category', 'showcategoryController::addcategory');
 $routes->post('/update-category', 'showcategoryController::updatecategory');
 $routes->post('/add-souscategory', 'showcategoryController::addsouscategory');
 $routes->post('/update-souscategory', 'showcategoryController::updatesouscategory');
+$routes->get('/addarticle', 'articleController::addarticle');
+$routes->post('/addarticle', 'articleController::addarticle');
+$routes->post('/show-souscategory', 'articleController::addarticle');
 
 /*
  * --------------------------------------------------------------------
