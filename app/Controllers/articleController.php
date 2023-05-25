@@ -47,9 +47,8 @@ class articleController extends BaseController
     public function addarticle()
     {
         $sessionExistsAndTrue = false;
-
         $autoriser = $this->session->get('Autoriser');
-
+        $response = "";
         // Vérifier si la session existe et est vraie
         if ($autoriser === true) {
             $sessionExistsAndTrue = true;
@@ -68,11 +67,47 @@ class articleController extends BaseController
             }
         }
 
+
+        if (isset($_POST['publication'])) {
+            $title = $_POST['title'];
+            $url = $_POST['url'];
+            $content = $_POST['description'];
+            $category_id = $_POST['category'];
+
+            if (isset($_POST['souscat'])){
+                $subcategory_id = $_POST['souscat'];
+            }else{
+                $subcategory_id = null;
+
+            }
+            // Vérifier si les champs ont été remplis
+                // Insérer les données dans la base de données
+                // ...
+
+                $builder = $this->db->table('articles');
+                $insertok = $builder->insert([
+                    'user_id' => $_SESSION['iduser'],
+                    'category_id' => $category_id,
+                    'subcategory_id' => $subcategory_id,
+                    "title" => $title,
+                    "content" => $content,
+                    "image" => $url,
+                    "link" => $url,
+                ]);
+            }     if ($this->db->error()) {
+                $error = $this->db->error();
+                $response = "Erreur lors de la mise à jour : " . $error['message'];
+            } else {
+                $response = "Suppression effectuée avec succès.";
+            }
+
         return $this->twig->render('addarticle.html.twig', [
             'sessionExistsAndTrue' => $sessionExistsAndTrue,
             'session' => $_SESSION,
             'categorys' => $categorys,
+            "response" => $response ,
         ]);
     }
+
 
 }

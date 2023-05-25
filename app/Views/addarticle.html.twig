@@ -62,75 +62,57 @@
                     <h5 class="mb-0">Ajouter un article </h5>
                 </div>
                 <div class="card-body">
-                    <form>
+                    <form method="POST" >
                         <div class="col-md-6 mb-4">
                             <div class="form-floating form-floating-outline">
-                                <select id="category" class="select2 form-select" data-allow-clear="true">
+                                <select id="category" name="category" class="select2 form-select" data-allow-clear="true">
                                     {% for category in categorys %}
-                                        <option style="color:{{ category.color }}" value="{{ category.id }}">{{ category.name }}</option>
+                                        <option style="color:{{ category.color }}"  value="{{ category.id }}">{{ category.name }}</option>
                                     {% endfor %}
+                                    <option style="color:{{ category.color }}" value="1000">autres "hor liste "</option>
+
                                 </select>
                                 <label for="multicol-country">Choisir une catégorie</label>
                             </div>
                         </div>
 
-                        <div class="col-md-6 mb-4" >
+                        <div class="col-md-6 mb-4"id="selectsouscat" hidden>
                             <div class="form-floating form-floating-outline">
-                                <select id="souscategory" class="select2 form-select" data-allow-clear="true">
-                                    <option value="">Veuillez choisir une catégorie d'abord</option>
+                                <select id="souscategory" name="souscat" class="select2 form-select" data-allow-clear="true">
                                 </select>
-                                <label for="multicol-country">Choisir une sous-catégorie</label>
+                                <label for="souscategory">Choisir une sous-catégorie</label>
                             </div>
                         </div>
 
                         <div class="form-floating form-floating-outline mb-4">
-                            <input type="text" class="form-control" id="basic-default-fullname" placeholder="John Doe" />
+                            <input type="text" class="form-control" name="title" id="basic-default-fullname" placeholder="John Doe" />
                             <label for="basic-default-fullname">titre de l'aricle </label>
                         </div>
                         <div class="form-floating form-floating-outline mb-4">
-                            <input type="text" class="form-control" id="basic-default-company" placeholder="inserer l'url de l'image" />
+                            <input type="text" class="form-control" name="url" id="basic-default-company" placeholder="inserer l'url de l'image" />
                             <label for="basic-default-company">url de l'image de presentation</label>
-                        </div>
-                        <div class="mb-4">
-                            <div class="input-group input-group-merge">
-                                <div class="form-floating form-floating-outline">
-                                    <input
-                                            type="text"
-                                            id="basic-default-email"
-                                            class="form-control"
-                                            placeholder="john.doe"
-                                            aria-label="john.doe"
-                                            aria-describedby="basic-default-email2" />
-                                    <label for="basic-default-email">Email</label>
-                                </div>
-                                <span class="input-group-text" id="basic-default-email2">@example.com</span>
-                            </div>
-                            <div class="form-text">You can use letters, numbers & periods</div>
-                        </div>
-                        <div class="form-floating form-floating-outline mb-4">
-                            <input
-                                    type="text"
-                                    id="basic-default-phone"
-                                    class="form-control phone-mask"
-                                    placeholder="658 799 8941" />
-                            <label for="basic-default-phone">Phone No</label>
                         </div>
                         <div class="form-floating form-floating-outline mb-4">
                           <textarea
                                   id="basic-default-message"
                                   class="form-control"
+                                  name="description"
                                   placeholder="Hi, Do you have a moment to talk Joe?"
                                   style="height: 60px"></textarea>
                             <label for="basic-default-message">description</label>
                         </div>
-                        <button type="submit" class="btn btn-primary">envoyer</button>
+                        <button type="submit" name="publication" class="btn btn-primary">envoyer</button>
                     </form>
                 </div>
             </div>
         </div>
 
     </div>
-
+    {% if response is defined %}
+        <div style="">
+            {{ response }}test
+        </div>
+    {% endif %}
 
         </div>
 
@@ -185,6 +167,7 @@
 
 let category = document.getElementById("category");
 let souscategory = document.getElementById("souscategory");
+let divsouscat = document.getElementById("selectsouscat");
 category.onchange = function() {
     let idcategory = category.value;
     console.log(category.value);
@@ -199,17 +182,21 @@ category.onchange = function() {
         },
         dataType: 'json', // Attendre une réponse JSON du serveur
         success: function (response) {
-            // Vérifier la réponse du serveur
             if (response.hasOwnProperty('error')) {
                 // Erreur lors de l'ajout du vote
                 console.log('Erreur lors de l\'ajout du vote :', response.error);
             } else {
-                souscategory.innerHTML = 'nada';
-                for (let i = 0; i < response.length; i++) {
-                    let sousCat = response[i];
-                    souscategory.innerHTML += `<option value="${sousCat.id}">${sousCat.name}</option>`;
-                }
+                souscategory.innerHTML = '';
+                if (response.length > 0) {
+                    for (let i = 0; i < response.length; i++) {
+                        divsouscat.hidden = false;
+                        let sousCat = response[i];
+                        souscategory.innerHTML += `<option value="${sousCat.id}">${sousCat.name}</option>`;
+                    }                        souscategory.innerHTML += `<option value="100000">autre ("hors liste " )</option>`;
 
+                } else {
+                    divsouscat.hidden = true; // Cacher l'élément
+                }
             }
         },
         error: function (xhr, status, error) {

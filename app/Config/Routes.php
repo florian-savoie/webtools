@@ -48,6 +48,8 @@ $routes->post('/update-souscategory', 'showcategoryController::updatesouscategor
 $routes->get('/addarticle', 'articleController::addarticle');
 $routes->post('/addarticle', 'articleController::addarticle');
 $routes->post('/show-souscategory', 'articleController::addarticle');
+$routes->get('/showarticle', 'showarticlesController::showarticle');
+
 
 /*
  * --------------------------------------------------------------------
