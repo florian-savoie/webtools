@@ -143,23 +143,21 @@ class ShowcategoryController extends BaseController
         if (isset($_POST['action']) && $_POST['action'] === 'delete-souscategory') {
             $name = $_POST['name'];
             $idcategory = $_POST['idcategory'];
-
             $builder = $this->db->table('subcategories');
             $builder->where('name', $name);
             $builder->where('category_id', $idcategory);
             $builder->delete();
 
-
             if ($this->db->error()) {
                 $error = $this->db->error();
-                $response = "Erreur  fds lors de la mise à jour : " . $error['message'];
+                $response = "Erreur lors de la mise à jour : " . $error['message'];
             } else {
-                $response = "supression  effectuée avec succès.";
+                $response = "Suppression effectuée avec succès.";
             }
         } else {
-            $response = "erreur lors de la supresion.";
-
+            $response = "Erreur lors de la suppression.";
         }
+
         // Renvoyer la réponse au format JSON
         header('Content-Type: application/json');
         echo json_encode($response);

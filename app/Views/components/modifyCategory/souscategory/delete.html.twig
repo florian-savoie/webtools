@@ -1,39 +1,50 @@
-<!-- Vertically Centered Modal -->
-<div class="col-12 pt-3"><!-- Button trigger modal -->
+<div class="col-12 pt-3">
+    <!-- Button trigger modal -->
     <button
             type="button"
             class="btn btn-danger btn-sm"
             data-bs-toggle="modal"
-            data-bs-target="#modalCenterdellsouscat{{ souscategory.id }}">
+            data-bs-target="#modalCenterdellsouscat{{ category.id }}{{ subcategory }}"
+    >
         Supprimer
     </button>
 
     <!-- Modal -->
-    <div class="modal fade modalCenter" id="modalCenterdellsouscat{{ souscategory.id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal fade modalCenter" id="modalCenterdellsouscat{{ category.id }}{{ subcategory }}" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="modalCenterTitle">Suppresion de la category</h4>
+                    <h4 class="modal-title" id="modalCenterTitle">Suppression de la catégorie</h4>
                     <button
                             type="button"
                             class="btn-close"
                             data-bs-dismiss="modal"
-                            aria-label="Close"></button>
+                            aria-label="Close"
+                    ></button>
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <p> Etes vous sur de vouloir supprimer definitivement la category  {{ subcategory }} ainsi que toute c'est sous category </p>
+                        <p>
+                            Êtes-vous sûr de vouloir supprimer définitivement la catégorie
+                            {{ subcategory }} ainsi que toutes ses sous-catégories ?
+                        </p>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
-                        fermer
+                        Fermer
+                    </button><button
+                            type="button"
+                            class="btn btn-danger modalCenterdellsouscat"
+                            id="deletesouscategory{{ category.id }}{{ subcategory }}"
+                            data-idcategory="{{ category.id }}"
+                            data-name="{{ subcategory }}"
+                            data-bs-dismiss="modal"
+                    >
+                        Supprimer définitivement
                     </button>
-                    <button type="button" class="btn btn-danger modalCenterdellsouscat" id="deletesouscategory{{ souscategory.id }}" data-idcategory="{{ category.id }}" data-idsouscategory="{{ subcategory }}" data-bs-dismiss="modal">Supprimer definitivement </button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
