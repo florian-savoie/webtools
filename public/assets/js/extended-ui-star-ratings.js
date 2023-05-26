@@ -10,8 +10,8 @@ $(function () {
     halfStar = $('.half-star-ratings'),
     fullStar = $('.full-star-ratings'),
     readOnlyRatings = $('.read-only-ratings'),
-    onSetEvents = $('.onset-event-ratings'),
-    onChangeEvents = $('.onChange-event-ratings'),
+  /*  onSetEvents = $('.onset-event-ratings'),*/
+ onChangeEvents = $('.onChange-event-ratings'),
     ratingMethods = $('.methods-ratings'),
     initializeRatings = $('.btn-initialize'),
     destroyRatings = $('.btn-destroy'),
@@ -95,7 +95,7 @@ $(function () {
         rtl: isRtl
       })
       .on('rateyo.set', function (e, data) {
-        alert('The rating is set to ' + data.rating + '!');
+      /*  alert('The ratiniig is set to ' + data.rating + '!');*/
       });
   }
 

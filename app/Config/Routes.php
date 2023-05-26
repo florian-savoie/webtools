@@ -49,6 +49,7 @@ $routes->get('/addarticle', 'articleController::addarticle');
 $routes->post('/addarticle', 'articleController::addarticle');
 $routes->post('/show-souscategory', 'articleController::addarticle');
 $routes->get('/showarticle', 'showarticlesController::showarticle');
+$routes->post('/votestar', 'showarticlesController::votestar');
 
 
 /*

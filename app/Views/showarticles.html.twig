@@ -16,7 +16,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+        <!-- Favicon -->
+        <link rel="icon" type="image/x-icon" href="../../assets/img/favicon/favicon.ico" />
 
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+                href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+                rel="stylesheet" />
+
+        <!-- Icons -->
+        <link rel="stylesheet" href="../../assets/vendor/fonts/materialdesignicons.css" />
+        <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" /
 <!-- Icons -->
 <link rel="stylesheet" href="../../assets/vendor/fonts/materialdesignicons.css" />
 <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
@@ -35,7 +47,9 @@
 <link rel="stylesheet" href="../../assets/vendor/libs/tagify/tagify.css" />
 <link rel="stylesheet" href="../../assets/vendor/libs/flatpickr/flatpickr.css" />
 <link rel="stylesheet" href="../../assets/vendor/libs/formvalidation/dist/css/formValidation.min.css" />
+        <!-- Vendors CSS -->
 
+        <link rel="stylesheet" href="../../assets/vendor/libs/rateyo/rateyo.css" />
 <!-- Page CSS -->
 
 <!-- Helpers -->
@@ -52,102 +66,44 @@
 <!-- Content -->
 <!-- Users List Table -->
 <div class="container mt-5">
-        <div class="row">
+        <div class="row mt-5"></div>
+        <div class="row mt-5">
         <!-- Finance App -->
         {%  for article in articles %}
-        <div class="col-lg-4 col-xl-3 mb-3">
+        <div class="col-lg-4 col-xl-3 mb-3" style="height: 500px;">
                 <div class="card h-100">
-                        <img class="card-img-top" src="{{ article.link }}" alt="iPhone-bg" />
+                        <img class="card-img-top" style="height: 190px ; "  src="{{ article.link }}" alt="iPhone-bg" />
                         <div class="card-body">
                                 <div class="d-flex align-items-center justify-content-between mb-3">
-                                        <div class="d-flex">
+                                        <div class="d-flex " >
                                                 <div class="badge bg-label-success rounded-pill me-3">article</div>
                                                 <div class="badge bg-label-danger rounded-pill">React</div>
+
                                         </div>
-                                        <div class="dropdown">
-                                                <button
-                                                        class="btn p-0"
-                                                        type="button"
-                                                        id="financeApp"
-                                                        data-bs-toggle="dropdown"
-                                                        aria-haspopup="true"
-                                                        aria-expanded="false">
-                                                        <i class="mdi mdi-dots-vertical mdi-24px"></i>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="financeApp">
-                                                        <a class="dropdown-item" href="javascript:void(0);">Last 28 Days</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);">Last Year</a>
-                                                </div>
-                                        </div>
+                                      <div><p class="text-muted fw-semibold mt-2">{{ article.submission_date |date("m/d/Y") }}</p></div>
+
+
                                 </div>
-                                <h4 class="mb-2">{{ article.title }}</h4>
-                                <p class="text-muted fw-semibold">Due Date: 20/Dec/2022</p>
-                                <p class="text-muted my-3">
-                                        Managing your money isn’t the easiest thing to do. Now that many of us no longer balance a
-                                        checkbook, tracking and expenses.
+                                <h4 class="mb-1 text-center">{{ article.title }}</h4>
+                                <p class="text-muted my-2"  style=" height: 100px; overflow: hidden ">
+                                     {{ article.content }}
                                 </p>
-                                <div class="mb-3 mt-1">
-                                        <div class="d-flex justify-content-between gap-3">
-                                                <h6 class="mb-2 fw-semibold">Progress</h6>
-                                                <span class="text-heading fw-semibold">68%</span>
-                                        </div>
-                                        <div class="progress w-100 rounded bg-label-success" style="height: 8px">
-                                                <div
-                                                        class="progress-bar bg-success rounded"
-                                                        style="width: 68%"
-                                                        role="progressbar"
-                                                        aria-valuenow="68"
-                                                        aria-valuemin="0"
-                                                        aria-valuemax="100"></div>
-                                        </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                        <ul class="list-unstyled m-0 d-flex align-items-center avatar-group">
-                                                <li
-                                                        data-bs-toggle="tooltip"
-                                                        data-popup="tooltip-custom"
-                                                        data-bs-placement="top"
-                                                        title="Vinnie Mostowy"
-                                                        class="avatar pull-up">
-                                                        <img class="rounded-circle" src="../../assets/img/avatars/5.png" alt="Avatar" />
-                                                </li>
-                                                <li
-                                                        data-bs-toggle="tooltip"
-                                                        data-popup="tooltip-custom"
-                                                        data-bs-placement="top"
-                                                        title="Allen Rieske"
-                                                        class="avatar pull-up">
-                                                        <img class="rounded-circle" src="../../assets/img/avatars/12.png" alt="Avatar" />
-                                                </li>
-                                                <li
-                                                        data-bs-toggle="tooltip"
-                                                        data-popup="tooltip-custom"
-                                                        data-bs-placement="top"
-                                                        title="Julee Rossignol"
-                                                        class="avatar pull-up">
-                                                        <img class="rounded-circle" src="../../assets/img/avatars/6.png" alt="Avatar" />
-                                                </li>
-                                                <li
-                                                        data-bs-toggle="tooltip"
-                                                        data-popup="tooltip-custom"
-                                                        data-bs-placement="top"
-                                                        title="Darcey Nooner"
-                                                        class="avatar pull-up">
-                                                        <img class="rounded-circle" src="../../assets/img/avatars/10.png" alt="Avatar" />
-                                                </li>
-                                        </ul>
-                                        <div class="d-flex">
-                                                <div class="me-2 text-muted">
-                                                        <i class="mdi mdi-paperclip mdi-20px"></i>
-                                                        <span class="fw-semibold">24</span>
-                                                </div>
-                                                <div class="me-2 text-muted">
-                                                        <i class="mdi mdi-check-circle-outline mdi-20px"></i>
-                                                        <span class="fw-semibold">74/180</span>
+
+
+                                <!-- Events-->
+
+                                <div class="row mb-2 col-12">
+                                        <div class="col-12 d-flex flex-column justify-content-center align-items-start mb-sm-0 mb-3">
+                                                <small class="text-light fw-semibold">Note :{{ article.rating }}</small>
+                                                <div class="col-12 d-flex justify-content-around">
+                                                        <div class="onset-event-ratings" data-idArticle="{{ article.id }}" data-note="{{ article.rating }}" ></div>
+                                                        <div class="d-flex align-items-center justify-content-end"><span class="mdi mdi-heart-outline"></span></div>
                                                 </div>
                                         </div>
                                 </div>
+
+                                <!-- /Events-->
+
                         </div>
                 </div>
         </div>
@@ -197,10 +153,33 @@
         <script src="../../assets/vendor/libs/formvalidation/dist/js/FormValidation.min.js"></script>
         <script src="../../assets/vendor/libs/formvalidation/dist/js/plugins/Bootstrap5.min.js"></script>
         <script src="../../assets/vendor/libs/formvalidation/dist/js/plugins/AutoFocus.min.js"></script>
-
+                <!-- Page JS -->
+                <script src="../../assets/js/extended-ui-star-ratings.js"></script>
         <!-- Main JS -->
         <script src="../../assets/js/main.js"></script>
+                <!-- Core JS -->
+                <!-- build:js assets/vendor/js/core.js -->
+                <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
+                <script src="../../assets/vendor/libs/popper/popper.js"></script>
+                <script src="../../assets/vendor/js/bootstrap.js"></script>
+                <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+                <script src="../../assets/vendor/libs/node-waves/node-waves.js"></script>
 
+                <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
+                <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
+                <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
+
+                <script src="../../assets/vendor/js/menu.js"></script>
+                <!-- endbuild -->
+
+                <!-- Vendors JS -->
+                <script src="../../assets/vendor/libs/rateyo/rateyo.js"></script>
+
+                <!-- Main JS -->
+                <script src="../../assets/js/main.js"></script>
+
+                <!-- Page JS -->
+                <script src="../../assets/js/extended-ui-star-ratings.js"></script>
         <!-- Page JS -->
 
         <script src="../../assets/js/wizard-ex-property-listing.js"></script>
@@ -209,6 +188,7 @@
 
 
         </script>
+                <script src="../../assets/js/category/articles/votestar.js"></script>
 
 
         {% endblock %}

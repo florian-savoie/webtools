@@ -60,8 +60,9 @@ class showarticlesController extends BaseController
 
 
         $builder = $this->db->table('articles');
-        $query = $builder->get(); // Exécute la requête
-        $articles = $query->getResultArray(); // Récupère les résultats en tant que tableau
+        $builder->orderBy('id', 'DESC');
+        $query = $builder->get();
+        $articles = $query->getResultArray();
 
         return $this->twig->render('showarticles.html.twig', [
             'sessionExistsAndTrue' => $sessionExistsAndTrue ,
@@ -71,4 +72,32 @@ class showarticlesController extends BaseController
         ]);
     }
 
+    public function votestar()
+    {
+        if (isset($_POST['note']) && isset($_POST['idarticle'])) {
+            $note = $_POST['note'];
+            $idarticle = $_POST['idarticle'];
+
+            $data = ['rating' => $note
+            ];
+            $updated = $this->db->table('articles')->update($data, ['id' => $idarticle]);
+
+            if ($this->db->error()) {
+                $error = $this->db->error();
+                $response = "Erreur lors de la mise à jour : " . $error['message'];
+            } else {
+                $response = "note effectuée avec succès.";
+            }
+        } else {
+            $response = "Erreur lors de la note.";
+        }
+
+        // Renvoyer la réponse au format JSON
+        header('Content-Type: application/json');
+        echo json_encode($response);
+        return;
+
+
+
+    }
 }
