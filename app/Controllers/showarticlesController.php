@@ -58,15 +58,22 @@ class showarticlesController extends BaseController
             exit(0);
         }
 
-
+        $idUser = $_SESSION['iduser'] ;
         $builder = $this->db->table('articles');
         $builder->orderBy('id', 'DESC');
         $query = $builder->get();
         $articles = $query->getResultArray();
 
+        $builder = $this->db->table('favorites');
+        $builder->orderBy('id', 'DESC');
+        $builder->where('user_id', $idUser); // Remplacez $id par l'ID que vous voulez rechercher
+        $query = $builder->get();
+        $likes = $query->getResultArray();
+
         return $this->twig->render('showarticles.html.twig', [
             'sessionExistsAndTrue' => $sessionExistsAndTrue ,
             'articles' => $articles,
+            'likes' => $likes,
             'session' => $_SESSION
 
         ]);

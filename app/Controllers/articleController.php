@@ -77,7 +77,7 @@ class articleController extends BaseController
             if (isset($_POST['souscat'])){
                 $subcategory_id = $_POST['souscat'];
             }else{
-                $subcategory_id = null;
+                $subcategory_id = 0;
 
             }
             // Vérifier si les champs ont été remplis
