@@ -106,8 +106,6 @@ class showarticlesController extends BaseController
                 $articles = $query->getResultArray();
             }
         }
-
-
         return $this->twig->render('showarticles.html.twig', [
             'sessionExistsAndTrue' => $sessionExistsAndTrue ,
             'articles' => $articles,
