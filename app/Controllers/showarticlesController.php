@@ -59,11 +59,7 @@ class showarticlesController extends BaseController
         }
 
         $idUser = $_SESSION['iduser'] ;
-        $builder = $this->db->table('articles');
-        $builder->where('is_approved' , 1);
-        $builder->orderBy('id', 'DESC');
-        $query = $builder->get();
-        $articles = $query->getResultArray();
+
 
         $builder = $this->db->table('favorites');
         $builder->orderBy('id', 'DESC');
@@ -77,12 +73,48 @@ class showarticlesController extends BaseController
         $query = $builder->get();
         $votes = $query->getResultArray();
 
+        $builder = $this->db->table('categories');
+        $query = $builder->get();
+        $categories = $query->getResultArray();
+
+        $builder = $this->db->table('subcategories');
+        $query = $builder->get();
+        $souscategories = $query->getResultArray();
+
+        if(isset($_GET['category']) && isset($_GET['souscat'])){
+            $builder = $this->db->table('articles');
+            $builder->where('is_approved' , 1);
+            $builder->where('category_id' , $_GET['category']);
+            $builder->where('subcategory_id' , $_GET['souscat']);
+            $builder->orderBy('id', 'DESC');
+            $query = $builder->get();
+            $articles = $query->getResultArray();
+
+        }else if (isset($_GET['category']) ){
+            $builder = $this->db->table('articles');
+            $builder->where('is_approved' , 1);
+            $builder->where('category_id' , $_GET['category']);
+            $builder->orderBy('id', 'DESC');
+            $query = $builder->get();
+            $articles = $query->getResultArray();
+        }else{
+            if (empty($articles)) { // Ajout de la vérification si $articles est vide
+                $builder = $this->db->table('articles');
+                $builder->where('is_approved', 1);
+                $builder->orderBy('id', 'DESC');
+                $query = $builder->get();
+                $articles = $query->getResultArray();
+            }
+        }
+
 
         return $this->twig->render('showarticles.html.twig', [
             'sessionExistsAndTrue' => $sessionExistsAndTrue ,
             'articles' => $articles,
             'likes' => $likes,
             'votes' => $votes,
+            'categories' => $categories,
+            'souscategories' => $souscategories,
             'session' => $_SESSION
 
         ]);
