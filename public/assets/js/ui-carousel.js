@@ -4,57 +4,21 @@
 
 'use strict';
 
-(function (nbrCarousels) {
-
+(function () {
   const swiperDefault = document.querySelector('#swiper-default'),
-      swiperWithArrows = document.querySelector('#swiper-with-arrows'),
-      swiperWithPagination = document.querySelector('#swiper-with-pagination'),
-      swiperWithProgress = document.querySelector('#swiper-with-progress'),
-      swiperWithScrollbar = document.querySelector('#swiper-with-scrollbar'),
-      verticalSwiper = document.querySelector('#swiper-vertical'),
-      swiper3dCubeEffect = document.querySelector('#swiper-3d-cube-effect'),
-      swiper3dFlipEffect = document.querySelector('#swiper-3d-flip-effect'),
-      galleryThumbs = document.querySelector('.gallery-thumbs'),
-      galleryTop = document.querySelector('.gallery-top');
+    swiperWithArrows = document.querySelector('#swiper-with-arrows'),
+    swiperWithPagination = document.querySelector('#swiper-with-pagination'),
+    swiperWithProgress = document.querySelector('#swiper-with-progress'),
+    swiperWithScrollbar = document.querySelector('#swiper-with-scrollbar'),
+    verticalSwiper = document.querySelector('#swiper-vertical'),
+    swiperMultipleSlides = document.querySelector('#swiper-multiple-slides'),
+    swiper3dCoverflowEffect = document.querySelector('#swiper-3d-coverflow-effect'),
+    swiper3dCubeEffect = document.querySelector('#swiper-3d-cube-effect'),
+    swiper3dFlipEffect = document.querySelector('#swiper-3d-flip-effect'),
+    galleryThumbs = document.querySelector('.gallery-thumbs'),
+    galleryTop = document.querySelector('.gallery-top');
   let galleryInstance;
 
-  const swiperMultipleSlides = {};
-  const swiper3dCoverflowEffect = {};
-
-  for (let i = 1; i <= nbrCarousels; i++) {
-    swiperMultipleSlides[i] = document.querySelector(`#swiper-multiple-slides${i}`);
-    swiper3dCoverflowEffect[i] = document.querySelector(`#swiper-3d-coverflow-effect${i}`);
-
-    if (swiper3dCoverflowEffect[i]) {
-      new Swiper(swiper3dCoverflowEffect[i], {
-        effect: 'coverflow',
-        grabCursor: true,
-        centeredSlides: true,
-        slidesPerView: 'auto',
-        coverflowEffect: {
-          rotate: 50,
-          stretch: 0,
-          depth: 100,
-          modifier: 1,
-          slideShadows: true
-        },
-        pagination: {
-          el: `.swiper-pagination`
-        }
-      });
-    }
-
-    if (swiperMultipleSlides[i]) {
-      new Swiper(swiperMultipleSlides[i], {
-        slidesPerView: 3,
-        spaceBetween: 30,
-        pagination: {
-          clickable: true,
-          el: `.swiper-pagination`
-        }
-      });
-    }
-  }
   // Default
   // --------------------------------------------------------------------
   if (swiperDefault) {
@@ -62,7 +26,6 @@
       slidesPerView: 'auto'
     });
   }
-
 
   // With arrows
   // --------------------------------------------------------------------
@@ -127,6 +90,40 @@
     });
   }
 
+  // Multiple slides
+  // --------------------------------------------------------------------
+  if (swiperMultipleSlides) {
+    new Swiper(swiperMultipleSlides, {
+      slidesPerView: 3,
+      spaceBetween: 30,
+      pagination: {
+        clickable: true,
+        el: '.swiper-pagination'
+      }
+    });
+  }
+
+  // 3D coverflow effect
+  // --------------------------------------------------------------------
+  if (swiper3dCoverflowEffect) {
+    new Swiper(swiper3dCoverflowEffect, {
+      effect: 'coverflow',
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: 'auto',
+      coverflowEffect: {
+        rotate: 50,
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+        slideShadows: true
+      },
+      pagination: {
+        el: '.swiper-pagination'
+      }
+    });
+  }
+
   // 3D cube effect
   // --------------------------------------------------------------------
   if (swiper3dCubeEffect) {
@@ -144,7 +141,6 @@
       }
     });
   }
-
 
   // 3D flip effect
   // --------------------------------------------------------------------
@@ -186,4 +182,4 @@
       }
     });
   }
-})(nbrCaroussel.length);
+})();

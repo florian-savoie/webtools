@@ -50,6 +50,14 @@ $routes->post('/addarticle', 'articleController::addarticle');
 $routes->post('/show-souscategory', 'articleController::addarticle');
 $routes->get('/showarticle', 'showarticlesController::showarticle');
 $routes->post('/votestar', 'showarticlesController::votestar');
+$routes->post('/addfavorite', 'showarticlesController::addfavorite');
+$routes->post('/deletefavorite', 'showarticlesController::deletefavorite');
+$routes->post('/validatearticle', 'validatearticleController::validatearticle');
+$routes->get('/validatearticle', 'validatearticleController::home');
+$routes->get('/showmembres', 'controlmembreController::home');
+$routes->post('/showmembres', 'controlmembreController::updatemembres');
+$routes->post('/updaterole', 'controlmembreController::updaterole');
+$routes->post('/deleteuser', 'controlmembreController::deleteuser');
 
 
 /*

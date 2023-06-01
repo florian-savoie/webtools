@@ -72,9 +72,9 @@
             {% for article in articles %}
                 <div class="col-lg-4 col-xl-3 mb-3" style="height: 500px;">
                     <div class="card h-100">
-                        <img class="card-img-top" style="height: 190px ; " src="{{ article.image }}" alt="iPhone-bg"/>
-                        <div class="card-body">
-                            <div class="d-flex align-items-center justify-content-between mb-3">
+                        <img class="card-img-top" style="height: 190px ;min-height: 190px " src="{{ article.image }}" alt="iPhone-bg"/>
+                        <div class="card-body ">
+                            <div class="d-flex align-items-center justify-content-between mb-3" style="height: 35px">
                                 <div class="d-flex ">
                                     <div class="badge bg-label-success rounded-pill me-3">article</div>
                                     <div class="badge bg-label-danger rounded-pill">React</div>
@@ -86,36 +86,55 @@
 
 
                             </div>
-                            <h4 class="mb-1 text-center">{{ article.title }}</h4>
-                            <p class="text-muted my-2" style=" height: 100px; overflow: hidden ">
+                            <h4 class="mb-1 text-center" style="height: 35px">{{ article.title }}</h4>
+                            <p class="text-muted my-2" style=" height: 120px; overflow: hidden ">
                                 {{ article.content }}
                             </p>
 
 
                             <!-- Events-->
 
-                            <div class="row mb-2 col-12">
-                                <div class="col-12 d-flex flex-column justify-content-center align-items-start mb-sm-0 mb-3">
+                            <div class="row mb-1 col-12 ">
+                                <div class="col-12 d-flex flex-column justify-content-center  mb-sm-0 mb-3">
                                     <small class="text-light fw-semibold">Note :{{ article.rating }}</small>
-                                    <div class="col-12 d-flex justify-content-around">
-                                        <div class="onset-event-ratings" data-idArticle="{{ article.id }}"
-                                             data-note="{{ article.rating }}"></div>
+                                    <div class="col-12 d-flex justify-content-between ">
+                                        {% set voted = false %}
+                                        {% set voteValue = 0 %}
+
+                                        {% for vote in votes %}
+                                            {% if vote.article_id == article.id %}
+                                                {% set voted = true %}
+                                                {% set voteValue = vote.vote %}
+                                            {% endif %}
+                                        {% endfor %}
+
+                                        {% if voted %}
+                                            <div class="onset-event-ratings" data-idArticle="{{ article.id }}" data-note="{{ voteValue }}"></div>
+                                        {% else %}
+                                            <div class="onset-event-ratings" data-idArticle="{{ article.id }}" data-note="0"></div>
+                                        {% endif %}
+
                                         <div class="d-flex align-items-center justify-content-end">
 
-                                                                <span>
-                                               {% set liked = false %}
+                                            {% set liked = false %}
 
-                                                                    {% for like in likes %}
-                                                                        {% if like.article_id == article.id %}          {% set liked = true %}
-                                                                        {% endif %}
-                                                                     
+                                            {% for like in likes %}
+                                                {% if like.article_id == article.id %}          {% set liked = true %}
+                                                {% endif %}
 
-                                                                    {% endfor %}   {% if liked %}
-                                                                                💛
-                                                                        {% else %}
-                                                                                🤍❤
-                                                                        {% endif %}
-                                                                </span>
+
+                                            {% endfor %}   {% if liked %}
+                                                <span onclick="deletefavorite({{ article.id }})"
+                                                      id="deletefavorite{{ article.id }}">💛</span>
+                                                <span onclick="addfavorite({{ article.id }})"
+                                                      id="addfavorite{{ article.id }}" hidden>🤍 </span>
+                                            {% else %}
+                                                <span onclick="deletefavorite({{ article.id }})"
+                                                      id="deletefavorite{{ article.id }}" hidden>💛</span>
+                                                <span onclick="addfavorite({{ article.id }})"
+                                                      id="addfavorite{{ article.id }}">🤍</span>
+
+                                            {% endif %}
 
 
                                         </div>
@@ -209,6 +228,8 @@
 
             </script>
             <script src="../../assets/js/category/articles/votestar.js"></script>
+            <script src="../../assets/js/category/articles/addfavorite.js"></script>
+            <script src="../../assets/js/category/articles/deletefavorite.js"></script>
 
 
         {% endblock %}
