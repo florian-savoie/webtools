@@ -63,8 +63,7 @@
 
 
    <!-- Layout wrapper -->
-    <div class="layout-wrapper layout-content-navbar">
-        <div class="layout-container">
+
 
             {% if sessionExistsAndTrue %}
                 <!-- barre de navigation en ligne -->
@@ -75,7 +74,8 @@
             {% endif %}
 
                   <!-- aside -->
-
+            <div class="layout-wrapper layout-content-navbar">
+                <div class="layout-container">
 
 {% block contenu %}{% endblock %}
 

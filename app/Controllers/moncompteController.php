@@ -63,6 +63,25 @@ class moncompteController extends BaseController
         $query = $builder->getWhere(['id' => $_SESSION['iduser']], 1);
         $user = $query->getResultArray();
 
+        if(isset($_POST['postPhotoProfil'])){
+            $uploadedFile = $_FILES['PhotoProfil']; // remplacez "name" par le nom de votre input file
+            $targetDir = "Data/img_profil_users/"; // dossier cible pour enregistrer le fichier
+            $targetFile = $targetDir . basename($_SESSION['iduser'].".jpg"); // chemin absolu du fichier cible
+
+// déplacer le fichier temporaire vers le dossier cible
+            if (move_uploaded_file($uploadedFile["tmp_name"], $targetFile)) {
+                echo "Le fichier " . htmlspecialchars(basename($uploadedFile["name"])) . " a été téléchargé avec succès.";
+                echo  $targetFile ;
+                $data = ['profile_image' => $_SESSION['iduser'].".jpg"
+
+                ];
+                $updated = $this->db->table('users')->update($data, ['id' => $_SESSION['iduser']]);
+            } else {
+                echo "Désolé, une erreur s'est produite lors de l'envoi de votre fichier.";
+            }
+
+        }
+
         return $this->twig->render('moncompte.html.twig', [
             'sessionExistsAndTrue' => $sessionExistsAndTrue ,
             'user' => $user,

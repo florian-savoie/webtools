@@ -1,0 +1,4 @@
+.app-chat .app-chat-history .chat-history-body {
+    flex: 1 !important;
+    overflow-y: scroll !important;
+}

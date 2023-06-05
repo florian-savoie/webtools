@@ -4,7 +4,7 @@ namespace App\Controllers;
 use Config\Database;
 
 
-class validatearticleController extends BaseController
+class chatController extends BaseController
 {
 
     /**
@@ -44,7 +44,7 @@ class validatearticleController extends BaseController
         }
     }
 
-    public function home()
+    public function chat()
     {
         $sessionExistsAndTrue = false;
 
@@ -53,53 +53,56 @@ class validatearticleController extends BaseController
         // Vérifier si la session existe et est vraie
         if ( $autoriser === true) {
             $sessionExistsAndTrue = true;
-        }else {
-            header("Location: /login");
-            exit(0);
         }
 
-        $idUser = $_SESSION['iduser'] ;
-        $builder = $this->db->table('articles');
-        $builder->where('is_approved' , 0);
-        $builder->orderBy('id', 'DESC');
-        $query = $builder->get();
-        $articles = $query->getResultArray();
-
-
-
-
-        return $this->twig->render('validatearticle.html.twig', [
-            'sessionExistsAndTrue' => $sessionExistsAndTrue ,
-            'articles' => $articles,
-            'session' => $_SESSION
-
+        return $this->twig->render('chat.html.twig', [
+            'sessionExistsAndTrue' => $sessionExistsAndTrue,
+            'session' => $_SESSION,
         ]);
-    }
-
-
-    public function validatearticle()
+    }    public function addchat()
     {
-        if (isset($_POST['idarticle'])) {
-            $idarticle = $_POST['idarticle'];
-            $valeur = $_POST['hidden'];
+        if (isset($_POST['action']) && $_POST['action'] === 'add-chat') {
+            $message = $_POST['message'];
 
-            $data = ['is_approved' => $valeur
-            ];
-            $updated = $this->db->table('articles')->update($data, ['id' => $idarticle ]);
+            $builder = $this->db->table('chat');
+            $insertok = $builder->insert([
+                'message' => $message,
+                'id_user' => $_SESSION['iduser']
+            ]);
+
 
             if ($this->db->error()) {
                 $error = $this->db->error();
-                $response = "Erreur lors de la mise à jour : " . $error['message'];
+                $response = "Erreur  fds lors de l'ajout' : " . $error['message'];
             } else {
-                $response = "note effectuée avec succès.";
+                $response = "ajout du message effectuée avec succès.";
             }
         } else {
-            $response = "Erreur lors de la note.";
-        }
+            $response = "erreur lors de l'ajout.";
 
+        }
         // Renvoyer la réponse au format JSON
         header('Content-Type: application/json');
         echo json_encode($response);
+        return;
+    }
+    public function getmessages()
+    {
+
+        $builder = $this->db->table('chat');
+        $chats = $builder->get()->getResultArray();
+
+
+        // Renvoyer la réponse au format JSON
+        header('Content-Type: application/json');
+        echo json_encode($chats);
+
+        return;
+    }
+    public function getSessionData()
+    {
+        header('Content-Type: application/json');
+        echo json_encode($_SESSION);
         return;
     }
 }

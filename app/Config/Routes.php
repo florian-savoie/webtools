@@ -58,6 +58,12 @@ $routes->get('/showmembres', 'controlmembreController::home');
 $routes->post('/showmembres', 'controlmembreController::updatemembres');
 $routes->post('/updaterole', 'controlmembreController::updaterole');
 $routes->post('/deleteuser', 'controlmembreController::deleteuser');
+$routes->post('/chat', 'chatController::chat');
+$routes->get('/chat', 'chatController::chat');
+$routes->post('/addchat', 'chatController::addchat');
+$routes->get('/get-messages', 'chatController::getmessages');
+$routes->get('/getSessionData', 'chatController::getSessionData');
+
 
 
 /*

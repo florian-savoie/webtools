@@ -71,50 +71,11 @@
 {% block contenu %}
     <!-- Content -->
     <!-- Users List Table -->
+    {% include "./layout/aside.html.twig" %}
+
     <div class="row col-12 mt-5">
-
-        <div class="col-2 mt-5" style="background: radial-gradient(circle, rgba(241,224,232,1) 0%, rgba(180,207,242,0.10407913165266103) 100%) ; border: solid 2px black
-            ;border-radius: 2rem
-            ;
-">
-
-
-            <div id="accordion">
-                {% for categorie in categories %}
-                    <div class="card">
-                        <div class="card-header d-flex justify-content-between"
-                             style=" width: 100%;background: radial-gradient(circle, rgba(241,224,232,1) 0%, rgba(180,207,242,0.10407913165266103) 100%)">
-                            <a class="btn col-10 " href="?category={{ categorie.id }}">
-                                <span style="color: {{ categorie.color }}">{{ categorie.name }}</span>
-                                {% set souscat = false %}
-                                {% set lessouscats = [] %}
-                                {% for souscategorie in souscategories %}
-                                    {% if souscategorie.category_id == categorie.id %}
-                                        {% set souscat = true %}
-                                        {% set lessouscats = lessouscats|merge([souscategorie]) %}
-                                    {% endif %}
-                                {% endfor %}
-                                {% if souscat %}
-                                    <a data-bs-toggle="collapse" class="col-2 "  href="#accordion{{ categorie.id }}"><img
-                                                src="../../assets/img/webtools/fleche-vers-le-bas.png" class="ms-4">
-                                    </a> {% endif %}
-
-                            </a>
-                        </div>
-                        <div id="accordion{{ categorie.id }}" class="collapse" data-bs-parent="#accordion">
-                            <div class="card-body">
-                                {% for souscategorie in lessouscats %}
-                                    <a class="btn col-10" href="?category={{ categorie.id }}&souscat={{ souscategorie.id }}">  <span style="color: {{ categorie.color }}">{{ souscategorie.name }}</span> <br>
-                               </a> {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-
-
-        </div>
-        <div class="col-10 mt-5">
+        <div class="col-1"></div>
+        <div class="col-11 mt-5">
             <div class="row">
                 <!-- Finance App -->
                 {% for article in articles %}
