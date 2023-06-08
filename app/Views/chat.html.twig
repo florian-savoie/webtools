@@ -42,8 +42,8 @@
                         </div>
                         <!-- Chat message form -->
                         <div class="chat-history-footer">
-                            <form class="form-send-message d-flex justify-content-between align-items-center">
-                                <input
+                            <form class="d-flex justify-content-between align-items-center">
+                            <input
                                         class="form-control message-input me-3 shadow-none " id="inputchat"
                                         placeholder="Type your message here" name="inputchat" />
                                 <div class="message-actions d-flex align-items-center">
@@ -81,8 +81,24 @@
 
         <script>
 
-            $('#addchat').click(function() {
-                let test = $('#inputchat').val(); // utilisation de # pour trouver l'élément input par son id
+            const input = document.getElementById('inputchat');
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+            // Appeler la fonction pour ajouter le message lorsque l'utilisateur appuie sur "Entrée" dans la zone de texte
+
+
+            // Appeler la fonction pour ajouter le message lorsque l'utilisateur clique sur le bouton "Envoyer"
+            $('#addchat').click(function(event) {
+                event.preventDefault();  // empêche le formulaire de se soumettre lors du clic sur le bouton "Envoyer"
+                sendMessage();
+            });
+            // Définir la fonction pour ajouter le message
+            function sendMessage() {
+                let test = $('#inputchat').val();
                 console.log(test);
                 $('#inputchat').val('');
                 $.ajax({
@@ -105,7 +121,7 @@
                         // Gérer l'erreur
                     }
                 });
-            });
+            }
 
             let idUser = "";
             $.ajax({

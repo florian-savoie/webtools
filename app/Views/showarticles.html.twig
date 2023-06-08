@@ -48,7 +48,9 @@
     <link rel="stylesheet" href="../../assets/vendor/libs/flatpickr/flatpickr.css"/>
     <link rel="stylesheet" href="../../assets/vendor/libs/formvalidation/dist/css/formValidation.min.css"/>
     <!-- Vendors CSS -->
-
+    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/node-waves/node-waves.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
     <link rel="stylesheet" href="../../assets/vendor/libs/rateyo/rateyo.css"/>
     <!-- Page CSS -->
 
@@ -73,14 +75,20 @@
     <!-- Users List Table -->
     {% include "./layout/aside.html.twig" %}
 
-    <div class="row col-12 mt-5">
+    <div class="row col-12 ">
         <div class="col-1"></div>
         <div class="col-11 mt-5">
+            <div class="d-flex justify-content-end align-items-center my-3">
+                <label for="search-box" class=" col-form-label">Rechercher : </label>
+                <div class="col-2">
+                    <input class="form-control" type="text" placeholder="Rechercher un article" id="search-box">
+                </div>
+            </div>
             <div class="row">
                 <!-- Finance App -->
                 {% for article in articles %}
-                    <div class="col-lg-4 col-xl-3 mb-3" style="height: 500px;">
-                        <div class="card h-100">
+                    <div class="col-lg-4 col-xl-3 mb-3 article" style="height: 500px;">
+                        <div class="card h-100 ">
                             <img class="card-img-top" style="height: 190px ;min-height: 190px "
                                  src="{{ article.image }}" alt="iPhone-bg"/>
                             <div class="card-body ">
@@ -237,12 +245,32 @@
 
             <script src="../../assets/js/wizard-ex-property-listing.js"></script>
             <script>
+                const searchBox = $('#search-box');
+                const articles = $('.article');
 
+                searchBox.on('input', function() {
+                    const searchTerm = searchBox.val().toLowerCase();
+
+                    // parcours chaque élément article
+                    articles.each(function() {
+                        const card = $(this);
+                        const contenttitle = card.find('h4').text().toLowerCase();
+                        const content = card.find('p').text().toLowerCase();
+
+                        // affiche ou masque la carte en fonction de la recherche
+                        if (content.includes(searchTerm) || contenttitle.includes(searchTerm)) {
+                            card.show();
+                        } else {
+                            card.hide();
+                        }
+                    });
+                });
 
             </script>
             <script src="../../assets/js/category/articles/votestar.js"></script>
             <script src="../../assets/js/category/articles/addfavorite.js"></script>
             <script src="../../assets/js/category/articles/deletefavorite.js"></script>
+            <script src="../../assets/js/form-basic-inputs.js"></script>
 
 
         {% endblock %}

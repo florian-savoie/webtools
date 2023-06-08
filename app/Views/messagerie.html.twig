@@ -1,0 +1,40 @@
+{% set title = 'client acceuil' %}
+{% extends "./layout/layout_nav.html.twig" %}
+{% block css %}
+    <link rel="stylesheet" href="../../assets/vendor/css/pages/ui-carousel.css"/>
+    <link rel="stylesheet" href="../../assets/vendor/libs/swiper/swiper.css"/>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <!-- Flipster CSS -->
+    <link rel="stylesheet" href="dist/jquery.flipster.min.css">
+
+    <link rel="stylesheet" href="../assets/css/time-line.css">
+    <!-- Flipster Js -->
+    <script src="dist/jquery.flipster.min.js"></script>
+{% endblock %}
+{% block contenu %}
+    <!-- Content -->
+
+    <div class="container-xxl flex-grow-1 container-p-y mt-5">
+
+    </div>
+    <!-- / Content -->
+
+
+
+
+{% endblock %}
+
+    {% block js %}
+
+        <script src="../assets/js/time-line/client/caroussel.js"></script>
+        <script src="../assets/js/time-line/artisan/delete-like-photo.js"></script>
+        <script src="../assets/js/time-line/artisan/like-photo.js"></script>
+        <script src="../assets/js/time-line/artisan/envent-form.js"></script>
+        <script src="../assets/js/time-line/artisan/compression-photo.js"></script>
+        <script src="../../assets/vendor/assets/js/form-basic-inputs.js"></script>
+        <script src="../../assets/vendor/assets/js/extended-ui-timeline.js"></script>
+        <script src="../../assets/vendor/libs/swiper/swiper.js"></script>
+
+    {% endblock %}

@@ -63,6 +63,10 @@ $routes->get('/chat', 'chatController::chat');
 $routes->post('/addchat', 'chatController::addchat');
 $routes->get('/get-messages', 'chatController::getmessages');
 $routes->get('/getSessionData', 'chatController::getSessionData');
+$routes->get('/list', 'listController::list');
+$routes->get('/showlist', 'listController::showlist');
+$routes->get('/messagerie', 'messagerieController::messagerie');
+$routes->post('/messagerie', 'messagerieController::messagerie');
 
 
 

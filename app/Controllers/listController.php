@@ -4,7 +4,7 @@ namespace App\Controllers;
 use Config\Database;
 
 
-class chatController extends BaseController
+class listController extends BaseController
 {
 
     /**
@@ -44,7 +44,7 @@ class chatController extends BaseController
         }
     }
 
-    public function chat()
+    public function list()
     {
         $sessionExistsAndTrue = false;
 
@@ -55,55 +55,42 @@ class chatController extends BaseController
             $sessionExistsAndTrue = true;
         }
 
-        return $this->twig->render('chat.html.twig', [
-            'sessionExistsAndTrue' => $sessionExistsAndTrue,
-            'session' => $_SESSION,
-        ]);
-    }    public function addchat()
-    {
-        if (isset($_POST['action']) && $_POST['action'] === 'add-chat') {
-            $message = $_POST['message'];
-
-            $builder = $this->db->table('chat');
-            $insertok = $builder->insert([
-                'message' => $message,
-                'id_user' => $_SESSION['iduser']
-            ]);
-
-
-            if ($this->db->error()) {
-                $error = $this->db->error();
-                $response = "Erreur  fds lors de l'ajout' : " . $error['message'];
-            } else {
-                $response = "ajout du message effectuée avec succès.";
-            }
-        } else {
-            $response = "erreur lors de l'ajout.";
-
-        }
-        // Renvoyer la réponse au format JSON
-        header('Content-Type: application/json');
-        echo json_encode($response);
-        return;
-    }
-    public function getmessages()
-    {
-
-        $builder = $this->db->table('chat');
+        $builder = $this->db->table('articles');
+        $builder->where('is_approved', 1);
         $builder->orderBy('id', 'DESC');
-        $chats = $builder->get()->getResultArray();
+        $query = $builder->get();
+        $articles = $query->getResultArray();
+        $dir ="assets/json/articles.json";
 
 
+        return $this->twig->render('list.html.twig', [
+            'sessionExistsAndTrue' => $sessionExistsAndTrue,
+            'session' => $_SESSION
+        ]);
+    }
+
+    public function showlist()
+    {
+        $sessionExistsAndTrue = false;
+
+        $autoriser = $this->session->get('Autoriser');
+
+        // Vérifier si la session existe et est vraie
+        if ( $autoriser === true) {
+            $sessionExistsAndTrue = true;
+        }
+
+        $builder = $this->db->table('articles');
+        $builder->where('is_approved', 1);
+        $builder->orderBy('id', 'DESC');
+        $query = $builder->get();
+        $articles = $query->getResultArray();
         // Renvoyer la réponse au format JSON
         header('Content-Type: application/json');
-        echo json_encode($chats);
+        echo json_encode($articles);
+        return;
 
-        return;
+
     }
-    public function getSessionData()
-    {
-        header('Content-Type: application/json');
-        echo json_encode($_SESSION);
-        return;
-    }
+
 }

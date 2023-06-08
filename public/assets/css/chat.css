@@ -2,3 +2,24 @@
     flex: 1 !important;
     overflow-y: scroll !important;
 }
+
+#chat{
+    position: fixed;
+    bottom: 10vh;
+    right: 15px;
+}
+#modalchat{
+position: fixed;
+    right: 50%;
+    bottom: 50%;
+    transform: translate(50%,50%);
+    width: 70% !important;
+    height: 90% !important;
+    display: none;
+    z-index: 1500;
+}
+#closechat{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
