@@ -54,10 +54,18 @@ class messagerieController extends BaseController
         if ( $autoriser === true) {
             $sessionExistsAndTrue = true;
         }
+        $builder = $this->db->table('messages_prives');
+        $messagerecu = $builder->getWhere(['destinataire' => $_SESSION['iduser']])->getResult();
+
+        if (isset($_POST['sendMessage'])){
+            var_dump($_POST);
+            die();
+        }
 
         return $this->twig->render('messagerie.html.twig', [
             'sessionExistsAndTrue' => $sessionExistsAndTrue,
-            'session' => $_SESSION
+            'session' => $_SESSION,
+            'messagerecu' => $messagerecu
         ]);
     }
 
