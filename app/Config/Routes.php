@@ -67,6 +67,8 @@ $routes->get('/list', 'listController::list');
 $routes->get('/showlist', 'listController::showlist');
 $routes->get('/messagerie', 'messagerieController::messagerie');
 $routes->post('/messagerie', 'messagerieController::messagerie');
+$routes->post('/messagerieaddfavorite', 'messagerieController::addfavorite');
+$routes->post('/messageriedeletevaforite', 'messagerieController::deletefavorite');
 
 
 

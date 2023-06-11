@@ -1,316 +1,433 @@
 <!-- Navbar -->
-
-<nav class="navbar navbar-expand-sm bg-light  navbar-light ">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Logo</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav flex-sm-column flex-md-row align-items-center ms-auto">
-                <li class="nav-item me-1 me-xl-0 mx-3">
-                    <a class="nav-link" href="/showarticle">
-                        les Articles
-                    </a>
-                </li>            <li class="nav-item me-1 me-xl-0 mx-3">
-                    <a class="nav-link" href="/validatearticle">
-                        Artcles en attente
-                    </a>
-                </li>  <li class="nav-item me-1 me-xl-0 mx-3">
-                    <a class="nav-link" href="/showcategory">
-                        les categories
-                    </a>
-                </li><li class="nav-item me-1 me-xl-0 mx-3">
-                    <a class="nav-link" href="/chat">
-Chat                    </a>
-                </li><li class="nav-item me-1 me-xl-0 mx-3">
-                    <a class="nav-link" href="/messagerie">
-Messagerie               </a>
-                </li>
-                <li class="nav-item me-1 me-xl-0 mx-3">
-                    <a class="nav-link" href="/addarticle">
-                        Ajout d'articles </a>
-                </li>            <li class="nav-item me-1 me-xl-0 mx-3">
-                    <a class="nav-link" href="/showmembres">
-                        Les membres </a>
-                </li>
-                <!-- Style Switcher -->
-                <li class="nav-item me-1 me-xl-0">
-                    <a
-                            class="nav-link btn btn-text-secondary rounded-pill btn-icon style-switcher-toggle hide-arrow"
-                            href="javascript:void(0);">
-                        <i class="mdi mdi-24px"></i>
-                    </a>
-                </li>
-                <!--/ Style Switcher -->
+<style>
 
 
-                <!-- Notification -->
-                <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-2 me-xl-1">
-                    <a
-                            class="nav-link btn btn-text-secondary rounded-pill btn-icon dropdown-toggle hide-arrow"
-                            href="javascript:void(0);"
-                            data-bs-toggle="dropdown"
-                            data-bs-auto-close="outside"
-                            aria-expanded="false">
-                        <i class="mdi mdi-bell-outline mdi-24px"></i>
-                        <span
-                                class="position-absolute top-0 start-50 translate-middle-y badge badge-dot bg-danger mt-2 border"></span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end py-0">
-                        <li class="dropdown-menu-header border-bottom">
-                            <div class="dropdown-header d-flex align-items-center py-3">
-                                <h6 class="mb-0 me-auto">Notification</h6>
-                                <span class="badge rounded-pill bg-label-primary">8 New</span>
-                            </div>
-                        </li>
-                        <li class="dropdown-notifications-list scrollable-container">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                                    <div class="d-flex gap-2">
-                                        <div class="flex-shrink-0">
-                                            <div class="avatar me-1">
-                                                <img src="../../assets/img/avatars/1.png" alt
-                                                     class="w-px-40 h-auto rounded-circle"/>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex flex-column flex-grow-1 overflow-hidden w-px-200">
-                                            <h6 class="mb-1 text-truncate">Congratulation Lettie 🎉</h6>
-                                            <small class="text-truncate text-body">Won the monthly best seller gold
-                                                badge</small>
-                                        </div>
-                                        <div class="flex-shrink-0 dropdown-notifications-actions">
-                                            <small class="text-muted">1h ago</small>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                                    <div class="d-flex gap-2">
-                                        <div class="flex-shrink-0">
-                                            <div class="avatar me-1">
-                                                <span class="avatar-initial rounded-circle bg-label-danger">CF</span>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex flex-column flex-grow-1 overflow-hidden w-px-200">
-                                            <h6 class="mb-1 text-truncate">Charles Franklin</h6>
-                                            <small class="text-truncate text-body">Accepted your connection</small>
-                                        </div>
-                                        <div class="flex-shrink-0 dropdown-notifications-actions">
-                                            <small class="text-muted">12hr ago</small>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                                    <div class="d-flex gap-2">
-                                        <div class="flex-shrink-0">
-                                            <div class="avatar me-1">
-                                                <img src="../../assets/img/avatars/2.png" alt
-                                                     class="w-px-40 h-auto rounded-circle"/>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex flex-column flex-grow-1 overflow-hidden w-px-200">
-                                            <h6 class="mb-1 text-truncate">New Message ✉️</h6>
-                                            <small class="text-truncate text-body">You have new message from Natalie</small>
-                                        </div>
-                                        <div class="flex-shrink-0 dropdown-notifications-actions">
-                                            <small class="text-muted">1h ago</small>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                                    <div class="d-flex gap-2">
-                                        <div class="flex-shrink-0">
-                                            <div class="avatar me-1">
-                                <span class="avatar-initial rounded-circle bg-label-success"
-                                ><i class="mdi mdi-cart-outline"></i
-                                    ></span>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex flex-column flex-grow-1 overflow-hidden w-px-200">
-                                            <h6 class="mb-1 text-truncate">Whoo! You have new order 🛒</h6>
-                                            <small class="text-truncate text-body">ACME Inc. made new order $1,154</small>
-                                        </div>
-                                        <div class="flex-shrink-0 dropdown-notifications-actions">
-                                            <small class="text-muted">1 day ago</small>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                                    <div class="d-flex gap-2">
-                                        <div class="flex-shrink-0">
-                                            <div class="avatar me-1">
-                                                <img src="../../../assets/img/avatars/9.png" alt
-                                                     class="w-px-40 h-auto rounded-circle"/>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex flex-column flex-grow-1 overflow-hidden w-px-200">
-                                            <h6 class="mb-1 text-truncate">Application has been approved 🚀</h6>
-                                            <small class="text-truncate text-body"
-                                            >Your ABC project application has been approved.</small
-                                            >
-                                        </div>
-                                        <div class="flex-shrink-0 dropdown-notifications-actions">
-                                            <small class="text-muted">2 days ago</small>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                                    <div class="d-flex gap-2">
-                                        <div class="flex-shrink-0">
-                                            <div class="avatar me-1">
-                                <span class="avatar-initial rounded-circle bg-label-success"
-                                ><i class="mdi mdi-chart-pie-outline"></i
-                                    ></span>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex flex-column flex-grow-1 overflow-hidden w-px-200">
-                                            <h6 class="mb-1 text-truncate">Monthly report is generated</h6>
-                                            <small class="text-truncate text-body">July monthly financial report is
-                                                generated </small>
-                                        </div>
-                                        <div class="flex-shrink-0 dropdown-notifications-actions">
-                                            <small class="text-muted">3 days ago</small>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                                    <div class="d-flex gap-2">
-                                        <div class="flex-shrink-0">
-                                            <div class="avatar me-1">
-                                                <img src="../../../assets/img/avatars/5.png" alt
-                                                     class="w-px-40 h-auto rounded-circle"/>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex flex-column flex-grow-1 overflow-hidden w-px-200">
-                                            <h6 class="mb-1 text-truncate">Send connection request</h6>
-                                            <small class="text-truncate text-body">Peter sent you connection request</small>
-                                        </div>
-                                        <div class="flex-shrink-0 dropdown-notifications-actions">
-                                            <small class="text-muted">4 days ago</small>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                                    <div class="d-flex gap-2">
-                                        <div class="flex-shrink-0">
-                                            <div class="avatar me-1">
-                                                <img src="../../assets/img/avatars/6.png" alt
-                                                     class="w-px-40 h-auto rounded-circle"/>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex flex-column flex-grow-1 overflow-hidden w-px-200">
-                                            <h6 class="mb-1 text-truncate">New message from Jane</h6>
-                                            <small class="text-truncate text-body">Your have new message from Jane</small>
-                                        </div>
-                                        <div class="flex-shrink-0 dropdown-notifications-actions">
-                                            <small class="text-muted">5 days ago</small>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                                    <div class="d-flex gap-2">
-                                        <div class="flex-shrink-0">
-                                            <div class="avatar me-1">
-                                <span class="avatar-initial rounded-circle bg-label-warning"
-                                ><i class="mdi mdi-alert-circle-outline"></i
-                                    ></span>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex flex-column flex-grow-1 overflow-hidden w-px-200">
-                                            <h6 class="mb-1">CPU is running high</h6>
-                                            <small class="text-truncate text-body"
-                                            >CPU Utilization Percent is currently at 88.63%,</small
-                                            >
-                                        </div>
-                                        <div class="flex-shrink-0 dropdown-notifications-actions">
-                                            <small class="text-muted">5 days ago</small>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="dropdown-menu-footer border-top p-2">
-                            <a href="javascript:void(0);" class="btn btn-primary d-flex justify-content-center">
-                                View all notifications
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <!--/ Notification -->
+</style>
 
-                <!-- User -->
-                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                    <div class="avatar avatar-online">
-                        <img src="Data/img_profil_users/{{ session.profile_image }}" alt class="w-px-40 h-auto rounded-circle"/>
-                    </div>
+<nav
+        class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+        id="layout-navbar">
+    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+            <i class="mdi mdi-menu mdi-24px"></i>
+        </a>
+    </div>
+
+    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+        <!-- Search -->
+
+        <!-- /Search -->
+
+        <ul class="navbar-nav flex-row align-items-center ms-auto">
+
+
+
+
+
+
+            <!-- Quick affichage classique  -->
+            <li class="nav-item dropdown-shortcuts navbar-dropdown dropdown me-1 me-xl-0">
+                <a class="nav-link btn btn-text-secondary rounded-pill btn-icon dropdown-toggle hide-arrow"
+                   href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside"
+                   aria-expanded="false">
+                    <span class="mdi mdi-view-grid-outline"></span>
                 </a>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li>
-                            <a class="dropdown-item" href="/moncompte">
-                                <div class="d-flex">
-                                    <div class="flex-shrink-0 me-3">
-                                        <div class="avatar avatar-online">
-                                            <img src="Data/img_profil_users/{{ session.profile_image }}" alt
-                                                 class="w-px-40 h-auto rounded-circle"/>
+                <div class="dropdown-menu dropdown-menu-end py-0">
+                    <div class="dropdown-menu-header border-bottom">
+                        <div class="dropdown-header d-flex align-items-center py-3">
+                            <h5 class="text-body mb-0 me-auto">Utilisation classique</h5>
+                            <a href="javascript:void(0)" class="dropdown-shortcuts-add text-muted" data-bs-toggle="tooltip"
+                               data-bs-placement="top" title="Add shortcuts"><i
+                                        class="mdi mdi-view-grid-plus-outline mdi-24px"></i></a>
+                        </div>
+                    </div>
+                    <div class="dropdown-shortcuts-list scrollable-container">
+                        <div class="row row-bordered overflow-visible g-0">
+                            <div class="dropdown-shortcuts-item col">
+                        <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
+<span class="mdi mdi-post-outline"></span>
+                        </span>
+                                <a href="/showarticle" class="stretched-link">Voir les articles</a>
+                            </div>
+                            <div class="dropdown-shortcuts-item col">
+                        <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
+<span class="mdi mdi-view-grid-plus"></span>
+                        </span>
+                                <a href="/addarticle" class="stretched-link">Ajouter des articles</a>
+                                <small class="text-muted mb-0">Publier votre articles</small>
+                            </div>
+                        </div>
+                        <div class="row row-bordered overflow-visible g-0">
+                            <div class="dropdown-shortcuts-item col">
+                        <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
+<span class="mdi mdi-account-details"></span>
+                        </span>
+                                <a href="/showmembres" class="stretched-link">Liste des menbres</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </li>
+            <!-- Quick affichage classique -->
+
+            <!-- Quick Gestion  -->
+            <li class="nav-item dropdown-shortcuts navbar-dropdown dropdown me-1 me-xl-0">
+                <a class="nav-link btn btn-text-secondary rounded-pill btn-icon dropdown-toggle hide-arrow"
+                   href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside"
+                   aria-expanded="false">
+                    <span class="mdi mdi-shield-crown"></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end py-0">
+                    <div class="dropdown-menu-header border-bottom">
+                        <div class="dropdown-header d-flex align-items-center py-3">
+                            <h5 class="text-body mb-0 me-auto">Gestion administrateur</h5>
+                            <a href="javascript:void(0)" class="dropdown-shortcuts-add text-muted" data-bs-toggle="tooltip"
+                               data-bs-placement="top" title="Add shortcuts"><i
+                                        class="mdi mdi-view-grid-plus-outline mdi-24px"></i></a>
+                        </div>
+                    </div>
+                    <div class="dropdown-shortcuts-list scrollable-container">
+                        <div class="row row-bordered overflow-visible g-0">
+                            <div class="dropdown-shortcuts-item col">
+                        <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
+<span class="mdi mdi-check-outline"></span>
+                        </span>
+                                <a href="/validatearticle" class="stretched-link">Validation des articles</a>
+                                <small class="text-muted mb-0">Valider les articles en attente</small>
+                            </div>
+                            <div class="dropdown-shortcuts-item col">
+                        <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
+<span class="mdi mdi-email-open-outline"></span>
+                        </span>
+                                <a href="/showcategory" class="stretched-link">Gestion des categories</a>
+                                <small class="text-muted mb-0">Ajouter modifier ou supprimer une categorie</small>
+                            </div>
+                        </div>
+                        <div class="row row-bordered overflow-visible g-0">
+                            <div class="dropdown-shortcuts-item col">
+                        <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
+<span class="mdi mdi-account-details"></span>
+                        </span>
+                                <a href="/showmembres" class="stretched-link">Liste des menbres</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </li>
+            <!-- Quick Gestion -->
+
+            <!-- Quick Communication  -->
+            <li class="nav-item dropdown-shortcuts navbar-dropdown dropdown me-1 me-xl-0">
+                <a class="nav-link btn btn-text-secondary rounded-pill btn-icon dropdown-toggle hide-arrow"
+                   href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside"
+                   aria-expanded="false">
+                    <span class="mdi mdi-wechat"></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end py-0">
+                    <div class="dropdown-menu-header border-bottom">
+                        <div class="dropdown-header d-flex align-items-center py-3">
+                            <h5 class="text-body mb-0 me-auto">Communication</h5>
+                            <a href="javascript:void(0)" class="dropdown-shortcuts-add text-muted" data-bs-toggle="tooltip"
+                               data-bs-placement="top" title="Add shortcuts"><i
+                                        class="mdi mdi-view-grid-plus-outline mdi-24px"></i></a>
+                        </div>
+                    </div>
+                    <div class="dropdown-shortcuts-list scrollable-container">
+                        <div class="row row-bordered overflow-visible g-0">
+                            <div class="dropdown-shortcuts-item col">
+                        <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
+<span class="mdi mdi-chat-processing-outline"></span>
+                        </span>
+                                <a href="/chat" class="stretched-link">Chat</a>
+                                <small class="text-muted mb-0">Echanger en direct avec la communautée</small>
+                            </div>
+                            <div class="dropdown-shortcuts-item col">
+                        <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
+<span class="mdi mdi-email-open-outline"></span>
+                        </span>
+                                <a href="/messagerie" class="stretched-link">Messagerie</a>
+                                <small class="text-muted mb-0">Boite de dialogue</small>
+                            </div>
+                        </div>
+                        <div class="row row-bordered overflow-visible g-0">
+                            <div class="dropdown-shortcuts-item col">
+                        <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
+<span class="mdi mdi-message-outline"></span>
+                        </span>
+                                <a href="app-user-list.html" class="stretched-link">Propagande</a>
+                                <small class="text-muted mb-0">Passer vos message en avant premiere</small>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </li>
+            <!-- Quick Communication -->
+
+            <!-- Notification -->
+            <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-2 me-xl-1">
+                <a class="nav-link btn btn-text-secondary rounded-pill btn-icon dropdown-toggle hide-arrow"
+                   href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside"
+                   aria-expanded="false">
+                    <i class="mdi mdi-bell-outline mdi-24px"></i>
+                    <span
+                            class="position-absolute top-0 start-50 translate-middle-y badge badge-dot bg-danger mt-2 border"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end py-0">
+                    <li class="dropdown-menu-header border-bottom">
+                        <div class="dropdown-header d-flex align-items-center py-3">
+                            <h6 class="mb-0 me-auto">Notification</h6>
+                            <span class="badge rounded-pill bg-label-primary">8 New</span>
+                        </div>
+                    </li>
+                    <li class="dropdown-notifications-list scrollable-container">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                                <div class="d-flex gap-2">
+                                    <div class="flex-shrink-0">
+                                        <div class="avatar me-1">
+                                            <img src="../../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
                                         </div>
                                     </div>
-                                    <div class="flex-grow-1">
-                                    <span class="fw-semibold d-block">{{ session['pseudo'] }}
-</span>
-                                        <small class="text-muted">{{ session['role'] }}
-                                        </small>
+                                    <div class="d-flex flex-column flex-grow-1 overflow-hidden w-px-200">
+                                        <h6 class="mb-1 text-truncate">Congratulation Lettie 🎉</h6>
+                                        <small class="text-truncate text-body">Won the monthly best seller gold badge</small>
+                                    </div>
+                                    <div class="flex-shrink-0 dropdown-notifications-actions">
+                                        <small class="text-muted">1h ago</small>
                                     </div>
                                 </div>
-                            </a>
-                        </li>
-                        <li>
-                            <div class="dropdown-divider"></div>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/moncompte">
-                                <i class="mdi mdi-account-outline me-2"></i>
-                                <span class="align-middle">Mon compte</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="pages-account-settings-account.html">
-                                <i class="mdi mdi-cog-outline me-2"></i>
-                                <span class="align-middle">reglages</span>
-                            </a>
-                        </li>
-                        <li>
-                            <div class="dropdown-divider"></div>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="pages-help-center-landing.html">
-                                <i class="mdi mdi-lifebuoy me-2"></i>
-                                <span class="align-middle">caummunautes</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="pages-faq.html">
-                                <i class="mdi mdi-help-circle-outline me-2"></i>
-                                <span class="align-middle">FAQ</span>
-                            </a>
-                        </li>
-                        <li>
-                            <div class="dropdown-divider"></div>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/logout" target="_blank">
-                                <i class="mdi mdi-logout me-2"></i>
-                                <span class="align-middle">deconnexion</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <!--/ User -->
-            </ul>
+                            </li>
+                            <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                                <div class="d-flex gap-2">
+                                    <div class="flex-shrink-0">
+                                        <div class="avatar me-1">
+                                            <span class="avatar-initial rounded-circle bg-label-danger">CF</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column flex-grow-1 overflow-hidden w-px-200">
+                                        <h6 class="mb-1 text-truncate">Charles Franklin</h6>
+                                        <small class="text-truncate text-body">Accepted your connection</small>
+                                    </div>
+                                    <div class="flex-shrink-0 dropdown-notifications-actions">
+                                        <small class="text-muted">12hr ago</small>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                                <div class="d-flex gap-2">
+                                    <div class="flex-shrink-0">
+                                        <div class="avatar me-1">
+                                            <img src="../../assets/img/avatars/2.png" alt class="w-px-40 h-auto rounded-circle" />
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column flex-grow-1 overflow-hidden w-px-200">
+                                        <h6 class="mb-1 text-truncate">New Message ✉️</h6>
+                                        <small class="text-truncate text-body">You have new message from Natalie</small>
+                                    </div>
+                                    <div class="flex-shrink-0 dropdown-notifications-actions">
+                                        <small class="text-muted">1h ago</small>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                                <div class="d-flex gap-2">
+                                    <div class="flex-shrink-0">
+                                        <div class="avatar me-1">
+                              <span class="avatar-initial rounded-circle bg-label-success"><i
+                                          class="mdi mdi-cart-outline"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column flex-grow-1 overflow-hidden w-px-200">
+                                        <h6 class="mb-1 text-truncate">Whoo! You have new order 🛒</h6>
+                                        <small class="text-truncate text-body">ACME Inc. made new order $1,154</small>
+                                    </div>
+                                    <div class="flex-shrink-0 dropdown-notifications-actions">
+                                        <small class="text-muted">1 day ago</small>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                                <div class="d-flex gap-2">
+                                    <div class="flex-shrink-0">
+                                        <div class="avatar me-1">
+                                            <img src="../../assets/img/avatars/9.png" alt class="w-px-40 h-auto rounded-circle" />
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column flex-grow-1 overflow-hidden w-px-200">
+                                        <h6 class="mb-1 text-truncate">Application has been approved 🚀</h6>
+                                        <small class="text-truncate text-body">Your ABC project application has been
+                                            approved.</small>
+                                    </div>
+                                    <div class="flex-shrink-0 dropdown-notifications-actions">
+                                        <small class="text-muted">2 days ago</small>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                                <div class="d-flex gap-2">
+                                    <div class="flex-shrink-0">
+                                        <div class="avatar me-1">
+                              <span class="avatar-initial rounded-circle bg-label-success"><i
+                                          class="mdi mdi-chart-pie-outline"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column flex-grow-1 overflow-hidden w-px-200">
+                                        <h6 class="mb-1 text-truncate">Monthly report is generated</h6>
+                                        <small class="text-truncate text-body">July monthly financial report is generated </small>
+                                    </div>
+                                    <div class="flex-shrink-0 dropdown-notifications-actions">
+                                        <small class="text-muted">3 days ago</small>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                                <div class="d-flex gap-2">
+                                    <div class="flex-shrink-0">
+                                        <div class="avatar me-1">
+                                            <img src="../../assets/img/avatars/5.png" alt class="w-px-40 h-auto rounded-circle" />
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column flex-grow-1 overflow-hidden w-px-200">
+                                        <h6 class="mb-1 text-truncate">Send connection request</h6>
+                                        <small class="text-truncate text-body">Peter sent you connection request</small>
+                                    </div>
+                                    <div class="flex-shrink-0 dropdown-notifications-actions">
+                                        <small class="text-muted">4 days ago</small>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                                <div class="d-flex gap-2">
+                                    <div class="flex-shrink-0">
+                                        <div class="avatar me-1">
+                                            <img src="../../assets/img/avatars/6.png" alt class="w-px-40 h-auto rounded-circle" />
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column flex-grow-1 overflow-hidden w-px-200">
+                                        <h6 class="mb-1 text-truncate">New message from Jane</h6>
+                                        <small class="text-truncate text-body">Your have new message from Jane</small>
+                                    </div>
+                                    <div class="flex-shrink-0 dropdown-notifications-actions">
+                                        <small class="text-muted">5 days ago</small>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                                <div class="d-flex gap-2">
+                                    <div class="flex-shrink-0">
+                                        <div class="avatar me-1">
+                              <span class="avatar-initial rounded-circle bg-label-warning"><i
+                                          class="mdi mdi-alert-circle-outline"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column flex-grow-1 overflow-hidden w-px-200">
+                                        <h6 class="mb-1">CPU is running high</h6>
+                                        <small class="text-truncate text-body">CPU Utilization Percent is currently at
+                                            88.63%,</small>
+                                    </div>
+                                    <div class="flex-shrink-0 dropdown-notifications-actions">
+                                        <small class="text-muted">5 days ago</small>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-menu-footer border-top p-2">
+                        <a href="javascript:void(0);" class="btn btn-primary d-flex justify-content-center">
+                            View all notifications
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!--/ Notification -->
 
-        </div>
+            <!-- Style mode dark/light -->
+            <!-- Style Switcher -->
+            <li class="nav-item me-1 me-xl-0">
+                <a
+                        class="nav-link btn btn-text-secondary rounded-pill btn-icon style-switcher-toggle hide-arrow"
+                        href="javascript:void(0);">
+                    <i class="mdi mdi-24px"></i>
+                </a>
+            </li>
+            <!-- User -->
+            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                <div class="avatar avatar-online">
+                    <img src="Data/img_profil_users/{{ session.profile_image }}" alt class="w-px-40 h-auto rounded-circle"/>
+                </div>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                    <a class="dropdown-item" href="/moncompte">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0 me-3">
+                                <div class="avatar avatar-online">
+                                    <img src="Data/img_profil_users/{{ session.profile_image }}" alt
+                                         class="w-px-40 h-auto rounded-circle"/>
+                                </div>
+                            </div>
+                            <div class="flex-grow-1">
+                                    <span class="fw-semibold d-block">{{ session['pseudo'] }}
+</span>
+                                <small class="text-muted">{{ session['role'] }}
+                                </small>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <div class="dropdown-divider"></div>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="/moncompte">
+                        <i class="mdi mdi-account-outline me-2"></i>
+                        <span class="align-middle">Mon compte</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="pages-account-settings-account.html">
+                        <i class="mdi mdi-cog-outline me-2"></i>
+                        <span class="align-middle">reglages</span>
+                    </a>
+                </li>
+                <li>
+                    <div class="dropdown-divider"></div>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="pages-help-center-landing.html">
+                        <i class="mdi mdi-lifebuoy me-2"></i>
+                        <span class="align-middle">caummunautes</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="pages-faq.html">
+                        <i class="mdi mdi-help-circle-outline me-2"></i>
+                        <span class="align-middle">FAQ</span>
+                    </a>
+                </li>
+                <li>
+                    <div class="dropdown-divider"></div>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="/logout" target="_blank">
+                        <i class="mdi mdi-logout me-2"></i>
+                        <span class="align-middle">deconnexion</span>
+                    </a>
+                </li>
+            </ul>
+            </li>
+            <!--/ User -->
+        </ul>
     </div>
+
+
 </nav>
 
+<script>
 
 
+</script>
 <!-- / Navbar -->

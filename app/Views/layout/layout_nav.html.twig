@@ -55,8 +55,32 @@
     <script src="../../assets/vendor/js/template-customizer.js"></script>
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="../../assets/js/config.js"></script>
- 
+<style>
+    .marquee-rtl {
+        margin: auto ;
+        border: 10px solid #F0F0FF;
+        overflow: hidden;
+        box-shadow: 0 .25em .5em #CCC,inset 0 0 1em .25em #CCC;
+        margin-top: 70px;
+        height: 4rem;
+        display: flex; /* ajoutez cette ligne pour activer l'alignement vertical et horizontal */
+        align-items: center; /* ajoutez cette ligne pour centrer verticalement */
+    }
 
+    .marquee-rtl > :first-child {
+        margin: auto;
+        display: inline-block;
+        padding-right: 2em;
+        padding-left: 100%;
+        white-space: nowrap;
+        animation: defilement-rtl 30s infinite linear;
+    }
+
+    .marquee-item{
+        list-style-type: none;
+    }
+
+</style>
     {% block css %}{% endblock %}
 </head>
 
@@ -74,6 +98,19 @@
                 {% include "./layout/nav_offline.html.twig" %}
             {% endif %}
 
+   <div class="container d-flex justify-content-center">
+       <div class="marquee-rtl">
+           <!-- le contenu défilant -->
+           <ul class="marquee-list d-flex align-items-center">
+               <li class="marquee-item">Découvrez les dernières tendances en matière de développement web grâce à notre nouveau guide.&nbsp;&nbsp;&nbsp;&nbsp;</li>
+               <li class="marquee-item">Améliorez votre productivité en utilisant ces astuces pour coder plus rapidement.&nbsp;&nbsp;&nbsp;&nbsp;</li>
+               <li class="marquee-item">Sécurisez votre site web en suivant les bonnes pratiques recommandées par les experts&nbsp;&nbsp;&nbsp;&nbsp;</li>
+               <li class="marquee-item">Apprenez à coder avec notre programme d'apprentissage en ligne pour débutants de tous âges&nbsp;&nbsp;&nbsp;&nbsp;</li>
+               <li class="marquee-item">Développez vos compétences en programmation en rejoignant notre communauté de développeurs passionnés&nbsp;&nbsp;&nbsp;&nbsp;</li>
+           </ul>
+       </div>
+   </div>
+
                   <!-- aside -->
             <div class="layout-wrapper layout-content-navbar">
                 <div class="layout-container">
@@ -81,7 +118,6 @@
 {% block contenu %}{% endblock %}
 
 
-         
 
 
 
@@ -118,13 +154,6 @@
                                             <div class="chat-history-wrapper">
                                                 <div class="chat-history-body">
                                                     <ul class="list-unstyled chat-history" id="chaturl">
-
-
-
-
-
-
-
 
 
 
@@ -187,7 +216,34 @@
     <!-- Page JS -->
     <script src="../../assets/js/dashboards-analytics.js"></script>
                     <script>
-                    function showchat(){
+
+                        const li = document.querySelectorAll('.marquee-item'); // Sélectionne les éléments li représentant les messages
+                        let totalWidth = 0;
+
+                        // Boucle à travers les éléments li et ajoute la largeur de chaque élément pour obtenir la largeur totale
+                        li.forEach(item => {
+                            totalWidth += item.offsetWidth;
+                        });
+
+                        const marqueeAnimation = document.createElement('style');
+                        marqueeAnimation.innerHTML = `
+    @keyframes defilement-rtl {
+        0% {
+            transform: translate3d(0,0,0);      /* position initiale à droite */
+        }
+        100% {
+            transform: translate3d(calc(-${totalWidth}px - 20%),0,0);
+        }
+    }
+`;
+
+                        // Ajouter l'élément style dans le document
+                        document.body.appendChild(marqueeAnimation);
+
+
+
+
+                        function showchat(){
 $('#modalchat').show();
                     }                    function closemodal(){
 $('#modalchat').hide();

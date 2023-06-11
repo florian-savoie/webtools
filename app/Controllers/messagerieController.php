@@ -57,6 +57,9 @@ class messagerieController extends BaseController
         $builder = $this->db->table('messages_prives');
         $messagerecu = $builder->getWhere(['destinataire' => $_SESSION['iduser']])->getResult();
 
+        $builder = $this->db->table('messages_prives');
+        $messageenvoyer = $builder->getWhere(['emetteur' => $_SESSION['iduser']])->getResult();
+
         if (isset($_POST['sendMessage'])){
             var_dump($_POST);
             die();
@@ -65,8 +68,35 @@ class messagerieController extends BaseController
         return $this->twig->render('messagerie.html.twig', [
             'sessionExistsAndTrue' => $sessionExistsAndTrue,
             'session' => $_SESSION,
-            'messagerecu' => $messagerecu
+            'messagerecu' => $messagerecu,
+            'messageenvoyer' => $messageenvoyer
         ]);
     }
+    public function addfavorite()
+    {
+        $data = ['favorite' => $_POST['addfavorite']];
+        $updated = $this->db->table('messages_prives')->where('id', $_POST['idmail'])->update($data);
 
+        if ($updated) {
+            $response = ['status' => 'success', 'message' => 'Favori ajouté avec succès.'];
+        } else {
+            $response = ['status' => 'error', 'message' => 'Impossible d\'ajouter le favori.'];
+        }
+
+        return response()->json($response);
+    }
+
+    public function deletefavorite()
+    {
+        $data = ['favorite' => $_POST['deletefavorite']];
+        $updated = $this->db->table('messages_prives')->where('id', $_POST['idmail'])->update($data);
+
+        if ($updated) {
+            $response = ['status' => 'success', 'message' => 'Favori supprimé avec succès.'];
+        } else {
+            $response = ['status' => 'error', 'message' => 'Impossible de supprimer le favori.'];
+        }
+
+        return response()->json($response);
+    }
 }
