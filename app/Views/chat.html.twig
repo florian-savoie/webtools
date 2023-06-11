@@ -110,7 +110,6 @@
                         message: test,
                     },
                     success: function(response) {
-                        console.log(response);
                         // Faire quelque chose avec la réponse du serveur, par exemple :
                         // alert(response);
                         // ou mettre à jour la liste des sous-catégories
@@ -131,7 +130,6 @@
                     // data contient les données de session récupérées
                     var mesDonnees = JSON.parse(data);
                     // Utilise mesDonnees dans ton code JavaScript
-                    console.log(mesDonnees);
                     idUser = mesDonnees.iduser ;
 
                     getMessages() ;
@@ -146,7 +144,6 @@
                     url: '/get-messages',
                     method: 'GET',
                     success: function(response) {
-                        console.log(response);
                         var messages = JSON.parse(response);
 
                         // extraire les messages qui n'ont pas encore été affichés

@@ -55,7 +55,7 @@ class messagerieController extends BaseController
             $sessionExistsAndTrue = true;
         }
         $builder = $this->db->table('messages_prives');
-        $messagerecu = $builder->getWhere(['destinataire' => $_SESSION['iduser']])->getResult();
+        $messagerecu = $builder->getWhere(['destinataire' => $_SESSION['iduser'], 'hidden' => 0])->getResult();
 
         $builder = $this->db->table('messages_prives');
         $messageenvoyer = $builder->getWhere(['emetteur' => $_SESSION['iduser']])->getResult();
@@ -95,6 +95,33 @@ class messagerieController extends BaseController
             $response = ['status' => 'success', 'message' => 'Favori supprimé avec succès.'];
         } else {
             $response = ['status' => 'error', 'message' => 'Impossible de supprimer le favori.'];
+        }
+
+        return response()->json($response);
+    }
+
+    public function deletemsg()
+    {
+        $data = ['hidden' => 1 ];
+        $updated = $this->db->table('messages_prives')->where('id', $_POST['idmessage'])->update($data);
+
+        if ($updated) {
+            $response = ['status' => 'success', 'message' => 'message supprimé avec succès.'];
+        } else {
+            $response = ['status' => 'error', 'message' => 'Impossible de supprimer le message.'];
+        }
+
+        return response()->json($response);
+
+    }    public function readok()
+    {
+        $data = ['vue' => 1 ];
+        $updated = $this->db->table('messages_prives')->where('id', $_POST['idmessage'])->update($data);
+
+        if ($updated) {
+            $response = ['status' => 'success', 'message' => 'message supprimé avec succès.'];
+        } else {
+            $response = ['status' => 'error', 'message' => 'Impossible de supprimer le message.'];
         }
 
         return response()->json($response);

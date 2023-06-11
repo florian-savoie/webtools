@@ -22,7 +22,7 @@
     <!-- Flipster Js -->
     <script src="dist/jquery.flipster.min.js"></script>
     <style>
-        .app-email-view-envoye{
+        .app-email-view-envoye {
             overflow: scroll;
         }
     </style>
@@ -41,14 +41,15 @@
                                     class="btn btn-primary btn-compose"
                                     data-bs-toggle="modal"
                                     data-bs-target="#emailComposeSidebar">
-                                Compose
+                                Ecrire un message
                             </button>
                         </div>
                         <!-- Email Filters -->
                         <div class="email-filters pt-2 pb-2">
                             <!-- Email Filters: Folder -->
                             <ul class="email-filter-folders list-unstyled">
-                                <li class="d-flex justify-content-between align-items-center" data-target="draft">
+                                <li class="active d-flex justify-content-between align-items-center" data-target="draft"
+                                    id="clique">
                                     <a href="javascript:void(0);" class="d-flex flex-wrap align-items-center">
                                         <i class="mdi mdi-email-outline mdi-20px me-1"></i>
                                         <span class="align-middle ms-2">Reception</span>
@@ -113,30 +114,9 @@
                                                 <input
                                                         type="text"
                                                         class="form-control email-search-input border-0"
-                                                        placeholder="Search..."
+                                                        placeholder="Rechercher ..."
                                                         aria-label="Search..."
                                                         aria-describedby="email-search"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center mb-0 mb-md-2">
-                              <span class="btn btn-icon btn-text-secondary rounded-pill">
-                                <i class="mdi mdi-refresh mdi-20px scaleX-n1-rtl cursor-pointer email-refresh"></i>
-                              </span>
-                                        <div class="dropdown btn btn-icon btn-text-secondary rounded-pill">
-                                            <i
-                                                    class="mdi mdi-dots-vertical mdi-20px cursor-pointer"
-                                                    id="emailsActions"
-                                                    data-bs-toggle="dropdown"
-                                                    aria-haspopup="true"
-                                                    aria-expanded="false">
-                                            </i>
-                                            <div class="dropdown-menu dropdown-menu-end"
-                                                 aria-labelledby="emailsActions">
-                                                <a class="dropdown-item" href="javascript:void(0)">Mark as read</a>
-                                                <a class="dropdown-item" href="javascript:void(0)">Mark as unread</a>
-                                                <a class="dropdown-item" href="javascript:void(0)">Delete</a>
-                                                <a class="dropdown-item" href="javascript:void(0)">Archive</a>
                                             </div>
                                         </div>
                                     </div>
@@ -152,49 +132,8 @@
                                         <div class="btn btn-text-secondary btn-icon rounded-pill me-1">
                                             <i class="mdi mdi-delete-outline mdi-24px email-list-delete cursor-pointer"></i>
                                         </div>
-                                        <div class="btn btn-text-secondary btn-icon rounded-pill me-1">
-                                            <i class="mdi mdi-email-open-outline mdi-24px email-list-read cursor-pointer"></i>
-                                        </div>
-                                        <div class="dropdown btn btn-text-secondary btn-icon rounded-pill me-1">
-                                            <i
-                                                    class="mdi mdi-folder-outline mdi-24px cursor-pointer"
-                                                    id="dropdownMenuFolderOne"
-                                                    data-bs-toggle="dropdown"
-                                                    aria-haspopup="true"
-                                                    aria-expanded="false"></i>
-                                            <div class="dropdown-menu dropdown-menu-end"
-                                                 aria-labelledby="dropdownMenuFolderOne">
 
-                                            </div>
-                                        </div>
-                                        <div class="dropdown btn btn-text-secondary btn-icon rounded-pill">
-                                            <i
-                                                    class="mdi mdi-label-outline mdi-24px cursor-pointer"
-                                                    id="dropdownLabelOne"
-                                                    data-bs-toggle="dropdown"
-                                                    aria-haspopup="true"
-                                                    aria-expanded="false">
-                                            </i>
-                                            <div class="dropdown-menu dropdown-menu-end"
-                                                 aria-labelledby="dropdownLabelOne">
-                                                <a class="dropdown-item" href="javascript:void(0)">
-                                                    <i class="mdi mdi-circle-medium mdi-24px text-success me-1"></i>
-                                                    <span class="align-middle">Workshop</span>
-                                                </a>
-                                                <a class="dropdown-item" href="javascript:void(0)">
-                                                    <i class="mdi mdi-circle-medium mdi-24px text-primary me-1"></i>
-                                                    <span class="align-middle">Company</span>
-                                                </a>
-                                                <a class="dropdown-item" href="javascript:void(0)">
-                                                    <i class="mdi mdi-circle-medium mdi-24px text-warning me-1"></i>
-                                                    <span class="align-middle">Important</span>
-                                                </a>
-                                                <a class="dropdown-item" href="javascript:void(0)">
-                                                    <i class="mdi mdi-circle-medium mdi-24px text-danger me-1"></i>
-                                                    <span class="align-middle">Private</span>
-                                                </a>
-                                            </div>
-                                        </div>
+
                                     </div>
                                     <div
                                             class="email-pagination d-sm-flex d-none align-items-center flex-wrap justify-content-between justify-sm-content-end">
@@ -220,7 +159,10 @@
                                                 {% if  msgrecu.favorite  == 1 %} data-starred="true" {% endif %}
                                                 data-draft="true"
                                                 data-bs-toggle="sidebar"
-                                                data-target="#app-email-recu{{ msgrecu.id }}">
+                                                id="limessage{{ msgrecu.id }}"
+                                                data-target="#app-email-recu{{ msgrecu.id }}"
+                                        onclick="readok({{ msgrecu.id }})"
+                                        >
                                             <div class="d-flex align-items-center">
                                                 <div class="form-check mb-0">
                                                     <input class="email-list-item-input form-check-input"
@@ -252,7 +194,7 @@
                                                     <ul class="list-inline email-list-item-actions">
                                                         <li class="list-inline-item email-delete">
                                                             <i class="mdi mdi-delete-outline mdi-24px ideletemsg"
-                                                               id="deleteMsg{{ msgrecu.id }}"></i>
+                                                               id="deleteMsg{{ msgrecu.id }}" onclick="deletemsg({{ msgrecu.id }})"></i>
                                                         </li>
 
                                                     </ul>
@@ -286,11 +228,9 @@
                                                     >
                                                 </div>
                                                 <div class="email-list-item-meta ms-auto d-flex align-items-center">
-                                  <span
-                                          class="email-list-item-label badge badge-dot bg-primary d-none d-md-inline-block me-2"
-                                          data-label="important"></span>
+
                                                     <span
-                                                            class="email-list-item-label badge {% if send.vue == 0 %} bg-danger {% else %} bg-success {% endif %} d-none d-md-inline-block me-2"
+                                                            class="email-list-item-label badge badge-dot {% if send.vue == 0 %} bg-danger {% else %} bg-success {% endif %} d-none d-md-inline-block me-2"
                                                             data-label="private"></span>
                                                     <small class="email-list-item-time text-muted">10:12 AM</small>
 
@@ -305,7 +245,7 @@
                         <div class="app-overlay"></div>
                     </div>
                     <!-- /Emails List -->
-                    envoye{{ envoye.id }}
+
                     <!-- Email recu affichage -->
                     {% for recu in messagerecu %}
                         <div class="col app-email-view flex-grow-0 bg-body" id="app-email-recu{{ recu.id }}">
@@ -322,12 +262,13 @@
                                     </div>
 
                                 </div>
-                                <hr class="app-email-view-hr mx-n3 my-2" />
+                                <hr class="app-email-view-hr mx-n3 my-2"/>
                             </div>
-                            <hr class="m-0" />
+                            <hr class="m-0"/>
                             <!-- Email View : Content-->
                             <div class="app-email-view-content py-4">
-                                <p class="email-earlier-msgs text-center text-muted cursor-pointer mb-5">Reception Message</p>
+                                <p class="email-earlier-msgs text-center text-muted cursor-pointer mb-5">Reception
+                                    Message</p>
                                 <!-- Email View : Previous mails-->
 
                                 <!-- Email View : Last mail-->
@@ -340,7 +281,7 @@
                                                     alt="user-avatar"
                                                     class="flex-shrink-0 rounded-circle me-3"
                                                     height="40"
-                                                    width="40" />
+                                                    width="40"/>
                                             <div class="flex-grow-1 ms-1">
                                                 <h6 class="m-0">Chandler Bing</h6>
                                                 <small class="text-muted">iAmAhoot@email.com</small>
@@ -354,13 +295,15 @@
                                     <div class="card-body">
                                         <p class="fw-semibold mt-5">Greetings!</p>
                                         <p>
-                                            There are many variations of passages of Lorem Ipsum available, but the majority have
-                                            suffered alteration in some form, by injected humour, or randomised words which don't look
+                                            There are many variations of passages of Lorem Ipsum available, but the
+                                            majority have
+                                            suffered alteration in some form, by injected humour, or randomised words
+                                            which don't look
                                             even slightly believable.
                                         </p>
                                         <p class="mb-0">Sincerely yours,</p>
                                         <p class="fw-semibold mb-0">Envato Design Team</p>
-                                        <hr />
+                                        <hr/>
                                         <p class="text-muted mb-2">Attachments</p>
 
                                     </div>
@@ -387,7 +330,8 @@
                     <!-- Email recu affichage -->
                     <!-- Email envoyer affichage -->
                     {% for envoye in messageenvoyer %}
-                        <div class="col app-email-view app-email-view-envoye flex-grow-0 bg-body" id="app-email-envoye{{ envoye.id }}">
+                        <div class="col app-email-view app-email-view-envoye flex-grow-0 bg-body"
+                             id="app-email-envoye{{ envoye.id }}">
                             <div class="card-body app-email-view-header p-3 py-2">
                                 <!-- Email View : Title  bar-->
                                 <div class="d-flex justify-content-between align-items-center py-2">
@@ -401,12 +345,13 @@
                                     </div>
                                     <!-- Email View : Action  bar-->
                                 </div>
-                                <hr class="app-email-view-hr mx-n3 my-2" />
+                                <hr class="app-email-view-hr mx-n3 my-2"/>
                             </div>
-                            <hr class="m-0" />
+                            <hr class="m-0"/>
                             <!-- Email View : Content-->
                             <div class="app-email-view-content py-4">
-                                <p class="email-earlier-msgs text-center text-muted cursor-pointer mb-5">1 Earlier Message</p>
+                                <p class="email-earlier-msgs text-center text-muted cursor-pointer mb-5">1 Earlier
+                                    Message</p>
                                 <!-- Email View : Previous mails-->
 
                                 <!-- Email View : Last mail-->
@@ -419,7 +364,7 @@
                                                     alt="user-avatar"
                                                     class="flex-shrink-0 rounded-circle me-3"
                                                     height="40"
-                                                    width="40" />
+                                                    width="40"/>
                                             <div class="flex-grow-1 ms-1">
                                                 <h6 class="m-0">Chandler Bing</h6>
                                                 <small class="text-muted">iAmAhoot@email.com</small>
@@ -435,13 +380,15 @@
 
                                         </p>
                                         <p>
-                                            There are many variations of passages of Lorem Ipsum available, but the majority have
-                                            suffered alteration in some form, by injected humour, or randomised words which don't look
+                                            There are many variations of passages of Lorem Ipsum available, but the
+                                            majority have
+                                            suffered alteration in some form, by injected humour, or randomised words
+                                            which don't look
                                             even slightly believable.
                                         </p>
                                         <p class="mb-0">Sincerely yours,</p>
                                         <p class="fw-semibold mb-0">Envato Design Team</p>
-                                        <hr />
+                                        <hr/>
 
                                     </div>
                                 </div>
@@ -491,9 +438,9 @@
                         <div class="modal-body flex-grow-1 pb-sm-0 p-4 py-2">
                             <form class="email-compose-form" method="post">
                                 <div class="email-compose-to d-flex justify-content-between align-items-center">
-                                    <label class="form-label mb-0 fs-6 text-muted" for="emailContacts">To:</label>
+                                    <label class="form-label mb-0 fs-6 text-muted" for="emailContacts">destinataire :</label>
                                     <div class="select2-primary border-0 shadow-none flex-grow-1 mx-2">
-                                        <input class="form-control" type="text" placeholder="Materialize"
+                                        <input class="form-control" type="text" placeholder="Pseudo"
                                                id="html5-text-input" name="destinataire">
                                     </div>
                                 </div>
@@ -556,6 +503,72 @@
         <script src="../../assets/vendor/libs/block-ui/block-ui.js"></script>
 
         <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                let elementToClick = document.querySelector('#clique');
+                if (elementToClick) {
+                    elementToClick.click();
+                }
+            });
+
+
+            function deletemsg(id){
+                $.ajax({
+                    url: '/deletemsg',
+                    method: 'POST',
+                    data: {
+                        idmessage: id,
+                    },
+                    dataType: 'json', // Attendre une réponse JSON du serveur
+                    success: function (response) {
+                        // Vérifier la réponse du serveur
+                        if (response.hasOwnProperty('error')) {
+                            // Erreur lors de l'ajout de la catégorie
+                            console.log('Erreur lors de l\'ajout de la catégorie :', response.error);
+
+                        } else {
+                            // La catégorie a été ajoutée avec succès
+                            console.log(response);
+
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        // Gérer les erreurs lors de la requête Ajax
+                        console.error('Une erreur s\'est produite lors de la requête :', error);
+                    }
+                });
+            }
+function readok(id){
+                $.ajax({
+                    url: '/readok',
+                    method: 'POST',
+                    data: {
+                        idmessage: id,
+                    },
+                    dataType: 'json', // Attendre une réponse JSON du serveur
+                    success: function (response) {
+                        // Vérifier la réponse du serveur
+                        if (response.hasOwnProperty('error')) {
+                            // Erreur lors de l'ajout de la catégorie
+                            console.log('Erreur lors de l\'ajout de la catégorie :', response.error);
+
+                        } else {
+                            // La catégorie a été ajoutée avec succès
+                            console.log(response);
+
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        // Gérer les erreurs lors de la requête Ajax
+                        console.error('Une erreur s\'est produite lors de la requête :', error);
+                    }
+                });
+                let li = $('#limessage'+id);
+                console.log(li);
+                 li.removeClass("email-marked-read");
+            }
+
+
+
             function favoritemail(id) {
                 const emailItem = document.querySelector(`#email_${id}`);
                 const choix = emailItem.getAttribute('data-favorite');
@@ -573,7 +586,7 @@
                             if (response.hasOwnProperty('error')) {
                                 // Erreur lors de l'ajout de la catégorie
                                 console.log('Erreur lors de l\'ajout de la catégorie :', response.error);
-                            %
+
                             } else {
                                 // La catégorie a été ajoutée avec succès
                                 console.log(response);
