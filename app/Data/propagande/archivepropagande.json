@@ -1,0 +1,24 @@
+{
+  "messages": [
+    {
+      "pseudo": "JohnDoe",
+      "message": "Hi, how are you doing?"
+    },
+    {
+      "pseudo": "JaneSmith",
+      "message": "Hey John, I'm good, thanks! How about you?"
+    },
+    {
+      "pseudo": "JohnDoe",
+      "message": "I'm doing pretty well, thank you for asking!"
+    },
+    {
+      "pseudo": "JaneSmith",
+      "message": "That's great to hear!"
+    },
+    {
+      "pseudo": "JohnDoe",
+      "message": "Yeah, it's been a good day so far. How about you?"
+    }
+  ]
+}

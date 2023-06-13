@@ -1,52 +1,52 @@
 <!DOCTYPE html>
 
 <html
-  lang="en"
-  class="light-style layout-navbar-fixed layout-menu-fixed"
-  dir="ltr"
-  data-theme="theme-default"
-  data-assets-path="../../assets/"
-  data-template="vertical-menu-template">
-  <head>
-    <meta charset="utf-8" />
+        lang="en"
+        class="light-style layout-navbar-fixed layout-menu-fixed"
+        dir="ltr"
+        data-theme="theme-default"
+        data-assets-path="../../assets/"
+        data-template="vertical-menu-template">
+<head>
+    <meta charset="utf-8"/>
     <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
 
     <title>Dashboard - Analytics | Materialize - Material Design HTML Admin Template</title>
 
-    <meta name="description" content="" />
+    <meta name="description" content=""/>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon/favicon.ico"/>
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet" />
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"/>
 
     <!-- Icons -->
-    <link rel="stylesheet" href="../../assets/vendor/fonts/materialdesignicons.css" />
-    <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/materialdesignicons.css"/>
+    <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css"/>
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="../../assets/css/demo.css" />
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css"/>
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css"/>
+    <link rel="stylesheet" href="../../assets/css/demo.css"/>
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-    <link rel="stylesheet" href="../../assets/vendor/libs/node-waves/node-waves.css" />
-    <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
-    <link rel="stylesheet" href="../../assets/vendor/libs/apex-charts/apex-charts.css" />
-    <link rel="stylesheet" href="../../assets/vendor/libs/swiper/swiper.css" />
-    <link rel="stylesheet" href="../../assets/css/chat.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
+    <link rel="stylesheet" href="../../assets/vendor/libs/node-waves/node-waves.css"/>
+    <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css"/>
+    <link rel="stylesheet" href="../../assets/vendor/libs/apex-charts/apex-charts.css"/>
+    <link rel="stylesheet" href="../../assets/vendor/libs/swiper/swiper.css"/>
+    <link rel="stylesheet" href="../../assets/css/chat.css"/>
 
     <!-- Page CSS -->
-    <link rel="stylesheet" href="../../assets/vendor/css/pages/cards-statistics.css" />
-    <link rel="stylesheet" href="../../assets/vendor/css/pages/cards-analytics.css" />
+    <link rel="stylesheet" href="../../assets/vendor/css/pages/cards-statistics.css"/>
+    <link rel="stylesheet" href="../../assets/vendor/css/pages/cards-analytics.css"/>
     <!-- Helpers -->
     <script src="../../assets/vendor/js/helpers.js"></script>
 
@@ -55,178 +55,174 @@
     <script src="../../assets/vendor/js/template-customizer.js"></script>
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="../../assets/js/config.js"></script>
-<style>
-    .marquee-rtl {
-        margin: auto ;
-        border: 10px solid #F0F0FF;
-        overflow: hidden;
-        box-shadow: 0 .25em .5em #CCC,inset 0 0 1em .25em #CCC;
-        margin-top: 70px;
-        height: 4rem;
-        display: flex; /* ajoutez cette ligne pour activer l'alignement vertical et horizontal */
-        align-items: center; /* ajoutez cette ligne pour centrer verticalement */
-    }
+    <style>
+        .marquee-rtl {
+            margin: auto;
+            border: 10px solid #F0F0FF;
+            overflow: hidden;
+            box-shadow: 0 .25em .5em #CCC, inset 0 0 1em .25em #CCC;
+            margin-top: 70px;
+            height: 4rem;
+            display: flex; /* ajoutez cette ligne pour activer l'alignement vertical et horizontal */
+            align-items: center; /* ajoutez cette ligne pour centrer verticalement */
+        }
 
-    .marquee-rtl > :first-child {
-        margin: auto;
-        display: inline-block;
-        padding-right: 2em;
-        padding-left: 100%;
-        white-space: nowrap;
-        animation: defilement-rtl 30s infinite linear;
-    }
+        .marquee-rtl > :first-child {
+            margin: auto;
+            display: inline-block;
+            padding-right: 2em;
+            padding-left: 100%;
+            white-space: nowrap;
+            animation: defilement-rtl 30s infinite linear;
+        }
 
-    .marquee-item{
-        list-style-type: none;
-    }
+        .marquee-item {
+            list-style-type: none;
+        }
 
-</style>
+    </style>
     {% block css %}{% endblock %}
 </head>
 
 <body>
 
 
-   <!-- Layout wrapper -->
+<!-- Layout wrapper -->
 
 
-            {% if sessionExistsAndTrue %}
-                <!-- barre de navigation en ligne -->
-                {% include "./layout/nav_online.html.twig" %}
-            {% else %}
-                <!-- barre de navigation hors ligne -->
-                {% include "./layout/nav_offline.html.twig" %}
-            {% endif %}
+{% if sessionExistsAndTrue %}
+    <!-- barre de navigation en ligne -->
+    {% include "./layout/nav_online.html.twig" %}
+{% else %}
+    <!-- barre de navigation hors ligne -->
+    {% include "./layout/nav_offline.html.twig" %}
+{% endif %}
 
-   <div class="container d-flex justify-content-center">
-       <div class="marquee-rtl">
-           <!-- le contenu défilant -->
-           <ul class="marquee-list d-flex align-items-center">
-               <li class="marquee-item">Découvrez les dernières tendances en matière de développement web grâce à notre nouveau guide.&nbsp;&nbsp;&nbsp;&nbsp;</li>
-               <li class="marquee-item">Améliorez votre productivité en utilisant ces astuces pour coder plus rapidement.&nbsp;&nbsp;&nbsp;&nbsp;</li>
-               <li class="marquee-item">Sécurisez votre site web en suivant les bonnes pratiques recommandées par les experts&nbsp;&nbsp;&nbsp;&nbsp;</li>
-               <li class="marquee-item">Apprenez à coder avec notre programme d'apprentissage en ligne pour débutants de tous âges&nbsp;&nbsp;&nbsp;&nbsp;</li>
-               <li class="marquee-item">Développez vos compétences en programmation en rejoignant notre communauté de développeurs passionnés&nbsp;&nbsp;&nbsp;&nbsp;</li>
-           </ul>
-       </div>
-   </div>
+<div class="container d-flex justify-content-center">
+    <div class="marquee-rtl">
+        <!-- le contenu défilant -->
+        <ul class="marquee-list d-flex align-items-center">
+            {% for propa in propagande %}
+                <li class="marquee-item">{{ propa.pseudo }} : {{ propa.message }}&emsp;&emsp;</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
 
-                  <!-- aside -->
-            <div class="layout-wrapper layout-content-navbar">
-                <div class="layout-container">
+<!-- aside -->
+<div class="layout-wrapper layout-content-navbar">
+    <div class="layout-container">
 
-{% block contenu %}{% endblock %}
-
-
-
-
+        {% block contenu %}{% endblock %}
 
 
         <!-- Overlay -->
         <div class="layout-overlay layout-menu-toggle"></div>
         <!-- Drag Target Area To SlideIn Menu On Small Screens -->
         <div class="drag-target"></div>
-                <!-- Fullscreen Modal -->
+        <!-- Fullscreen Modal -->
 
-                        <button
-                                type="button"
-                                class="btn"
-                                id="chat"
-                                onclick="showchat()"
-                       style=" background-image: url('assets/img/webtools/discussion.webp');
-  background-size: cover;height: 50px;width:50px;border-radius: 50%;" >
+        <button
+                type="button"
+                class="btn"
+                id="chat"
+                onclick="showchat()"
+                style=" background-image: url('assets/img/webtools/discussion.webp');
+  background-size: cover;height: 50px;width:50px;border-radius: 50%;">
 
-                        </button>
+        </button>
 
-                        <!-- Modal -->
-                        <div id="modalchat" style="background-color: #e6e6e6" >
-                        <div class="d-flex justify-content-end"> <span onclick="closemodal()" class="mdi mdi-close mt-2 me-2"  style="background-color: red;color: white"></span>
-                            </span>
-                        </div>
-                    <div class="container-xxl flex-grow-1 container-p-y mt-2">
-                                <div class="app-chat card ">
-                                    <div class="row g-0 ">
-                                        <!-- Sidebar Left -->
-
-
-                                        <!-- Chat History -->
-                                        <div class="col app-chat-history">
-                                            <div class="chat-history-wrapper">
-                                                <div class="chat-history-body">
-                                                    <ul class="list-unstyled chat-history" id="chaturl">
-
-
-
-                                                    </ul>
-                                                </div>
-                                                <!-- Chat message form -->
-                                                <div class="chat-history-footer">
-                                                    <form class="d-flex justify-content-between align-items-center">
-                                                        <input
-                                                                class="form-control message-input me-3 shadow-none " id="inputchat"
-                                                                placeholder="Type your message here" name="inputchat" />
-                                                        <div class="message-actions d-flex align-items-center">
-                                                            </label>
-                                                            <button class="btn btn-primary d-flex send-msg-btn " id="addchat" type="button" >
-                                                                <span class="align-middle">Send</span>
-                                                            </button>
-                                                        </div>
-                                                    </form>
-
-                                                </div>
-                                                <button class="btn btn-danger d-flex send-msg-btn " id="closechat" type="button" onclick="closemodal()" >
-                                                    <span class="align-middle">Fermer</span>
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- / Content -->
-                        </div>
-                        <!-- Modal -->
-
+        <!-- Modal -->
+        <div id="modalchat" style="background-color: #e6e6e6">
+            <div class="d-flex justify-content-end"><span onclick="closemodal()" class="mdi mdi-close mt-2 me-2"
+                                                          style="background-color: red;color: white"></span>
+                </span>
             </div>
+            <div class="container-xxl flex-grow-1 container-p-y mt-2">
+                <div class="app-chat card ">
+                    <div class="row g-0 ">
+                        <!-- Sidebar Left -->
 
+
+                        <!-- Chat History -->
+                        <div class="col app-chat-history">
+                            <div class="chat-history-wrapper">
+                                <div class="chat-history-body">
+                                    <ul class="list-unstyled chat-history" id="chaturl">
+
+
+                                    </ul>
+                                </div>
+                                <!-- Chat message form -->
+                                <div class="chat-history-footer">
+                                    <form class="d-flex justify-content-between align-items-center">
+                                        <input
+                                                class="form-control message-input me-3 shadow-none " id="inputchat"
+                                                placeholder="Type your message here" name="inputchat"/>
+                                        <div class="message-actions d-flex align-items-center">
+                                            </label>
+                                            <button class="btn btn-primary d-flex send-msg-btn " id="addchat"
+                                                    type="button">
+                                                <span class="align-middle">Send</span>
+                                            </button>
+                                        </div>
+                                    </form>
+
+                                </div>
+                                <button class="btn btn-danger d-flex send-msg-btn " id="closechat" type="button"
+                                        onclick="closemodal()">
+                                    <span class="align-middle">Fermer</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-    <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
-    <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="../../assets/vendor/libs/popper/popper.js"></script>
-    <script src="../../assets/vendor/js/bootstrap.js"></script>
-    <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="../../assets/vendor/libs/node-waves/node-waves.js"></script>
+            </div>
+            <!-- / Content -->
+        </div>
+        <!-- Modal -->
 
-    <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
-    <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
-    <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
-   <link rel="stylesheet" href="../assets/vendor/css/pages/app-chat.css" />
+    </div>
 
-    <script src="../../assets/vendor/js/menu.js"></script>
-    <!-- endbuild -->
+</div>
+<!-- Core JS -->
+<!-- build:js assets/vendor/js/core.js -->
+<script src="../../assets/vendor/libs/jquery/jquery.js"></script>
+<script src="../../assets/vendor/libs/popper/popper.js"></script>
+<script src="../../assets/vendor/js/bootstrap.js"></script>
+<script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script src="../../assets/vendor/libs/node-waves/node-waves.js"></script>
 
-    <!-- Vendors JS -->
-    <script src="../../assets/vendor/libs/apex-charts/apexcharts.js"></script>
-    <script src="../../assets/vendor/libs/swiper/swiper.js"></script>
+<script src="../../assets/vendor/libs/hammer/hammer.js"></script>
+<script src="../../assets/vendor/libs/i18n/i18n.js"></script>
+<script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
+<link rel="stylesheet" href="../assets/vendor/css/pages/app-chat.css"/>
 
-    <!-- Main JS -->
-    <script src="../../assets/js/main.js"></script>
+<script src="../../assets/vendor/js/menu.js"></script>
+<!-- endbuild -->
 
-    <!-- Page JS -->
-    <script src="../../assets/js/dashboards-analytics.js"></script>
-                    <script>
+<!-- Vendors JS -->
+<script src="../../assets/vendor/libs/apex-charts/apexcharts.js"></script>
+<script src="../../assets/vendor/libs/swiper/swiper.js"></script>
 
-                        const li = document.querySelectorAll('.marquee-item'); // Sélectionne les éléments li représentant les messages
-                        let totalWidth = 0;
+<!-- Main JS -->
+<script src="../../assets/js/main.js"></script>
 
-                        // Boucle à travers les éléments li et ajoute la largeur de chaque élément pour obtenir la largeur totale
-                        li.forEach(item => {
-                            totalWidth += item.offsetWidth;
-                        });
+<!-- Page JS -->
+<script src="../../assets/js/dashboards-analytics.js"></script>
+<script>
 
-                        const marqueeAnimation = document.createElement('style');
-                        marqueeAnimation.innerHTML = `
+    const li = document.querySelectorAll('.marquee-item'); // Sélectionne les éléments li représentant les messages
+    let totalWidth = 0;
+
+    // Boucle à travers les éléments li et ajoute la largeur de chaque élément pour obtenir la largeur totale
+    li.forEach(item => {
+        totalWidth += item.offsetWidth;
+    });
+
+    const marqueeAnimation = document.createElement('style');
+    marqueeAnimation.innerHTML = `
     @keyframes defilement-rtl {
         0% {
             transform: translate3d(0,0,0);      /* position initiale à droite */
@@ -237,147 +233,151 @@
     }
 `;
 
-                        // Ajouter l'élément style dans le document
-                        document.body.appendChild(marqueeAnimation);
+    // Ajouter l'élément style dans le document
+    document.body.appendChild(marqueeAnimation);
 
 
+    function showchat() {
+        $('#modalchat').show();
+    }
+
+    function closemodal() {
+        $('#modalchat').hide();
+    }
 
 
-                        function showchat(){
-$('#modalchat').show();
-                    }                    function closemodal(){
-$('#modalchat').hide();
+</script>
+<script>
+
+    const input = document.getElementById('inputchat');
+    input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
+    // Appeler la fonction pour ajouter le message lorsque l'utilisateur appuie sur "Entrée" dans la zone de texte
+
+
+    // Appeler la fonction pour ajouter le message lorsque l'utilisateur clique sur le bouton "Envoyer"
+    $('#addchat').click(function (event) {
+        event.preventDefault();  // empêche le formulaire de se soumettre lors du clic sur le bouton "Envoyer"
+        sendMessage();
+    });
+
+    // Définir la fonction pour ajouter le message
+    function sendMessage() {
+        let test = $('#inputchat').val();
+        console.log(test);
+        $('#inputchat').val('');
+        $.ajax({
+            url: '/addchat',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                action: 'add-chat',
+                message: test,
+            },
+            success: function (response) {
+                console.log(response);
+                // Faire quelque chose avec la réponse du serveur, par exemple :
+                // alert(response);
+                // ou mettre à jour la liste des sous-catégories
+                // $('.subcategories-list').append('<li>' + name + '</li>');
+            },
+            error: function (xhr, status, error) {
+                console.log(error);
+                // Gérer l'erreur
+            }
+        }
+    }
+
+    )
+    ;
+    }
+
+    let idUser = "";
+    $.ajax({
+        type: 'GET',
+        url: '/getSessionData', // endpoint créé dans l'étape précédente
+        success: function (data) {
+            // data contient les données de session récupérées
+            var mesDonnees = JSON.parse(data);
+            // Utilise mesDonnees dans ton code JavaScript
+            console.log(mesDonnees);
+            idUser = mesDonnees.iduser;
+
+            getMessages();
+        }
+    });
+
+    let nbrmsg = 0;
+
+    function getMessages() {
+        let urlchat = $('#chaturl');
+        $.ajax({
+            url: '/get-messages',
+            method: 'GET',
+            success: function (response) {
+                console.log(response);
+                var messages = JSON.parse(response);
+
+                // extraire les messages qui n'ont pas encore été affichés
+                messages = messages.slice(nbrmsg);
+
+                messages.forEach(function (chat) {
+
+                    // création de l'élément enfant div
+
+                    if (chat.id_user == idUser) {
+                        var childDiv = `<li class="chat-message chat-message-right">
+           <div class="d-flex overflow-hidden">
+               <div class="user-avatar flex-shrink-0 me-3">
+                   <div class="avatar avatar-sm">
+                       <img src="Data/img_profil_users/` + idUser + `.jpg" alt="Avatar" class="rounded-circle" />
+                   </div>
+               </div>
+               <div class="chat-message-wrapper flex-grow-1">
+                   <div class="chat-message-text">
+                       <p class="mb-0">` + chat.message + `</p>
+                   </div>
+                   <div class="text-muted">
+                       <small>` + chat.date + `</small>
+                   </div>
+               </div>
+           </div>
+       </li>`;
+                    } else {
+                        var childDiv = `<li class="chat-message ">
+           <div class="d-flex overflow-hidden">
+               <div class="user-avatar flex-shrink-0 me-3">
+                   <div class="avatar avatar-sm">
+                       <img src="Data/img_profil_users/` + chat.id_user + `.jpg" alt="Avatar" class="rounded-circle" />
+                   </div>
+               </div>
+               <div class="chat-message-wrapper flex-grow-1">
+                   <div class="chat-message-text">
+                       <p class="mb-0">` + chat.message + `</p>
+                   </div>
+                   <div class="text-muted">
+                       <small>` + chat.date + `</small>
+                   </div>
+               </div>
+           </div>
+       </li>`;
                     }
 
+                    // ajout de l'élément enfant au parent avec la classe ".parent"
+                    urlchat.append(childDiv);
+                    nbrmsg += 1;
+                });
+            }
+        });
+    }
 
+    setInterval(getMessages, 1000);
 
-
-                    </script>
-   <script>
-
-       const input = document.getElementById('inputchat');
-       input.addEventListener('keydown', function(e) {
-           if (e.key === 'Enter') {
-               e.preventDefault();
-               sendMessage();
-           }
-       });
-       // Appeler la fonction pour ajouter le message lorsque l'utilisateur appuie sur "Entrée" dans la zone de texte
-
-
-       // Appeler la fonction pour ajouter le message lorsque l'utilisateur clique sur le bouton "Envoyer"
-       $('#addchat').click(function(event) {
-           event.preventDefault();  // empêche le formulaire de se soumettre lors du clic sur le bouton "Envoyer"
-           sendMessage();
-       });
-       // Définir la fonction pour ajouter le message
-       function sendMessage() {
-           let test = $('#inputchat').val();
-           console.log(test);
-           $('#inputchat').val('');
-           $.ajax({
-               url: '/addchat',
-               type: 'post',
-               dataType: 'json',
-               data: {
-                   action: 'add-chat',
-                   message: test,
-               },
-               success: function(response) {
-                   console.log(response);
-                   // Faire quelque chose avec la réponse du serveur, par exemple :
-                   // alert(response);
-                   // ou mettre à jour la liste des sous-catégories
-                   // $('.subcategories-list').append('<li>' + name + '</li>');
-               },
-               error: function(xhr, status, error) {
-                   console.log(error);
-                   // Gérer l'erreur
-               }
-           });
-       }
-
-       let idUser = "";
-       $.ajax({
-           type: 'GET',
-           url: '/getSessionData', // endpoint créé dans l'étape précédente
-           success: function(data) {
-               // data contient les données de session récupérées
-               var mesDonnees = JSON.parse(data);
-               // Utilise mesDonnees dans ton code JavaScript
-               console.log(mesDonnees);
-               idUser = mesDonnees.iduser ;
-
-               getMessages() ;
-           }
-       });
-
-       let nbrmsg = 0;
-
-       function getMessages() {
-           let urlchat = $('#chaturl');
-           $.ajax({
-               url: '/get-messages',
-               method: 'GET',
-               success: function(response) {
-                   console.log(response);
-                   var messages = JSON.parse(response);
-
-                   // extraire les messages qui n'ont pas encore été affichés
-                   messages = messages.slice(nbrmsg);
-
-                   messages.forEach(function(chat) {
-
-                       // création de l'élément enfant div
-
-                       if ( chat.id_user == idUser){
-                           var childDiv = `<li class="chat-message chat-message-right">
-           <div class="d-flex overflow-hidden">
-               <div class="user-avatar flex-shrink-0 me-3">
-                   <div class="avatar avatar-sm">
-                       <img src="Data/img_profil_users/`+ idUser+`.jpg" alt="Avatar" class="rounded-circle" />
-                   </div>
-               </div>
-               <div class="chat-message-wrapper flex-grow-1">
-                   <div class="chat-message-text">
-                       <p class="mb-0">`+ chat.message+ `</p>
-                   </div>
-                   <div class="text-muted">
-                       <small>`+ chat.date+ `</small>
-                   </div>
-               </div>
-           </div>
-       </li>`;
-                       }else {
-                           var childDiv = `<li class="chat-message ">
-           <div class="d-flex overflow-hidden">
-               <div class="user-avatar flex-shrink-0 me-3">
-                   <div class="avatar avatar-sm">
-                       <img src="Data/img_profil_users/`+ chat.id_user+ `.jpg" alt="Avatar" class="rounded-circle" />
-                   </div>
-               </div>
-               <div class="chat-message-wrapper flex-grow-1">
-                   <div class="chat-message-text">
-                       <p class="mb-0">`+ chat.message+ `</p>
-                   </div>
-                   <div class="text-muted">
-                       <small>`+ chat.date+ `</small>
-                   </div>
-               </div>
-           </div>
-       </li>`;
-                       }
-
-                       // ajout de l'élément enfant au parent avec la classe ".parent"
-                       urlchat.append(childDiv);
-                       nbrmsg += 1 ;
-                   });
-               }
-           });
-       }
-       setInterval(getMessages, 1000);
-
-   </script>
+</script>
 {% block js %}{% endblock %}
 
 </body>

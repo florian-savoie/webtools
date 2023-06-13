@@ -71,6 +71,8 @@ $routes->post('/messagerieaddfavorite', 'messagerieController::addfavorite');
 $routes->post('/messageriedeletevaforite', 'messagerieController::deletefavorite');
 $routes->post('/deletemsg', 'messagerieController::deletemsg');
 $routes->post('/readok', 'messagerieController::readok');
+$routes->get('/propagande', 'propagandeController::propagande');
+$routes->post('/propagande', 'propagandeController::propagande');
 
 
 

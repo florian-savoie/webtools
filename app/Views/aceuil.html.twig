@@ -6,15 +6,48 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
-    <!-- Flipster CSS -->
-    <link rel="stylesheet" href="dist/jquery.flipster.min.css">
 
-    <link rel="stylesheet" href="../assets/css/time-line.css">
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../assets/vendor/libs/swiper/swiper.css" />
+
+    <!-- Page CSS -->
+    <link rel="stylesheet" href="../assets/vendor/css/pages/ui-carousel.css" />
     <!-- Flipster Js -->
     <script src="dist/jquery.flipster.min.js"></script>
+
 {% endblock %}
 {% block contenu %}
 
+
+     <div class="container" style="height: 300px;">
+       <div class="col-12">
+         <div id="swiper-gallery">
+           <div class="swiper gallery-top" style="border-radius: 1.2rem;">
+             <div class="swiper-wrapper">
+               <div class="swiper-slide" style="height: 250px;background-color: #CD853F;"> Tirages au sort 05/05/2023
+                 <img src="assets/img/deeznutz/OIG_13-removebg-preview.png" style="height: 250px; width: auto;" alt="">80 000 token pour le vainqueur
+               </div>
+               <div class="swiper-slide" style="height: 250px;background-color: #CD853F;"> Concour de spam 05/05/2023
+                 <img src="assets/img/deeznutz/OIG.BAB-removebg-preview.png" style="height: 250px; width: auto;" alt="">80 000 token pour le vainqueur
+               </div>
+               <div class="swiper-slide" style="height: 250px;background-color: #CD853F;"> Concour Graphique 05/05/2023
+                 <img src="assets/img/deeznutz/ecureuilbtc-removebg-preview.png" style="height: 250px; width: auto;" alt="">  80 000 token pour le vainqueur
+               </div>
+               <div class="swiper-slide" style="height: 250px;background-color: #CD853F;"> Concour de Deez nuts 05/05/2023
+                 <img src="assets/img/deeznutz/OIGman-removebg-preview.png" style="height: 250px; width: auto;" alt="">80 000 token pour le vainqueur
+               </div>
+               <div class="swiper-slide" style="height: 250px;background-color: #CD853F;"> Concour de spam 05/05/2023
+                 <img src="assets/img/deeznutz/OIG.oE6CZigaxZNNyQX-removebg-preview.png" class="img-fluid" style="height: 250px; width: auto;" alt="">80 000 token pour le vainqueur
+               </div>
+
+             </div>
+             <div class="swiper-button-next swiper-button-white"></div>
+             <div class="swiper-button-prev swiper-button-white"></div>
+           </div>
+
+         </div>
+       </div>
+     </div>
 
  
 
@@ -29,7 +62,7 @@
         <script src="../assets/js/time-line/artisan/envent-form.js"></script>
         <script src="../assets/js/time-line/artisan/compression-photo.js"></script>
         <script src="../../assets/vendor/assets/js/form-basic-inputs.js"></script>
-        <script src="../../assets/vendor/assets/js/extended-ui-timeline.js"></script>
         <script src="../../assets/vendor/libs/swiper/swiper.js"></script>
+        <script src="assets/js/ui-carousel.js"></script>
 
     {% endblock %}
