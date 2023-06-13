@@ -55,17 +55,16 @@ class listController extends BaseController
             $sessionExistsAndTrue = true;
         }
 
-        $builder = $this->db->table('articles');
-        $builder->where('is_approved', 1);
-        $builder->orderBy('id', 'DESC');
-        $query = $builder->get();
-        $articles = $query->getResultArray();
-        $dir ="assets/json/articles.json";
 
+        $dir ="assets/json/menbres/listemenbres.json";
+        $existingContent = file_get_contents($dir);
+        // Convertir le contenu existant en tableau associatif ou objet
+        $pseudoweb = json_decode($existingContent, true);
 
         return $this->twig->render('list.html.twig', [
             'sessionExistsAndTrue' => $sessionExistsAndTrue,
-            'session' => $_SESSION
+            'session' => $_SESSION,
+            'menbre' => $pseudoweb
         ]);
     }
 

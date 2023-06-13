@@ -63,6 +63,19 @@ class registerController extends BaseController
                     $builder = $this->db->table('users');
                     $insert = $builder->insert($data);
                     $message = "Enregistrement réussi.";
+
+
+                    // archive propagande
+                    $listemenbre = file_get_contents( "assets/json/menbres/listemenbres.json");
+                    $nouveaumenbre = json_decode($listemenbre, true);
+                    $menbre = ['pseudo' => $_POST['pseudo']];
+
+
+                    $nouveaumenbre[] = $menbre;
+
+                    file_put_contents("assets/json/menbres/listemenbres.json", json_encode($nouveaumenbre));
+
+
                     // Rediriger vers la page de connexion ou une autre page appropriée
                     header("Location: /login");
                     exit();

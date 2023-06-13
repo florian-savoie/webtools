@@ -4,7 +4,6 @@
     <link rel="stylesheet" href="../../assets/vendor/css/pages/ui-carousel.css"/>
     <link rel="stylesheet" href="../../assets/vendor/libs/swiper/swiper.css"/>
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
     <!-- Flipster CSS -->
     <link rel="stylesheet" href="dist/jquery.flipster.min.css">
@@ -15,11 +14,8 @@
     <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="../../assets/vendor/libs/node-waves/node-waves.css" />
     <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
-    <link rel="stylesheet" href="../../assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css" />
-    <link rel="stylesheet" href="../../assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css" />
-    <link rel="stylesheet" href="../../assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css" />
     <link rel="stylesheet" href="../../assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css" />
-    <link rel="stylesheet" href="../../assets/vendor/libs/flatpickr/flatpickr.css" />
+
     <!-- Flipster Js -->
     <script src="dist/jquery.flipster.min.js"></script>
 
@@ -33,10 +29,20 @@
         <!-- Content -->
 
         <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="container">
+                <div class="container">
 
-            <!-- Modal to add new record -->
+                    <input
+                            class="form-control"
+                            list="datalistOptions"
+                            id="member-search"
+                            placeholder="Type to search..." />
+                    <datalist id="datalistOptions">
+                        <option id="nameautocompletion" value="Aucun resultat"></option>
+                    </datalist>                    <label for="member-search" id="proposition">Recherche de membre :</label>
 
-            <!-- / Content -->
+                </div>
+            </div>
 
 
             <div class="content-backdrop fade"></div>
@@ -59,16 +65,39 @@
 
     {% block js %}
 
-        <script src="../assets/js/time-line/client/caroussel.js"></script>
-        <script src="../assets/js/time-line/artisan/delete-like-photo.js"></script>
-        <script src="../assets/js/time-line/artisan/like-photo.js"></script>
-        <script src="../assets/js/time-line/artisan/envent-form.js"></script>
-        <script src="../assets/js/time-line/artisan/compression-photo.js"></script>
-        <script src="../../assets/vendor/assets/js/form-basic-inputs.js"></script>
-        <script src="../../assets/vendor/assets/js/extended-ui-timeline.js"></script>
-        <script src="../../assets/vendor/libs/swiper/swiper.js"></script>
-        <script src="../../assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
-        <script src="../../assets/js/tables-datatables-basic.js"></script>
 
+        <script src="../../assets/vendor/assets/js/form-basic-inputs.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                $.getJSON("assets/json/menbres/listemenbres.json", function(data) {
+                    var membres = data.menbres;
+                    var pseudos = membres.map(function(membre) {
+                        return membre.pseudo.toLowerCase();
+                    });
+
+                    var memberSearchInput = $("#member-search");
+                    var option = $("#proposition");
+
+                    memberSearchInput.on('input', function() {
+                        const searchTerm = memberSearchInput.val().toLowerCase();
+
+                        for (var i = 0; i < membres.length; i++) {
+                            var pseudo = membres[i].pseudo.toLowerCase();
+                            if (pseudo.indexOf(searchTerm) !== -1) {
+                                console.log(pseudo);
+                                option.text("Proposition de pseudo : "+pseudo);
+                                break
+                            }else{
+                                option.text("aucun pseudo correspondant");
+                            }
+                        }
+                    });
+                });
+            });
+
+        </script>
 
     {% endblock %}
