@@ -100,12 +100,16 @@ class articleController extends BaseController
             } else {
                 $response = "Suppression effectuée avec succès.";
             }
-
+        $existingContent = file_get_contents("assets/json/propagande/propagande.json");
+        // Convertir le contenu existant en tableau associatif ou objet
+        $existingData = json_decode($existingContent, true);
         return $this->twig->render('addarticle.html.twig', [
             'sessionExistsAndTrue' => $sessionExistsAndTrue,
             'session' => $_SESSION,
             'categorys' => $categorys,
             "response" => $response ,
+            'propagande' => $existingData['Propagande']
+
         ]);
     }
 

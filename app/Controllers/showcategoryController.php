@@ -60,11 +60,17 @@ class ShowcategoryController extends BaseController
             $builder = $this->db->table('subcategories');
             $souscategorys = $builder->get()->getResultArray();
 
+            $existingContent = file_get_contents("assets/json/propagande/propagande.json");
+            // Convertir le contenu existant en tableau associatif ou objet
+            $existingData = json_decode($existingContent, true);
+
             return $this->twig->render('showcategory.html.twig', [
                 'sessionExistsAndTrue' => $sessionExistsAndTrue,
                 'session' => $_SESSION,
                 "categorys" => $categorys,
-                "souscategorys" => $souscategorys
+                "souscategorys" => $souscategorys,
+                'propagande' => $existingData['Propagande']
+
 
 
             ]);

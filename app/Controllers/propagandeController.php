@@ -127,6 +127,8 @@ class propagandeController extends BaseController
 
 
         }
+
+
         return $this->twig->render('propagande.html.twig', [
             'sessionExistsAndTrue' => $sessionExistsAndTrue,
             'session' => $_SESSION,

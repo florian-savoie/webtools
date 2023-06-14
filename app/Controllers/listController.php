@@ -61,6 +61,7 @@ class listController extends BaseController
         // Convertir le contenu existant en tableau associatif ou objet
         $pseudoweb = json_decode($existingContent, true);
 
+
         return $this->twig->render('list.html.twig', [
             'sessionExistsAndTrue' => $sessionExistsAndTrue,
             'session' => $_SESSION,

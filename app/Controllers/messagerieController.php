@@ -34,7 +34,6 @@ class messagerieController extends BaseController
         ]);
         $this->session = \Config\Services::session();
         $this->db = \Config\Database::connect();
-
         // Vérifier la connexion à la base de données
         try {
             $this->db->initialize();
@@ -47,29 +46,79 @@ class messagerieController extends BaseController
     public function messagerie()
     {
         $sessionExistsAndTrue = false;
-
         $autoriser = $this->session->get('Autoriser');
 
         // Vérifier si la session existe et est vraie
         if ( $autoriser === true) {
             $sessionExistsAndTrue = true;
         }
-        $builder = $this->db->table('messages_prives');
-        $messagerecu = $builder->getWhere(['destinataire' => $_SESSION['iduser'], 'hidden' => 0])->getResult();
 
         $builder = $this->db->table('messages_prives');
-        $messageenvoyer = $builder->getWhere(['emetteur' => $_SESSION['iduser']])->getResult();
+        $messagerecu = $builder->where('destinataire', $_SESSION['iduser'])
+            ->where('hidden', 0)
+            ->orderBy('id', 'DESC')
+            ->get()
+            ->getResult();
 
-        if (isset($_POST['sendMessage'])){
-            var_dump($_POST);
-            die();
+        $builder = $this->db->table('messages_prives');
+        $messageenvoyer = $builder->where('emetteur', $_SESSION['iduser'])
+            ->orderBy('id', 'DESC')
+            ->get()
+            ->getResult();
+
+        $message = "";
+
+        if(isset($_POST['sendMessage'])){
+        if (isset($_POST['destinataire']) && isset($_POST['sujet']) && isset($_POST['contenu'])){
+
+            $builder = $this->db->table('users');
+            $destinataireIsset = $builder->getWhere(['pseudo' => $_POST['destinataire']])->getResult();
+
+            if($destinataireIsset){
+                $data = [
+                    'pseudo_emetteur' => $_SESSION['pseudo'],
+                    'pseudo_destinataire' => $_POST['destinataire'],
+                    'destinataire' => $destinataireIsset[0]->id,
+                    'emetteur' => $_SESSION['iduser'],
+                    'contenu' => $_POST['contenu'],
+                    'sujet' => $_POST['sujet'],
+                ];
+                $builder = $this->db->table('messages_prives');
+                $insert = $builder->insert($data);
+                $this->session->setFlashData('message', "success");
+                header("Location: /messagerie");
+                exit();            }
+
+        }}
+
+
+        if (isset($_POST['replysend']) ){
+
+            $data = [
+                'pseudo_emetteur' => $_SESSION['pseudo'],
+                'pseudo_destinataire' => $_POST['emetteur'],
+                'destinataire' => $_POST['idemetteur'],
+                'emetteur' => $_SESSION['iduser'],
+                'contenu' => $_POST['contenu'],
+                'sujet' => $_POST['sujet'],
+            ];
+            $builder = $this->db->table('messages_prives');
+            $insert = $builder->insert($data);
+            $this->session->setFlashData('message', "success");
+            header("Location: /messagerie");
+            exit();
+
         }
+
+
+        $message = $this->session->getFlashData('message');
 
         return $this->twig->render('messagerie.html.twig', [
             'sessionExistsAndTrue' => $sessionExistsAndTrue,
             'session' => $_SESSION,
             'messagerecu' => $messagerecu,
-            'messageenvoyer' => $messageenvoyer
+            'messageenvoyer' => $messageenvoyer,
+            'message' => $message
         ]);
     }
     public function addfavorite()
@@ -126,4 +175,7 @@ class messagerieController extends BaseController
 
         return response()->json($response);
     }
+
+
+
 }

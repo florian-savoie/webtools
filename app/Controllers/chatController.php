@@ -60,37 +60,37 @@ class chatController extends BaseController
             'session' => $_SESSION,
         ]);
     }    public function addchat()
-    {
-        if (isset($_POST['action']) && $_POST['action'] === 'add-chat') {
-            $message = $_POST['message'];
+{
+    if (isset($_POST['action']) && $_POST['action'] === 'add-chat') {
+        $message = $_POST['message'];
 
-            $builder = $this->db->table('chat');
-            $insertok = $builder->insert([
-                'message' => $message,
-                'id_user' => $_SESSION['iduser']
-            ]);
+        $builder = $this->db->table('chat');
+        $insertok = $builder->insert([
+            'message' => $message,
+            'id_user' => $_SESSION['iduser']
+        ]);
 
 
-            if ($this->db->error()) {
-                $error = $this->db->error();
-                $response = "Erreur  fds lors de l'ajout' : " . $error['message'];
-            } else {
-                $response = "ajout du message effectuée avec succès.";
-            }
+        if ($this->db->error()) {
+            $error = $this->db->error();
+            $response = "Erreur  fds lors de l'ajout' : " . $error['message'];
         } else {
-            $response = "erreur lors de l'ajout.";
-
+            $response = "ajout du message effectuée avec succès.";
         }
-        // Renvoyer la réponse au format JSON
-        header('Content-Type: application/json');
-        echo json_encode($response);
-        return;
+    } else {
+        $response = "erreur lors de l'ajout.";
+
     }
+    // Renvoyer la réponse au format JSON
+    header('Content-Type: application/json');
+    echo json_encode($response);
+    return;
+}
     public function getmessages()
     {
 
         $builder = $this->db->table('chat');
-        $builder->orderBy('id', 'DESC');
+        $builder->orderBy('id', 'asc');
         $chats = $builder->get()->getResultArray();
 
 

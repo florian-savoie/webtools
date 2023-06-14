@@ -65,12 +65,16 @@ class controlmembreController extends BaseController
         $users = $query->getResultArray();
 
 
-
+        $existingContent = file_get_contents("assets/json/propagande/propagande.json");
+        // Convertir le contenu existant en tableau associatif ou objet
+        $existingData = json_decode($existingContent, true);
 
         return $this->twig->render('listemenbers.html.twig', [
             'sessionExistsAndTrue' => $sessionExistsAndTrue ,
             'users' => $users,
-            'session' => $_SESSION
+            'session' => $_SESSION,
+            'propagande' => $existingData['Propagande']
+
 
         ]);
     }

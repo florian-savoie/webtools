@@ -43,7 +43,7 @@
                         <!-- Chat message form -->
                         <div class="chat-history-footer">
                             <form class="d-flex justify-content-between align-items-center">
-                            <input
+                                <input
                                         class="form-control message-input me-3 shadow-none " id="inputchat"
                                         placeholder="Type your message here" name="inputchat" />
                                 <div class="message-actions d-flex align-items-center">
@@ -120,6 +120,7 @@
                         // Gérer l'erreur
                     }
                 });
+                console.log('test');
             }
 
             let idUser = "";
@@ -145,7 +146,6 @@
                     method: 'GET',
                     success: function(response) {
                         var messages = JSON.parse(response);
-
                         // extraire les messages qui n'ont pas encore été affichés
                         messages = messages.slice(nbrmsg);
 
@@ -154,7 +154,7 @@
                             // création de l'élément enfant div
 
                             if ( chat.id_user == idUser){
-                            var childDiv = `<li class="chat-message chat-message-right">
+                                var childDiv = `<li class="chat-message chat-message-right">
            <div class="d-flex overflow-hidden">
                <div class="user-avatar flex-shrink-0 me-3">
                    <div class="avatar avatar-sm">
@@ -194,6 +194,7 @@
                             // ajout de l'élément enfant au parent avec la classe ".parent"
                             urlchat.append(childDiv);
                             nbrmsg += 1 ;
+                            messages = messages.slice(nbrmsg);
                         });
                     }
                 });
