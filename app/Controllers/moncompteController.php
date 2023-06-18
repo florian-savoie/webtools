@@ -76,6 +76,8 @@ class moncompteController extends BaseController
 
                 ];
                 $updated = $this->db->table('users')->update($data, ['id' => $_SESSION['iduser']]);
+                header('Location: /moncompte');
+                exit(0);
             } else {
                 echo "Désolé, une erreur s'est produite lors de l'envoi de votre fichier.";
             }

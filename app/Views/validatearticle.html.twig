@@ -69,7 +69,33 @@
         <div class="row mt-5"></div>
         <div class="row mt-5">
             <!-- Finance App -->
-            {% for article in articles %}
+
+            {% if articles is not defined  or articles == [] %}
+<div class="row d-flex justify-content-center mt-5">
+                <div class="col-md-12 col-lg-8 ">
+                    <div class="card h-100">
+                        <div class="d-flex align-items-end row">
+                            <div class="col-md-6 order-2 order-md-1">
+                                <div class="card-body">
+                                    <h4 class="card-title pb-xl-2">tous les articles on etait traité<strong><br> {{ session.pseudo }} !🎉</strong></h4>
+                                    <p class="mb-0">Le travail a etait effectué efficacement 😎 bien joué.</p>
+                                    <p>Merci de revenir jetter un coup d'oeil dans la journee.</p>
+                                    <a href="/showarticle" class="btn btn-primary waves-effect waves-light">Liste d'articles </a>
+                                </div>
+                            </div>
+                            <div class="col-md-6 text-center text-md-end order-1 order-md-2">
+                                <div class="card-body pb-0 px-0 px-md-4 ps-0">
+                                    <img src="Data/img_profil_users/{{ session.profile_image }}" height="186" alt="View Profile" >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div></div>
+                {% else %}
+
+            {% for article in articles %}                <h1> test2</h1>
+
+
                 <div class="col-lg-4 col-xl-3 mb-3" style="height: 500px;">
                     <div class="card h-100">
                         <img class="card-img-top" style="height: 190px ;min-height: 190px " src="{{ article.image }}"
@@ -123,7 +149,7 @@
                 </div>
                 <!--/ Finance App -->
             {% endfor %}
-
+            {% endif %}
         </div>
     </div>
 

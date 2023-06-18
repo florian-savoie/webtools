@@ -24,11 +24,11 @@
 {% block contenu %}
 
 
-     <div class="container" style="height: 300px;">
+     <div class="container" style="height: 250px;">
        <div class="col-12">
-         <div id="swiper-gallery">
+      <!--   <div id="swiper-gallery"style="height: 250px !important;">
            <div class="swiper gallery-top" style="border-radius: 1.2rem;">
-             <div class="swiper-wrapper">
+             <div class="swiper-wrapper" >
                <div class="swiper-slide" style="height: 250px;background-color: #CD853F;"> Tirages au sort 05/05/2023
                  <img src="assets/img/deeznutz/OIG_13-removebg-preview.png" style="height: 250px; width: auto;" alt="">80 000 token pour le vainqueur
                </div>
@@ -50,9 +50,119 @@
              <div class="swiper-button-prev swiper-button-white"></div>
            </div>
 
+         </div>-->
+
+       </div>    <div class="container d-flex justify-content-center mt-5">
+             <!-- Timeline -->
+
+             <div class=" row col-12 col-lg-6 col-xl-8 mb-4">
+                 <div class="card h-100">
+                     <img
+                             src="../../assets//img/elements/activity-timeline.png"
+                             alt="timeline-image"
+                             class="card-img-top h-px-200"
+                             style="object-fit: cover" />
+                     <div class="card-body">
+                         <h4 class="mb-4">Lancement du site le 20 juiller</h4>
+                         <ul class="timeline card-timeline mb-0">
+                             <li class="timeline-item timeline-item-transparent border-0">
+                                 <span class="timeline-point timeline-point-success"></span>
+                                 <div class="timeline-event pb-1">
+                                     <div class="timeline-header mb-1">
+                                         <h6 class="mb-0 fw-semibold">Lancement officiel du site</h6>
+                                         <small class="text-muted">20 juillet</small>
+                                     </div>
+                                     <p class="text-muted mb-0">Le site est disponible pour les utilisateurs .</p>
+                                 </div>
+                             </li>
+
+                             <li class="timeline-item timeline-item-transparent">
+                                 <span class="timeline-point timeline-point-succes"></span>
+                                 <div class="timeline-event">
+                                     <div class="timeline-header mb-1">
+                                         <h6 class="mb-0 fw-semibold">Déploiement du site</h6>
+                                         <small class="text-muted">30 juin</small>
+                                     </div>
+                                     <p class="text-muted mb-2">Mise en ligne du site sur un serveur accessible sur Internet</p>
+                                 </div>
+                             </li>
+                             <li class="timeline-item timeline-item-transparent">
+                                 <span class="timeline-point timeline-point-warning"></span>
+                                 <div class="timeline-event">
+                                     <div class="timeline-header mb-1">
+                                         <h6 class="mb-0 fw-semibold">Tests et correction des erreurs</h6>
+                                         <small class="text-muted">25 juin</small>
+                                     </div>
+                                     <p class="text-muted mb-2">Vérification de toutes les fonctionnalités du site et correction des éventuelles erreurs</p>
+                                 </div>
+                             </li>
+                             <li class="timeline-item timeline-item-transparent">
+                                 <span class="timeline-point timeline-point-info"></span>
+                                 <div class="timeline-event">
+                                     <div class="timeline-header mb-1">
+                                         <h6 class="mb-0 fw-semibold">Optimisation du code</h6>
+                                         <small class="text-muted">20 mai</small>
+                                     </div>
+                                     <p class="text-muted mb-2">Amélioration du contenu pour une meilleur performance </p>
+                                 </div>
+                             </li>
+                             <li class="timeline-item timeline-item-transparent">
+                                 <span class="timeline-point timeline-point-primary"></span>
+                                 <div class="timeline-event">
+                                     <div class="timeline-header mb-1">
+                                         <h6 class="mb-0 fw-semibold">Développement des fonctionnalités de base</h6>
+                                         <small class="text-muted">15 mai</small>
+                                     </div>
+                                     <p class="text-muted mb-2">Création des formulaires de contact et pannel de gestion</p>
+                                 </div>
+                             </li>
+                             <li class="timeline-item timeline-item-transparent">
+                                 <span class="timeline-point timeline-point-danger"></span>
+                                 <div class="timeline-event">
+                                     <div class="timeline-header mb-1">
+                                         <h6 class="mb-0 fw-semibold">Intégration du contenu</h6>
+                                         <small class="text-muted">10 mai</small>
+                                     </div>
+                                     <p class="text-muted mb-2">Ajout des textes, images et autres données pour remplir les pages</p>
+                                 </div>
+                             </li>
+                             <li class="timeline-item timeline-item-transparent">
+                                 <span class="timeline-point timeline-point-warning"></span>
+                                 <div class="timeline-event">
+                                     <div class="timeline-header mb-1">
+                                         <h6 class="mb-0 fw-semibold">Développement de la structure du site</h6>
+                                         <small class="text-muted">1 mai</small>
+                                     </div>
+                                     <p class="text-muted mb-2">Création de la hiérarchie des pages et navigation entre celles-ci</p>
+                                 </div>
+                             </li>
+                             <li class="timeline-item timeline-item-transparent">
+                                 <span class="timeline-point timeline-point-succes"></span>
+                                 <div class="timeline-event">
+                                     <div class="timeline-header mb-1">
+                                         <h6 class="mb-0 fw-semibold">Création de la maquette du site</h6>
+                                         <small class="text-muted">25 avril</small>
+                                     </div>
+                                     <p class="text-muted mb-2">Réalisation de croquis et de prototypes pour affiner l'apparence du site</p>
+                                 </div>
+                             </li>
+                             <li class="timeline-item timeline-item-transparent">
+                                 <span class="timeline-point timeline-point-danger"></span>
+                                 <div class="timeline-event">
+                                     <div class="timeline-header mb-1">
+                                         <h6 class="mb-0 fw-semibold">Définition des besoins et objectifs du site</h6>
+                                         <small class="text-muted">15 avril</small>
+                                     </div>
+                                     <p class="text-muted mb-2">Recueil des informations et des attentes du client</p>
+                                 </div>
+                             </li>
+                         </ul>
+                     </div>
+                 </div>
+             </div>
+             <!--/ Timeline -->
          </div>
 
-       </div>
      </div>
 
  

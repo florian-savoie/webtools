@@ -91,6 +91,32 @@ class validatearticleController extends BaseController
             ];
             $updated = $this->db->table('articles')->update($data, ['id' => $idarticle ]);
 
+            $builder = $this->db->table('articles');
+            $query = $builder->getWhere(['id' => $idarticle]);
+            $users = $query->getResultArray();
+            $idmenber  = $users[0]['user_id'];
+
+            $builder = $this->db->table('users');
+            $query = $builder->getWhere(['id' => $idmenber]);
+            $valuepublication = $query->getResultArray();
+            if ($valeur == 1){
+                $data = ['article_count' => $valuepublication[0]['article_count']+1
+                ];
+                $updatedstat = $this->db->table('users')->update($data, ['id' => $idmenber ]);
+            }else {
+                $data = ['article_count' => $valuepublication[0]['article_count']-1
+                ];
+                $updatedstat = $this->db->table('users')->update($data, ['id' => $idmenber ]);
+            }
+
+
+
+
+
+
+
+
+
             if ($this->db->error()) {
                 $error = $this->db->error();
                 $response = "Erreur lors de la mise à jour : " . $error['message'];
@@ -104,6 +130,7 @@ class validatearticleController extends BaseController
         // Renvoyer la réponse au format JSON
         header('Content-Type: application/json');
         echo json_encode($response);
+
         return;
     }
 }

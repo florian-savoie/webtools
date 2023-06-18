@@ -55,30 +55,41 @@ class registerController extends BaseController
                 isset($_POST['password2']) && !empty($_POST['password2'])
             ) {
                 if ($_POST['password'] === $_POST['password2']) {
+
+                    // Vérifier si le pseudo ou le mail est déjà utilisé
+                    $builder = $this->db->table('users');
+                    $builder->select('*');
+                    $builder->where('pseudo', $_POST['pseudo']); // Remplacez $_POST['pseudo'] par la variable qui contient le pseudo soumis par le formulaire.
+                    $builder->orWhere('email', $_POST['email']); // Remplacez $_POST['email'] par la variable qui contient l'adresse e-mail soumise par le formulaire.
+                    $query = $builder->get();
+
+                    if ($query->getNumRows() > 0) {
+                        $message = "Email ou mot de passe deja utilisé";
+                    } else {
+
+
                     $data = [
                         'pseudo' => $_POST['pseudo'],
                         'email' => $_POST['email'],
                         'password' => sha1($_POST['password']),
                     ];
+
+
                     $builder = $this->db->table('users');
                     $insert = $builder->insert($data);
                     $message = "Enregistrement réussi.";
 
+// Ajouter membre a la liste des recherches rapide
+                        $listeMembres = file_get_contents("assets/json/menbres/listemenbres.json");
+                        $nouveauxMembres = json_decode($listeMembres, true);
 
-                    // archive propagande
-                    $listemenbre = file_get_contents( "assets/json/menbres/listemenbres.json");
-                    $nouveaumenbre = json_decode($listemenbre, true);
-                    $menbre = ['pseudo' => $_POST['pseudo']];
+                        array_push($nouveauxMembres, $_POST["pseudo"]);
 
+                        file_put_contents("assets/json/menbres/listemenbres.json", json_encode($nouveauxMembres));
 
-                    $nouveaumenbre[] = $menbre;
-
-                    file_put_contents("assets/json/menbres/listemenbres.json", json_encode($nouveaumenbre));
-
-
-                    // Rediriger vers la page de connexion ou une autre page appropriée
+                        // Rediriger vers la page de connexion ou une autre page appropriée
                     header("Location: /login");
-                    exit();
+                    exit(); }
                 } else {
                     $message = "Les mots de passe ne correspondent pas.";
                 }

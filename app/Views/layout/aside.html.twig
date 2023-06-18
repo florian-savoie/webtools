@@ -3,9 +3,9 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <h4 class=" menu-text fw-bold text-center"> WEBTOOLS</h4>
     <div class="app-brand demo d-flex justify-content-center">
-        <a href="showarticle" class="app-brand-link">
+        <a href="showarticle " class="app-brand-link">
 
-                    <img src="../assets/img/webtools/logowebtools.png" style="height: 80px">
+            <img src="../assets/img/webtools/logowebtools.png" style="height: 50px">
         </a>
 
     </div>
@@ -18,61 +18,65 @@
 
         <!-- Extended components -->
 
-            <ul class="menu-inner">
+        <ul class="menu-inner">
 
-                {% for categorie in categories %}
-                    {% set souscat = false %}
-                    {% set lessouscats = [] %}
+            {% for categorie in categories %}
+                {% set souscat = false %}
+                {% set lessouscats = [] %}
 
-                    {% for souscategorie in souscategories  %}
-                        {%  if souscategorie.category_id == categorie.id %}
+                {% for souscategorie in souscategories %}
+                    {% if souscategorie.category_id == categorie.id %}
                         {% set souscat = true %}
                         {% set lessouscats = lessouscats|merge([souscategorie]) %}
-                        {% endif %}
+                    {% endif %}
 
-                    {% endfor %}
-
-                    <li class="menu-item">
-                        <a href="?category={{ categorie.id }}" class="menu-link menu-link {% if souscat %} menu-toggle {% endif %}">
-                            <div style="color: {{ categorie.color }}">{{ categorie.name }}</div>
-                        </a>
-
-                        {% if souscat %}
-                            <ul class="menu-sub">
-                                {% for souscategorie in lessouscats %}
-                                    <li class="menu-item">
-                                        <a href="?category={{ categorie.id }}&souscat={{ souscategorie.id }}" class="menu-link">
-                                            <div style="color: {{ categorie.color }}">{{ souscategorie.name }}</div>
-                                        </a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        {% endif %}
-                    </li>
                 {% endfor %}
 
-
-
-        <li class="menu-item">
-            <a href="javascript:void(0)" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons mdi mdi-star-outline"></i>
-                <div >Favoris</div>
-            </a>
-            <ul class="menu-sub">
-                {%  for favorite in likes %}
                 <li class="menu-item">
-                    <a href="extended-ui-avatar.html" class="menu-link">
-                        <div >{{ favorite.id }}</div>
+
+
+                    <a href="?category={{ categorie.id }}"
+                       class="menu-link menu-link {% if souscat %} menu-toggle {% endif %}">
+                        <div style="color: {{ categorie.color }}">{{ categorie.name }}</div>
                     </a>
+
+                    {% if souscat %}
+                        <ul class="menu-sub">
+                            {% for souscategorie in lessouscats %}
+                                <li class="menu-item">
+                                    <a href="?category={{ categorie.id }}&souscat={{ souscategorie.id }}"
+                                       class="menu-link">
+                                        <div style="color: {{ categorie.color }}">{{ souscategorie.name }}</div>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
                 </li>
-                {%  endfor %}
-            </ul>
-
-        </li>
-                                        </li>
+            {% endfor %}
 
 
-                                        </ul>
+            <li class="menu-item">
+               <a href="javascript:void(0)" class="menu-link menu-toggle">
+                     <!--<i class="menu-icon tf-icons mdi mdi-star-outline"></i>-->
+                    <div>Favoris</div>
+                </a>
+                <ul class="menu-sub">
+                    {% for favorite in likes %}
+                        <li class="menu-item">
+                            <a href="extended-ui-avatar.html" class="menu-link">
+                                <div>{{ favorite.id }}</div>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+            </li>
+
+            </li>
+
+
+        </ul>
 
 </aside>
-                                        <!-- / Menu -->
+<!-- / Menu -->

@@ -46,13 +46,16 @@
 
 
                 <div class="card mb-4">
-                    <h4 class="card-header">Profile Details</h4>
+                    <h4 class="card-header">Details du profil</h4>
                     <h4 class="card-header">{{ user.profile_image }}</h4>
                     <!-- Account -->
                     <div class="card-body">
                         <div class="row mt-2 gy-4">
-                            <div class="col-6 mt-5">
-                                <div class="d-flex align-items-start align-items-sm-center gap-4 mt-5">
+                            <div class="col-md-12 col-lg-6 mt-5">
+                                <h2 class=" text-center"> Changer votre photo de profil</h2>
+                                <div class="d-flex align-items-start align-items-sm-center gap-4 "  style="background-image: url('../assets/img/webtools/panel.webp');height: 300px;background-position: center;">
+
+
                                     <img src="Data/img_profil_users/{{ user[0].profile_image }}" alt="user-avatar" class="d-block w-px-120 h-px-120 rounded" id="uploadedAvatar"/>
 
                                     <div class="button-wrapper">
@@ -61,8 +64,8 @@
 
                                             <div class="input-group">
                                                 <input type="file" class="form-control" id="upload" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="PhotoProfil">
-                                                <button class="btn btn-outline-primary waves-effect" type="submit" id="inputGroupFileAddon04" name="postPhotoProfil">Envoyer</button>
-                                            </div> <div class="text-muted small">Format accepté : JPG . Taille maximale
+                                                <button class="btn btn-primary waves-effect" type="submit" id="inputGroupFileAddon04" name="postPhotoProfil">Envoyer</button>
+                                            </div> <div class="text-dark " style="background-color: rgba(224, 227, 231, 0.5)"><strong>Format accepté : JPG . Taille maximale</strong>
                                                 : 800 Ko
                                             </div>
                                         </form>
@@ -86,7 +89,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-md-12 col-lg-6">
                                 <!-- User Card -->
                                 <div class="card mb-5">
                                     <div class="card-body">
@@ -99,7 +102,7 @@
                                                         src="Data/img_profil_users/{{ user[0].profile_image }}"
                                                         height="120"
                                                         width="120"
-                                                        alt="User avatar"/>
+                                                        alt="User avatar" style="border-radius: 50%;border: black solid 1px"/>
                                                 <div class="user-info text-center">
                                                     <span class="badge bg-label-danger">{{ user[0].role }}</span>
                                                 </div>
@@ -113,21 +116,11 @@
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <h4 class="mb-0 fw-normal">1.23k</h4>
+                                                    <h4 class="mb-0 fw-normal">{{ user[0].article_count }}</h4>
                                                     <span>articles publié</span>
                                                 </div>
                                             </div>
-                                            <div class="d-flex align-items-center mt-3 gap-3">
-                                                <div class="avatar">
-                                                    <div class="avatar-initial bg-label-primary rounded">
-                                                        <i class="mdi mdi-star-outline mdi-24px"></i>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <h4 class="mb-0 fw-normal">568</h4>
-                                                    <span>notes </span>
-                                                </div>
-                                            </div>
+
                                         </div>
                                         <h5 class="pb-3 border-bottom mb-3">information</h5>
                                         <div class="info-container">
@@ -143,6 +136,9 @@
                                                 <li class="mb-3">
                                                     <span class="fw-semibold text-heading me-2">role</span>
                                                     <span class="badge bg-label-success">{{ user[0].role }}</span>
+                                                </li>    <li class="mb-3">
+                                                    <span class="fw-semibold text-heading me-2">Propagande publié</span>
+                                                    <span class="badge bg-label-success">{{ user[0].propagande_count }}</span>
                                                 </li>
                                                 <li class="mb-3">
                                                     <span class="fw-semibold text-heading me-2">date d'inscription</span>
