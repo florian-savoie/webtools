@@ -35,7 +35,7 @@
                     <h5 class="mb-0">Ajouter un article </h5>
                 </div>
                 <div class="card-body">
-                    <form method="POST" >
+                    <form id="image-form">
                         <div class="col-md-6 mb-4">
                             <div class="form-floating form-floating-outline">
                                 <select id="category" name="category" class="select2 form-select" data-allow-clear="true">
@@ -43,7 +43,6 @@
                                         <option style="color:{{ category.color }}"  value="{{ category.id }}">{{ category.name }}</option>
                                     {% endfor %}
                                     <option style="color:{{ category.color }}" value="1000">autres "hor liste "</option>
-
                                 </select>
                                 <label for="multicol-country">Choisir une catégorie</label>
                             </div>
@@ -51,32 +50,37 @@
 
                         <div class="col-md-6 mb-4"id="selectsouscat" hidden>
                             <div class="form-floating form-floating-outline">
-                                <select id="souscategory" name="souscat" class="select2 form-select" data-allow-clear="true">
+                                <select id="souscategory" name="souscat"  class="select2 form-select" data-allow-clear="true">
                                 </select>
                                 <label for="souscategory">Choisir une sous-catégorie</label>
                             </div>
                         </div>
 
                         <div class="form-floating form-floating-outline mb-4">
-                            <input type="text" class="form-control" name="title" id="basic-default-fullname" placeholder="John Doe" />
-                            <label for="basic-default-fullname">titre de l'aricle </label>
+                            <input type="file" class="form-control" id="file-input" name="file-input" accept="image/*" required />
+                            <label for="file-input">Ajouter une photo</label>
                         </div>
                         <div class="form-floating form-floating-outline mb-4">
-                            <input type="text" class="form-control" name="url" id="basic-default-company" placeholder="inserer l'url de l'image" />
-                            <label for="basic-default-company">url de l'image de presentation</label>
+                            <input type="text" class="form-control" id="title" name="title" placeholder="John Doe" required />
+                            <label for="title">titre de l'article </label>
                         </div>
                         <div class="form-floating form-floating-outline mb-4">
-                          <textarea
-                                  id="basic-default-message"
-                                  class="form-control"
-                                  name="description"
-                                  placeholder="Hi, Do you have a moment to talk Joe?"
-                                  style="height: 60px"></textarea>
-                            <label for="basic-default-message">description</label>
+                            <input type="text" class="form-control" id="url" name="url" placeholder="insérer l'url de l'image" required />
+                            <label for="url">url de l'image de présentation</label>
+                        </div>
+                        <div class="form-floating form-floating-outline mb-4">
+    <textarea
+            id="description"
+            class="form-control"
+            name="description"
+            placeholder="Hi, Do you have a moment to talk Joe?"
+            style="height: 60px"
+            required
+    ></textarea>
+                            <label for="description">description</label>
                         </div>
                         <button type="submit" name="publication" class="btn btn-primary">envoyer</button>
-                    </form>
-                </div>
+                    </form>             </div>
             </div>
         </div>
 
@@ -128,9 +132,10 @@ category.onchange = function() {
                         divsouscat.hidden = false;
                         let sousCat = response[i];
                         souscategory.innerHTML += `<option value="${sousCat.id}">${sousCat.name}</option>`;
-                    }                        souscategory.innerHTML += `<option value="100000">autre ("hors liste " )</option>`;
+                    }                        souscategory.innerHTML += `<option value="0">autre ("hors liste " )</option>`;
 
                 } else {
+                    souscategory.innerHTML += `<option value="0">autre ("hors liste " )</option>`;
                     divsouscat.hidden = true; // Cacher l'élément
                 }
             }
@@ -171,6 +176,103 @@ $('.addsouscategory').click(function() {
 
 });
 
+
+
+
+
+function compressAndAddImage(img, formData, callback) {
+    // Créer un canvas qui permet de dessiner l'image réduite
+    const canvas = document.createElement("canvas");
+    // Définir la largeur et la hauteur maximales de l'image
+    let maxWidth = 640;
+    let maxHeight = 400;
+
+    // Récupérer les dimensions de l'image
+    let width = img.width;
+    let height = img.height;
+
+    // Si la largeur de l'image est supérieure à la largeur maximale
+    if (width > maxWidth) {
+        // Ajuster la hauteur de l'image de façon proportionnelle
+        height *= maxWidth / width;
+        // Mettre la largeur de l'image à la largeur maximale
+        width = maxWidth;
+    }
+
+    // Si la hauteur de l'image est supérieure à la hauteur maximale
+    if (height > maxHeight) {
+        // Ajuster la largeur de l'image de façon proportionnelle
+        width *= maxHeight / height;
+        // Mettre la hauteur de l'image à la hauteur maximale
+        height = maxHeight;
+    }
+
+    // Fixer la largeur et la hauteur du canvas
+    canvas.width = width;
+    canvas.height = height;
+
+    // Dessiner l'image sur le canvas avec les dimensions réduites
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0, width, height);
+
+    // Convertir le canvas en données d'URL pour obtenir l'image compressée
+    const compressedImageData = canvas.toDataURL("image/jpeg", 0.9);
+
+    // Ajouter les données de l'image compressée à FormData
+    formData.append("image", compressedImageData);
+
+    // Appeler la fonction de rappel
+    callback();
+}
+
+function processForm(event) {
+    event.preventDefault();
+
+    const fileInput = document.getElementById("file-input");
+    const file = fileInput.files[0];
+
+    if (!file) {
+        alert("Veuillez choisir une image.");
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append("description", document.querySelector("#description").value);
+    formData.append("url", document.querySelector("#url").value);
+    formData.append("category", document.querySelector("#category").value);
+    formData.append("title", document.querySelector("#title").value);
+
+    let souscat = document.querySelector("#souscategory").value;
+    if (souscat == 0 || souscat === undefined || souscat === "" || souscat === null || souscat == 0){
+        souscat = 0 ;
+    }
+
+    formData.append("souscat", souscat);
+
+    const reader = new FileReader();
+    reader.onload = function (event) {
+        const img = new Image();
+        img.onload = function () {
+            compressAndAddImage(img, formData, function () {
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", "/addarticle");
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        console.log(xhr.responseText);
+                    } else {
+                        console.error(xhr.responseText);
+                    }
+                };
+                xhr.send(formData);
+            });
+        };
+        img.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+
+const form = document.getElementById("image-form");
+form.addEventListener("submit", processForm);
         </script>
 
         {% endblock %}

@@ -68,38 +68,62 @@ class articleController extends BaseController
         }
 
 
-        if (isset($_POST['publication'])) {
+        if (isset($_POST['title'])) {
             $title = $_POST['title'];
             $url = $_POST['url'];
             $content = $_POST['description'];
             $category_id = $_POST['category'];
+            $souscat = $_POST['souscat'];
 
-            if (isset($_POST['souscat'])){
-                $subcategory_id = $_POST['souscat'];
-            }else{
-                $subcategory_id = 0;
-
-            }
             // Vérifier si les champs ont été remplis
-                // Insérer les données dans la base de données
-                // ...
+            if ($title && $url && $content && $category_id) {
 
+                // Récupérer les données de l'image compressée de FormData
+                $compressedImage = $_POST['image'];
+
+                // Générer un nom de fichier unique pour chaque image
+                $fileName = uniqid('') . '.jpg';
+
+                // Convertir les données Base64 en binaire
+                $imageData = base64_decode(str_replace('data:image/jpeg;base64,', '', $compressedImage));
+
+                // Chemin de destination pour enregistrer l'image
+                $destinationPath ='assets/imgArticle/' . $fileName;
+
+                // Enregistrer l'image sur le serveur
+                if (file_put_contents($destinationPath, $imageData)) {
+                    // L'image a été enregistrée avec succès
+                    echo "L'image $fileName a été enregistrée.";
+                } else {
+                    // Une erreur s'est produite lors de l'enregistrement de l'image
+                    echo "Une erreur s'est produite lors de l'enregistrement de l'image $fileName.";
+                }
+
+                // Insérer les données de l'article dans la base de données
                 $builder = $this->db->table('articles');
                 $insertok = $builder->insert([
                     'user_id' => $_SESSION['iduser'],
                     'category_id' => $category_id,
-                    'subcategory_id' => $subcategory_id,
+                    'subcategory_id' => $souscat,
                     "title" => $title,
                     "content" => $content,
-                    "image" => $url,
+                    "image" => $destinationPath,
                     "link" => $url,
                 ]);
-            }     if ($this->db->error()) {
-                $error = $this->db->error();
-                $response = "Erreur lors de la mise à jour : " . $error['message'];
+
+                if ($this->db->error()) {
+                    $error = $this->db->error();
+                    $response = "Erreur lors de la mise à jour : " . $error['message'];
+                } else {
+                    $response = "Ajout effectué avec succès.";
+                }
             } else {
-                $response = "Suppression effectuée avec succès.";
+                $response = "Veuillez remplir tous les champs.";
             }
+
+            // Envoyer une réponse à la demande AJAX
+            echo $response;
+        }
         $existingContent = file_get_contents("assets/json/propagande/propagande.json");
         // Convertir le contenu existant en tableau associatif ou objet
         $existingData = json_decode($existingContent, true);
@@ -112,6 +136,7 @@ class articleController extends BaseController
 
         ]);
     }
+
 
 
 }
