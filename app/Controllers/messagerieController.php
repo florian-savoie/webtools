@@ -109,7 +109,9 @@ class messagerieController extends BaseController
             exit();
 
         }
-
+        $existingContent = file_get_contents("assets/json/propagande/propagande.json");
+        // Convertir le contenu existant en tableau associatif ou objet
+        $existingData = json_decode($existingContent, true);
 
         $message = $this->session->getFlashData('message');
 
@@ -118,7 +120,8 @@ class messagerieController extends BaseController
             'session' => $_SESSION,
             'messagerecu' => $messagerecu,
             'messageenvoyer' => $messageenvoyer,
-            'message' => $message
+            'message' => $message,
+            'propagande' => $existingData['Propagande']
         ]);
     }
     public function addfavorite()

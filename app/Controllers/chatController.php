@@ -54,10 +54,17 @@ class chatController extends BaseController
         if ( $autoriser === true) {
             $sessionExistsAndTrue = true;
         }
+        $existingContent = file_get_contents("assets/json/propagande/propagande.json");
+        // Convertir le contenu existant en tableau associatif ou objet
+        $existingData = json_decode($existingContent, true);
+        $vuechat = true;
 
         return $this->twig->render('chat.html.twig', [
             'sessionExistsAndTrue' => $sessionExistsAndTrue,
             'session' => $_SESSION,
+            'propagande' => $existingData['Propagande'],
+            'vuechat' => $vuechat
+
         ]);
     }    public function addchat()
 {

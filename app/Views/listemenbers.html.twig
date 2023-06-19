@@ -50,7 +50,6 @@
                         <th>Utilisateur</th>
                         <th>Role</th>
                         <th>Nombres de publication</th>
-                        <th>supprimer</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -75,11 +74,7 @@
                                 </div>
                             </td> <!-- Rôle de l'utilisateur -->
                             <td>{{ user.article_count }}</td> <!-- Nombre de publications de l'utilisateur -->
-                            <td>
-                                <!-- Bouton pour supprimer l'utilisateur -->
-                                <button class="btn btn-sm btn-danger" onclick="deleteUser({{ user.id }})">Supprimer
-                                </button>
-                            </td>
+
                         </tr>
                     {% endfor %}
                     </tbody>

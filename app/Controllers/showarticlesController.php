@@ -81,27 +81,38 @@ class showarticlesController extends BaseController
         $query = $builder->get();
         $souscategories = $query->getResultArray();
 
-        if(isset($_GET['category']) && isset($_GET['souscat'])){
+        if (isset($_GET['category']) && isset($_GET['souscat'])) {
+            $category_id = (int)$_GET['category'];
+            $subcategory_id = (int)$_GET['souscat'];
+
             $builder = $this->db->table('articles');
-            $builder->where('is_approved' , 1);
-            $builder->where('category_id' , $_GET['category']);
-            $builder->where('subcategory_id' , $_GET['souscat']);
+            $builder->select('articles.*, categories.name as category_name, categories.color as category_color');
+            $builder->join('categories', 'categories.id = articles.category_id', 'left');
+            $builder->where('category_id', $category_id);
+            $builder->where('subcategory_id', $subcategory_id);
             $builder->orderBy('id', 'DESC');
             $query = $builder->get();
             $articles = $query->getResultArray();
 
         }else if (isset($_GET['category']) ){
+            $category_id = (int)$_GET['category'];
+
             $builder = $this->db->table('articles');
-            $builder->where('is_approved' , 1);
-            $builder->where('category_id' , $_GET['category']);
+            $builder->select('articles.*, categories.name as category_name, categories.color as category_color');
+            $builder->join('categories', 'categories.id = articles.category_id', 'left');
+            $builder->where('is_approved', 1);
+            $builder->where('category_id', $category_id);
             $builder->orderBy('id', 'DESC');
             $query = $builder->get();
             $articles = $query->getResultArray();
         }else{
             if (empty($articles)) { // Ajout de la vérification si $articles est vide
                 $builder = $this->db->table('articles');
-                $builder->where('is_approved', 1);
-                $builder->orderBy('id', 'DESC');
+                $builder->select('articles.*, categories.name as category_name, categories.color as category_color,subcategories.name as subcategories_name');
+                $builder->join('categories', 'categories.id = articles.category_id', 'left');
+                $builder->join('subcategories', 'subcategories.id = articles.subcategory_id', 'left');
+                $builder->where('articles.is_approved', 1);
+                $builder->orderBy('articles.id', 'DESC');
                 $query = $builder->get();
                 $articles = $query->getResultArray();
             }
@@ -205,7 +216,6 @@ class showarticlesController extends BaseController
             'souscategories' => $souscategories,
             'session' => $_SESSION,
             'propagande' => $existingData['Propagande']
-
 
         ]);
     }

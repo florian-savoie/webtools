@@ -68,6 +68,7 @@ class propagandeController extends BaseController
 
             if (strlen($publication) < 101 && $users->propagande >= 1) {
                 $newpointpropagande = $users->propagande - 1;
+                $propagandeTotal = $users->propagande_count + 1;
                 // Récupérer les propagande actuelle
                 $existingContent = file_get_contents(self::PROPAGANDE_PATH . "propagande.json");
 // Convertir le contenu existant en tableau associatif ou objet
@@ -116,11 +117,14 @@ class propagandeController extends BaseController
 
 
                 $data = ['propagande' => $newpointpropagande,
+                    'propagande_count'=> $propagandeTotal
                 ];
                 $updated = $this->db->table('users')->update($data, ['pseudo' => $_SESSION['pseudo']]);
 
 // Convertir le tableau associatif ou objet en format JSON et réécrire le fichier
                 file_put_contents(self::PROPAGANDE_PATH . "propagande.json", json_encode($propagande));
+                header("Location: /propagande");
+                exit(0);
             } else {
 
             }

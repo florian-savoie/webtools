@@ -58,8 +58,63 @@
             <div class="row">
                 <!-- Finance App -->
                 {% for article in articles %}
+                    <!-- Modal edit-->
+                    <div class="modal fade" id="modalCenterEdit{{ article.id }}" tabindex="-1" aria-hidden="true" >
+                        <div class="modal-dialog modal-dialog-centered modal-xl" role="document" >
+                            <div class="modal-content" style="height: 800px !important;">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="modalCenterTitle">Modification de l'article</h4>
+                                    <button
+                                            type="button"
+                                            class="btn-close"
+                                            data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="row d-flex justify-content-center">
+                                            <img class="card-img-top" style="height: 200px ;min-height: 200px;max-width: 200px "
+                                                 src="{{ article.image }}" alt="iPhone-bg"/>
+                                        </div>
+                                        <div class="col mb-4 mt-2">
+                                            <div class="form-floating form-floating-outline">
+                                                <input
+                                                        type="text"
+                                                        id="nameWithTitle"
+                                                        class="form-control"
+                                                        placeholder="{{ article.title }}"
+                                                value="{{ article.title }}"
+                                                name="titre"/>
+                                                <label for="nameWithTitle">Titre</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row g-2">
+                                        <textarea
+                                                id="description"
+                                                class="form-control"
+                                                name="description"
+                                                placeholder="{{ article.content }}"
+                                                value="{{ article.content }}"
+                                                style="height: 250px"
+                                                required
+                                        ></textarea>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
+                                        Fermer
+                                    </button>
+                                    <button type="button" class="btn btn-danger">Modifier</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal edit-->
 
                     <div class="col-lg-3 col-xl-2 mb-3 article" style="height: 500px;">
+                        <div class="row"><div class="col-8"></div> <button class=" col-3 btn btn-warning btn-xs p-1 " data-bs-toggle="modal"
+                                                                           data-bs-target="#modalCenterEdit{{ article.id }}">>Editer</button><div class="col-1"></div> </div>
                         <a href="{{ article.link }}" target="_blank">
                         <div class="card h-100 ">
                             <img class="card-img-top" style="height: 190px ;min-height: 190px "
@@ -68,8 +123,8 @@
                                 <div class="d-flex align-items-center justify-content-between mb-3"
                                      style="height: 35px">
                                     <div class="d-flex ">
-                                        <div class="badge bg-label-success rounded-pill me-3">article</div>
-                                        <div class="badge bg-label-danger rounded-pill">React</div>
+                                        <div class="badge rounded-pill me-3" style="background-color: {{ article.category_color }};font-size: 12px">{{ article.category_name }}</div>
+                                        <div class="badge  rounded-pill" style="background-color: {{ article.category_color }};font-size: 12px">{{ article.subcategories_name }}</div>
 
                                     </div>
                                     <div>
@@ -78,8 +133,8 @@
 
 
                                 </div>
-                                <h4 class="mb-1 text-center" style="height: 35px">{{ article.title }}</h4>
-                                <p class="text-muted my-2" style=" height: 120px; overflow: hidden ">
+                                <h4 class="mb-1 text-center" style="height: 40px;overflow: hidden;font-size: 18px">{{ article.title }}</h4>
+                                <p class="text-muted my-2" style=" height: 115px; overflow: hidden ;font-size: 14px">
                                     {{ article.content }}
                                 </p>
 

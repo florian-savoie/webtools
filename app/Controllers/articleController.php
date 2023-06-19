@@ -131,7 +131,6 @@ class articleController extends BaseController
             'sessionExistsAndTrue' => $sessionExistsAndTrue,
             'session' => $_SESSION,
             'categorys' => $categorys,
-            "response" => $response ,
             'propagande' => $existingData['Propagande']
 
         ]);

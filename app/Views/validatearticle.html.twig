@@ -100,11 +100,129 @@
                     <div class="card h-100">
                         <img class="card-img-top" style="height: 190px ;min-height: 190px " src="{{ article.image }}"
                              alt="iPhone-bg"/>
+                        <div style="position: absolute; right: 0px;top: 0px; background-color: #e5e2e2;cursor: pointer">
+                                <span
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modaleditss{{ article.id }}"    class="mdi mdi-pencil mdi-24px" style="color:green ;"></span>
+
+
+
+
+
+
+
+                            <!-- Modal modification -->
+                            <div class="modal fade" id="modaleditss{{ article.id }}" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="modalCenterTitle">Modification de l'article</h4>
+                                            <button
+                                                    type="button"
+                                                    class="btn-close"
+                                                    data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="col mb-2">
+                                                <div class="form-floating form-floating-outline mb-2">
+                                                    <input
+                                                            type="text"
+                                                            id="dobWithTitle"
+                                                            class="form-control"
+                                                            placeholder="DD / MM / YY" />
+                                                    <label for="dobWithTitle">Modifier l'image</label>
+                                                </div>  <div class="form-floating form-floating-outline mb-2">
+                                                    <input
+                                                            type="text"
+                                                            id="dobWithTitle"
+                                                            class="form-control"
+                                                            placeholder="source" />
+                                                    <label for="dobWithTitle">Editer le lien de la source</label>
+                                                </div>
+                                            </div>
+                                            <div class="col mb-4 mt-2">
+                                                <div class="form-floating form-floating-outline">
+                                                    <input
+                                                            type="text"
+                                                            id="nameWithTitle"
+                                                            class="form-control"
+                                                            placeholder="Editer le titre"
+                                                            name="title"/>
+                                                    <label for="nameWithTitle">Editer le titre</label>
+                                                </div>
+                                            </div>
+                                            <div class="col mb-2">
+                                                <div class="form-floating form-floating-outline">
+
+                                                    <div class="form-floating form-floating-outline mb-4">
+                                                        <textarea class="form-control h-px-100" id="exampleFormControlTextarea1" placeholder="editer le contenu" name="content"></textarea>
+                                                        <label for="exampleFormControlTextarea1">Editer le contenu</label>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
+                                                Close
+                                            </button>
+                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- Modal modification -->
+                            <div class="modal fade" id="modaledeletess{{ article.id }}" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <form method="post">
+                                        <div class="modal-content">
+
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="modalCenterTitle">Suppresion de l'article</h4>
+                                                <button
+                                                        type="button"
+                                                        class="btn-close"
+                                                        data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <input
+                                                        type="text"
+                                                        class="form-control"
+                                                        name="idDeleteArticle"
+                                                        value="{{ article.id }}" hidden />
+                                                <h5> etes vous sur de vouloir supprimer cet article</h5>
+                                                <h5> {{ article.title }}</h5>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
+                                                    Fermer
+                                                </button>
+                                                <button type="submit" class="btn btn-danger" name="deleteArticle">Confirmer</button>
+                                            </div>
+                                        </div></form>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+                            <span data-bs-toggle="modal"
+                                  data-bs-target="#modaledeletess{{ article.id }}"  class="mdi mdi-delete-forever mdi-24px" style="color:red ;"></span>
+
+                        </div>
                         <div class="card-body ">
                             <div class="d-flex align-items-center justify-content-between mb-3" style="height: 35px">
                                 <div class="d-flex ">
-                                    <div class="badge bg-label-success rounded-pill me-3">article</div>
-                                    <div class="badge bg-label-danger rounded-pill">React</div>
+                                    <div class="badge rounded-pill me-3" style="background-color: {{ article.category_color }};font-size: 12px">{{ article.category_name }}</div>
+                                    <div class="badge  rounded-pill" style="background-color: {{ article.category_color }};font-size: 12px">{{ article.subcategories_name }}</div>
 
                                 </div>
                                 <div>
@@ -113,8 +231,8 @@
 
 
                             </div>
-                            <h4 class="mb-1 text-center" style="height: 35px">{{ article.title }}</h4>
-                            <p class="text-muted my-2" style=" height: 120px; overflow: hidden ">
+                            <h4 class="mb-1 text-center" style="height: 40px;overflow: hidden;font-size: 18px">{{ article.title }}</h4>
+                            <p class="text-muted my-2" style=" height: 115px; overflow: hidden ;font-size: 14px">
                                 {{ article.content }}
                             </p>
 

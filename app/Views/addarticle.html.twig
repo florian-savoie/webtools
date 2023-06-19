@@ -73,7 +73,7 @@
             id="description"
             class="form-control"
             name="description"
-            placeholder="Hi, Do you have a moment to talk Joe?"
+            placeholder="Renseigner le contenu de l'article"
             style="height: 60px"
             required
     ></textarea>
@@ -85,11 +85,7 @@
         </div>
 
     </div>
-    {% if response is defined %}
-        <div style="">
-            {{ response }}test
-        </div>
-    {% endif %}
+
 
         </div>
 
@@ -175,10 +171,6 @@ $('.addsouscategory').click(function() {
     });
 
 });
-
-
-
-
 
 function compressAndAddImage(img, formData, callback) {
     // Créer un canvas qui permet de dessiner l'image réduite
@@ -269,7 +261,7 @@ function processForm(event) {
         img.src = event.target.result;
     };
     reader.readAsDataURL(file);
-}
+    window.location.reload();}
 
 const form = document.getElementById("image-form");
 form.addEventListener("submit", processForm);

@@ -60,10 +60,14 @@ class validatearticleController extends BaseController
 
         $idUser = $_SESSION['iduser'] ;
         $builder = $this->db->table('articles');
+        $builder->select('articles.*, categories.name as category_name, categories.color as category_color,subcategories.name as subcategories_name');
+        $builder->join('categories', 'categories.id = articles.category_id', 'left');
+        $builder->join('subcategories', 'subcategories.id = articles.subcategory_id', 'left');
         $builder->where('is_approved' , 0);
         $builder->orderBy('id', 'DESC');
         $query = $builder->get();
         $articles = $query->getResultArray();
+
 
 
         $existingContent = file_get_contents("assets/json/propagande/propagande.json");
@@ -83,6 +87,16 @@ class validatearticleController extends BaseController
 
     public function validatearticle()
     {
+
+        if(isset($_POST['deleteArticle'])){
+            $builder = $this->db->table('articles');
+            $builder->where('id', $_POST['idDeleteArticle']);
+            $builder->delete();
+            header("Location: /validatearticle");
+            exit(0);
+        }
+
+
         if (isset($_POST['idarticle'])) {
             $idarticle = $_POST['idarticle'];
             $valeur = $_POST['hidden'];
