@@ -48,12 +48,10 @@ class articleController extends BaseController
     {
         $sessionExistsAndTrue = false;
         $autoriser = $this->session->get('Autoriser');
-        $response = "";
         // Vérifier si la session existe et est vraie
         if ($autoriser === true) {
             $sessionExistsAndTrue = true;
         }
-
         $builder = $this->db->table('categories');
         $categorys = $builder->get()->getResultArray();
 
@@ -66,7 +64,9 @@ class articleController extends BaseController
                 return $this->response->setJSON($souscategorys);
             }
         }
-
+        $existingContent = file_get_contents("assets/json/propagande/propagande.json");
+        // Convertir le contenu existant en tableau associatif ou objet
+        $existingData = json_decode($existingContent, true);
 
         if (isset($_POST['title'])) {
             $title = $_POST['title'];
@@ -93,10 +93,10 @@ class articleController extends BaseController
                 // Enregistrer l'image sur le serveur
                 if (file_put_contents($destinationPath, $imageData)) {
                     // L'image a été enregistrée avec succès
-                    echo "L'image $fileName a été enregistrée.";
+                    $this->session->setFlashData('message', "success");
                 } else {
                     // Une erreur s'est produite lors de l'enregistrement de l'image
-                    echo "Une erreur s'est produite lors de l'enregistrement de l'image $fileName.";
+                    $this->session->setFlashData('message', "success");
                 }
 
                 // Insérer les données de l'article dans la base de données
@@ -111,27 +111,26 @@ class articleController extends BaseController
                     "link" => $url,
                 ]);
 
-                if ($this->db->error()) {
-                    $error = $this->db->error();
-                    $response = "Erreur lors de la mise à jour : " . $error['message'];
-                } else {
-                    $response = "Ajout effectué avec succès.";
-                }
+                if ($insertok) {
+                    $this->session->setFlashData('message', "success");
             } else {
-                $response = "Veuillez remplir tous les champs.";
-            }
+                    $this->session->setFlashData('message', "success");         }
+            } else {
+                $this->session->setFlashData('message', "success");         }
 
             // Envoyer une réponse à la demande AJAX
-            echo $response;
+            $this->session->setFlashData('message', "success");
+
         }
-        $existingContent = file_get_contents("assets/json/propagande/propagande.json");
-        // Convertir le contenu existant en tableau associatif ou objet
-        $existingData = json_decode($existingContent, true);
+
+
         return $this->twig->render('addarticle.html.twig', [
             'sessionExistsAndTrue' => $sessionExistsAndTrue,
             'session' => $_SESSION,
             'categorys' => $categorys,
-            'propagande' => $existingData['Propagande']
+            'propagande' => $existingData['Propagande'],
+            'messageFlash' =>  $this->session->getFlashData('message'),
+
 
         ]);
     }

@@ -94,6 +94,7 @@ class registerController extends BaseController
                     $message = "Les mots de passe ne correspondent pas.";
                 }
             } else {
+
                 $message = "Veuillez remplir tous les champs.";
             }
         }

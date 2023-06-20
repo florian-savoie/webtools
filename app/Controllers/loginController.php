@@ -66,6 +66,7 @@ class loginController extends BaseController
                         'pseudo' => $users[0]['pseudo'],
                         'profile_image' => $users[0]['profile_image']
                     ]);
+                    $this->session->setFlashData('message', "success");
 
                     // Rediriger vers la page de connexion ou une autre page appropriée
                     header("Location: /aceuil");

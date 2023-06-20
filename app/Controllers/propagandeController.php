@@ -58,13 +58,12 @@ class propagandeController extends BaseController
         // Convertir le contenu existant en tableau associatif ou objet
         $existingData = json_decode($existingContent, true);
 
+        $builder = $this->db->table('users');
+        $query = $builder->getWhere(['pseudo' => $_SESSION['pseudo']], 1);
+        $users = $query->getRow();
 
         if (isset($_POST['propagande'])) {
-
             $publication = $_POST['propagande'];
-            $builder = $this->db->table('users');
-            $query = $builder->getWhere(['pseudo' => $_SESSION['pseudo']], 1);
-            $users = $query->getRow();
 
             if (strlen($publication) < 101 && $users->propagande >= 1) {
                 $newpointpropagande = $users->propagande - 1;
@@ -123,10 +122,13 @@ class propagandeController extends BaseController
 
 // Convertir le tableau associatif ou objet en format JSON et réécrire le fichier
                 file_put_contents(self::PROPAGANDE_PATH . "propagande.json", json_encode($propagande));
+                $this->session->setFlashData('message', "success");
+
+
                 header("Location: /propagande");
                 exit(0);
             } else {
-
+                $this->session->setFlashData('message', "error");
             }
 
 
@@ -136,7 +138,10 @@ class propagandeController extends BaseController
         return $this->twig->render('propagande.html.twig', [
             'sessionExistsAndTrue' => $sessionExistsAndTrue,
             'session' => $_SESSION,
-            'propagande' => $existingData['Propagande']
+            'propagande' => $existingData['Propagande'],
+            'messageFlash' =>  $this->session->getFlashData('message'),
+            'points' => $users->propagande
+
         ]);
     }
 

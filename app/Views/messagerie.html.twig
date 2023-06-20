@@ -1,30 +1,17 @@
-{% set title = 'client acceuil' %}
+{% set title = 'Boite messagerie' %}
 {% extends "./layout/layout_nav.html.twig" %}
 {% block css %}
-    <link rel="stylesheet" href="../../assets/vendor/css/pages/ui-carousel.css"/>
-    <link rel="stylesheet" href="../../assets/vendor/libs/swiper/swiper.css"/>
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
-    <!-- Flipster CSS -->
-    <link rel="stylesheet" href="dist/jquery.flipster.min.css">
-    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
-    <link rel="stylesheet" href="../../assets/vendor/libs/node-waves/node-waves.css"/>
-    <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css"/>
-    <link rel="stylesheet" href="../../assets/vendor/libs/quill/katex.css"/>
-    <link rel="stylesheet" href="../../assets/vendor/libs/quill/editor.css"/>
-    <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css"/>
+    <!-- Vendors CSS -->
     <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="../../assets/vendor/libs/node-waves/node-waves.css" />
     <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
-    <link rel="stylesheet" href="../../assets/vendor/libs/toastr/toastr.css" />
-    <link rel="stylesheet" href="../../assets/vendor/libs/animate-css/animate.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/quill/katex.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/quill/editor.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
+
     <!-- Page CSS -->
 
-    <link rel="stylesheet" href="../../assets/vendor/css/pages/app-email.css"/>
-    <link rel="stylesheet" href="../assets/css/time-line.css">
-    <!-- Flipster Js -->
-    <script src="dist/jquery.flipster.min.js"></script>
+    <link rel="stylesheet" href="../../assets/vendor/css/pages/app-email.css" />
     <style>
         .app-email-view-envoye {
             overflow: scroll;
@@ -37,14 +24,7 @@
 {% block contenu %}
     <!-- Content -->
 
-    <div class="container-xxl flex-grow-1 container-p-y mt-5" id="vue" hidden="">
-<span id="message">{{ message }}</span>
-        <div id="toast-container" class="toast-top-center">
-            <div class="toast toast-success" aria-live="polite" style="display: block;">
-                <button type="button" class="toast-close-button" role="button">×</button>
-                <div class="toast-title">Message envoye avec succces</div>
-            </div>
-        </div>
+    <div class="container-xxl flex-grow-1 container-p-y mt-5" id="vue" hidden>
 
         <div class="app-email card">
             <div class="border-0">
@@ -310,7 +290,7 @@
                                         <p>
                                             {{ recu.contenu }}
                                         </p>
-                                        <p class="mb-0">Sincerely yours,</p>
+
 
 
                                     </div>
@@ -487,6 +467,29 @@
             </div>
             <!-- /Compose Email -->
         </div>
+        <!-- Message addflash-->
+        <div>
+            <span id="message" hidden="">{{ messageFlash }}</span>
+
+            <div class="container d-flex justify-content-center mt-5">
+                <!-- Timeline -->
+                <div id="toast-container" class="toast-top-center" >
+                    <div class="toast toast-success" aria-live="polite" style="display: block;">
+                        <button type="button" class="toast-close-button" role="button">×</button>
+                        <div class="toast-title">Votre message a bien etait envoyer</div>
+                    </div>
+                </div>
+
+            </div>
+            <div id="toastError" >
+                <div id="toast-container" class="toast-top-center">
+                    <div class="toast toast-error" aria-live="assertive" style="display: block; ">
+                        <div class="toast-message">Votre message n'a pas pu etre Envoyé</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Message addflash-->
     </div>
     <!-- / Content -->
 
@@ -497,21 +500,13 @@
 
     {% block js %}
 
-        <script src="../assets/js/time-line/client/caroussel.js"></script>
-        <script src="../assets/js/time-line/artisan/delete-like-photo.js"></script>
-        <script src="../assets/js/time-line/artisan/like-photo.js"></script>
-        <script src="../assets/js/time-line/artisan/envent-form.js"></script>
-        <script src="../assets/js/time-line/artisan/compression-photo.js"></script>
-        <script src="../../assets/vendor/assets/js/form-basic-inputs.js"></script>
-        <script src="../../assets/vendor/assets/js/extended-ui-timeline.js"></script>
-        <script src="../../assets/vendor/libs/swiper/swiper.js"></script>
-        <script src="../../assets/js/app-email.js"></script>
+        <!-- Vendors JS -->
         <script src="../../assets/vendor/libs/quill/katex.js"></script>
         <script src="../../assets/vendor/libs/quill/quill.js"></script>
         <script src="../../assets/vendor/libs/select2/select2.js"></script>
         <script src="../../assets/vendor/libs/block-ui/block-ui.js"></script>
-        <script src="../../assets/vendor/libs/toastr/toastr.js"></script>
-        <script src="../../assets/js/ui-toasts.js"></script>
+        <!-- Page JS -->
+        <script src="../../assets/js/app-email.js"></script>
         <script>
             document.addEventListener("DOMContentLoaded", function () {
                 let elementToClick = document.querySelector('#clique');
@@ -640,25 +635,36 @@ function readok(id){
                 }
             }
 
+                     // Récupère l'élément div
+                var toast = document.getElementById('toast-container');
+                var toasterror = document.getElementById('toastError');
+                var message = document.getElementById('message').textContent;
+                toast.style.display = 'none';
+                toasterror.style.display = 'none';
 
-            // Récupère l'élément div
-            var toast = document.getElementById('toast-container');
-            var message = document.getElementById('message').textContent;
-            toast.style.display = 'none';
-
-            function succesSendMessage(){
-                toast.style.display = 'block';
-                setTimeout(function(){
+                function succesSendMessage() {
+                    toast.style.display = 'block';
+                    setTimeout(function () {
                     toast.style.display = 'none';
                 }, 3000);
-            }
+                }
 
-            if ( message == "success"){
-                succesSendMessage();
-            }
-            window.onload = function() {
-                var vue = document.getElementById('vue');
-                vue.hidden = false;
-            };
+                function succesSendMessageerror() {
+                    toasterror.style.display = 'block';
+                    setTimeout(function () {
+                    toasterror.style.display = 'none';
+                }, 3000);
+                }
+
+                if (message == "success") {
+                    succesSendMessage();
+                } else if (message == "error") {
+                    succesSendMessageerror();
+                }
+
+                window.onload = function () {
+                    var vue = document.getElementById('vue');
+                    vue.hidden = false;
+                };
         </script>
     {% endblock %}

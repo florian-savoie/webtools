@@ -24,7 +24,7 @@
 {% block contenu %}
 <!-- Content -->
 <!-- Users List Table -->
-<div class="container mt-5">
+<div class="container mt-5" id="vue" hidden="">
 
 
     <!-- Basic Layout -->
@@ -86,7 +86,29 @@
 
     </div>
 
+    <!-- Message addflash-->
+    <div>
+        <span id="message" >{{ messageFlash }}</span>
 
+        <div class="container d-flex justify-content-center mt-5">
+            <!-- Timeline -->
+            <div id="toast-container" class="toast-top-center" >
+                <div class="toast toast-success" aria-live="polite" style="display: block;">
+                    <button type="button" class="toast-close-button" role="button">×</button>
+                    <div class="toast-title">Votre message a bien etait envoyer</div>
+                </div>
+            </div>
+
+        </div>
+        <div id="toastError" >
+            <div id="toast-container" class="toast-top-center">
+                <div class="toast toast-error" aria-live="assertive" style="display: block; ">
+                    <div class="toast-message">Votre message n'a pas pu etre Envoyé</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Message addflash-->
         </div>
 
 
@@ -106,7 +128,6 @@ let souscategory = document.getElementById("souscategory");
 let divsouscat = document.getElementById("selectsouscat");
 category.onchange = function() {
     let idcategory = category.value;
-    console.log(category.value);
 
     // Effectuer la requête Ajax
     $.ajax({
@@ -158,14 +179,12 @@ $('.addsouscategory').click(function() {
             idcategory: idcategory
         },
         success: function(response) {
-            console.log(response);
             // Faire quelque chose avec la réponse du serveur, par exemple :
             // alert(response);
             // ou mettre à jour la liste des sous-catégories
             // $('.subcategories-list').append('<li>' + name + '</li>');
         },
         error: function(xhr, status, error) {
-            console.log(error);
             // Gérer l'erreur
         }
     });
@@ -250,9 +269,11 @@ function processForm(event) {
                 xhr.open("POST", "/addarticle");
                 xhr.onload = function () {
                     if (xhr.status === 200) {
-                        console.log(xhr.responseText);
+                        console.log(xhr.response);
+
                     } else {
-                        console.error(xhr.responseText);
+                        console.error(xhr.response);
+
                     }
                 };
                 xhr.send(formData);
@@ -261,10 +282,44 @@ function processForm(event) {
         img.src = event.target.result;
     };
     reader.readAsDataURL(file);
-    window.location.reload();}
+  // window.location.reload();
+}
 
 const form = document.getElementById("image-form");
 form.addEventListener("submit", processForm);
+
+
+// Récupère l'élément div
+var toast = document.getElementById('toast-container');
+var toasterror = document.getElementById('toastError');
+var message = document.getElementById('message').textContent;
+toast.style.display = 'none';
+toasterror.style.display = 'none';
+
+function succesSendMessage() {
+    toast.style.display = 'block';
+    setTimeout(function () {
+        toast.style.display = 'none';
+    }, 3000);
+}
+
+function succesSendMessageerror() {
+    toasterror.style.display = 'block';
+    setTimeout(function () {
+        toasterror.style.display = 'none';
+    }, 3000);
+}
+
+if (message == "success") {
+    succesSendMessage();
+} else if (message == "error") {
+    succesSendMessageerror();
+}
+
+window.onload = function () {
+    var vue = document.getElementById('vue');
+    vue.hidden = false;
+};
         </script>
 
         {% endblock %}
