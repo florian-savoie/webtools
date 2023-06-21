@@ -1,4 +1,4 @@
-{% set title = 'client acceuil' %}
+{% set title = 'Gestion des categories' %}
 {% extends "./layout/layout_nav.html.twig" %}
 {% block css %}
     <!-- jQuery -->
@@ -34,11 +34,9 @@
             <table class="datatables-users table">
                 <thead class="table-light">
                   <tr>
-                    <th></th>
-                    <th></th>
+
                     <th>nom</th>
-                    <th>nombres de sous catégorie</th>
-                    <th>nombres d'articles dans cette catégorie</th>
+                    <th class="d-sm-none d-md-block">nombres d'articles dans cette catégorie</th>
                     <th>modifier</th>
                     <th>supprimer</th>
                   </tr>
@@ -52,12 +50,11 @@
                       {% endif %}
                     {% endfor %}
                     <tr style="color: {{ category.color }}">
-                      <td></td>
-                      <td></td>
+
                       <td>
                         <div class="accordion-item">
                           <h2 class="accordion-header" id="heading{{ category.id }}">
-                            <button style="color: {{ category.color }}" type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionPopout{{ category.id }}" aria-expanded="false" aria-controls="accordionPopout{{ category.id }} ">
+                            <button style="color: {{ category.color }}" type="button" class="accordion-button collapsed " data-bs-toggle="collapse" data-bs-target="#accordionPopout{{ category.id }}" aria-expanded="false" aria-controls="accordionPopout{{ category.id }} ">
                               {{ category.name }}
                             </button>
                           </h2>
@@ -96,8 +93,8 @@
                           </div>
                         </div>
                       </td>
-                      <td></td>
-                      <td></td>
+
+                      <td class="d-sm-none d-md-block">{{ category.articles }}</td>
                       <td>
                         {% include "./components/modifyCategory/category/update.html.twig" %}
                       </td>

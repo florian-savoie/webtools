@@ -68,6 +68,21 @@ class articleController extends BaseController
         // Convertir le contenu existant en tableau associatif ou objet
         $existingData = json_decode($existingContent, true);
 
+
+
+
+        return $this->twig->render('addarticle.html.twig', [
+            'sessionExistsAndTrue' => $sessionExistsAndTrue,
+            'session' => $_SESSION,
+            'categorys' => $categorys,
+            'propagande' => $existingData['Propagande'],
+            'messageFlash' =>  $this->session->getFlashData('message'),
+
+
+        ]);
+    }
+
+    function addarticleajax(){
         if (isset($_POST['title'])) {
             $title = $_POST['title'];
             $url = $_POST['url'];
@@ -112,29 +127,21 @@ class articleController extends BaseController
                 ]);
 
                 if ($insertok) {
-                    $this->session->setFlashData('message', "success");
-            } else {
+                    $response = array(
+                        'success' => true,
+                        'message' => 'La réponse a été renvoyée avec succès.'
+                    );
+
+                    header('Content-Type: application/json');
+                    echo json_encode($response);                } else {
                     $this->session->setFlashData('message', "success");         }
             } else {
                 $this->session->setFlashData('message', "success");         }
 
             // Envoyer une réponse à la demande AJAX
             $this->session->setFlashData('message', "success");
-
         }
-
-
-        return $this->twig->render('addarticle.html.twig', [
-            'sessionExistsAndTrue' => $sessionExistsAndTrue,
-            'session' => $_SESSION,
-            'categorys' => $categorys,
-            'propagande' => $existingData['Propagande'],
-            'messageFlash' =>  $this->session->getFlashData('message'),
-
-
-        ]);
     }
-
 
 
 }

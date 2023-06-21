@@ -1,4 +1,4 @@
-{% set title = 'client acceuil' %}
+{% set title = 'Publication d\'article' %}
 {% extends "./layout/layout_nav.html.twig" %}
 {% block css %}
 
@@ -95,7 +95,7 @@
             <div id="toast-container" class="toast-top-center" >
                 <div class="toast toast-success" aria-live="polite" style="display: block;">
                     <button type="button" class="toast-close-button" role="button">×</button>
-                    <div class="toast-title">Votre message a bien etait envoyer</div>
+                    <div class="toast-title">Votre article a bien etait envoyer</div>
                 </div>
             </div>
 
@@ -103,7 +103,7 @@
         <div id="toastError" >
             <div id="toast-container" class="toast-top-center">
                 <div class="toast toast-error" aria-live="assertive" style="display: block; ">
-                    <div class="toast-message">Votre message n'a pas pu etre Envoyé</div>
+                    <div class="toast-message">Votre article n'a pas pu etre Envoyé</div>
                 </div>
             </div>
         </div>
@@ -266,13 +266,16 @@ function processForm(event) {
         img.onload = function () {
             compressAndAddImage(img, formData, function () {
                 const xhr = new XMLHttpRequest();
-                xhr.open("POST", "/addarticle");
+                xhr.open("POST", "/addarticleajax");
                 xhr.onload = function () {
                     if (xhr.status === 200) {
-                        console.log(xhr.response);
-
+                        var response = JSON.parse(xhr.response); // Analyser la réponse JSON
+                        console.log(response);
+                        document.getElementById("image-form").reset();
+                        succesSendMessage();
                     } else {
                         console.error(xhr.response);
+                        succesSendMessageerror();
 
                     }
                 };

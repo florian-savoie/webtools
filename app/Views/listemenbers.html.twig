@@ -1,4 +1,4 @@
-{% set title = 'client acceuil' %}
+{% set title = 'Liste des membres' %}
 {% extends "./layout/layout_nav.html.twig" %}
 {% block css %}
 
@@ -31,10 +31,12 @@
             <div class="card-header">
 
                 <div class="d-flex justify-content-between align-items-center my-3">
-                   <div> <h2>Liste des membres</h2></div>
-                    <div class="row col-3 d-flex justify-content-center">
-                      <div class="col-5">  <label for="search-box" class=" col-form-label">Rechercher : </label></div>
-                        <div class="col-7">  <input class="form-control me-5" type="text" placeholder="Rechercher un membres" id="search-box"></div>
+                    <div class="row col-12">
+                   <div class="row col-md-12 col-lg-9"> <h2>Liste des membres</h2></div>
+                    <div class="row col-md-12 col-lg-3 d-flex justify-content-center">
+                      <div class="col-md-12 col-lg-5">  <label for="search-box" class=" col-form-label">Rechercher : </label></div>
+                        <div class="col-md-12 col-lg-7">  <input class="form-control me-5" type="text" placeholder="Rechercher un membres" id="search-box"></div>
+                </div>
                 </div>
                 </div>                <div class="d-flex justify-content-between align-items-center row py-3 gap-3 gap-md-0">
                     <div class="col-md-4 user_role"></div>
@@ -59,7 +61,7 @@
                             <td>{{ user.pseudo }}</td> <!-- Nom de l'utilisateur -->
                             <td>
                                 <div class="row">
-                                    <div class="col-6"><select class="form-select" id="selectrole{{ user.id }}">
+                                    <div class="col-sm-4 col-lg-6"><select class="form-select" id="selectrole{{ user.id }}">
                                             <option disabled selected>{{ user.role }}</option>
                                             <option>user</option>
                                             <option>moderateur</option>
@@ -67,7 +69,7 @@
                                             <option>bloquer</option>
                                         </select></div>
                                     <div class="col-6">
-                                        <button class="btn btn-sm btn-success" onclick="updaterole({{ user.id }})">
+                                        <button class="btn  btn-sm btn-success" onclick="updaterole({{ user.id }})">
                                             Changer
                                         </button>
                                     </div>

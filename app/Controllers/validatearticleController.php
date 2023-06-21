@@ -69,6 +69,11 @@ class validatearticleController extends BaseController
         $articles = $query->getResultArray();
 
 
+        $builder = $this->db->table('categories');
+        $query = $builder->getWhere(['id' => 10]);
+        $nbrarticle = $query->getResultArray();
+
+
 
         $existingContent = file_get_contents("assets/json/propagande/propagande.json");
         // Convertir le contenu existant en tableau associatif ou objet
@@ -113,14 +118,33 @@ class validatearticleController extends BaseController
             $builder = $this->db->table('users');
             $query = $builder->getWhere(['id' => $idmenber]);
             $valuepublication = $query->getResultArray();
+
+            $builder = $this->db->table('categories');
+            $query = $builder->getWhere(['id' => $users[0]['category_id']]);
+            $nbrarticle = $query->getResultArray();
+
             if ($valeur == 1){
-                $data = ['article_count' => $valuepublication[0]['article_count']+1
+                $data = ['article_count' => $valuepublication[0]['article_count']+1,
+                    'propagande' => $valuepublication[0]['propagande']+1,
                 ];
                 $updatedstat = $this->db->table('users')->update($data, ['id' => $idmenber ]);
+
+
+                $data = ['articles' => $nbrarticle[0]['articles']+1
+                ];
+                $updatedstat = $this->db->table('categories')->update($data, ['id' => $users[0]['category_id'] ]);
+
+
             }else {
-                $data = ['article_count' => $valuepublication[0]['article_count']-1
+                $data = ['article_count' => $valuepublication[0]['article_count']-1,
+                    'propagande' => $valuepublication[0]['propagande']-1,
                 ];
                 $updatedstat = $this->db->table('users')->update($data, ['id' => $idmenber ]);
+
+
+                $data = ['articles' => $nbrarticle[0]['articles']-1
+                ];
+                $updatedstat = $this->db->table('categories')->update($data, ['id' => $users[0]['category_id'] ]);
             }
 
 

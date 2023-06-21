@@ -29,14 +29,30 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/aceuil', 'HomeController::Home');
+
+// ROUTE LOGIN
 $routes->get('/login', 'loginController::login');
 $routes->post('/login', 'loginController::login');
+
+// ROUTE INSCRIPTION
 $routes->get('/register', 'registerController::register');
 $routes->post('/register', 'registerController::register');
+
+// ROUTE DECONNEXION
 $routes->get('/logout', 'logoutController::logout');
-$routes->post('/moncompte', 'moncompteController::moncompte');
-$routes->get('/moncompte', 'moncompteController::moncompte');
+
+// ROUTE GESTION DES ARTICLES
+$routes->get('/addarticle', 'articleController::addarticle');
+$routes->post('/addarticle', 'articleController::addarticle');
+$routes->post('/addarticleajax', 'articleController::addarticleajax');
+$routes->get('/showarticle', 'showarticlesController::showarticle');
+$routes->post('/votestar', 'showarticlesController::votestar');
+$routes->post('/addfavorite', 'showarticlesController::addfavorite');
+$routes->post('/deletefavorite', 'showarticlesController::deletefavorite');
+$routes->post('/validatearticle', 'validatearticleController::validatearticle');
+$routes->get('/validatearticle', 'validatearticleController::home');
+
+// ROUTE GESTION DES CATEGORIES
 $routes->get('/showcategory', 'showcategoryController::category');
 $routes->post('/showcategory', 'showcategoryController::category');
 $routes->post('/delete-category', 'showcategoryController::deletecategory');
@@ -45,32 +61,40 @@ $routes->post('/add-category', 'showcategoryController::addcategory');
 $routes->post('/update-category', 'showcategoryController::updatecategory');
 $routes->post('/add-souscategory', 'showcategoryController::addsouscategory');
 $routes->post('/update-souscategory', 'showcategoryController::updatesouscategory');
-$routes->get('/addarticle', 'articleController::addarticle');
-$routes->post('/addarticle', 'articleController::addarticle');
 $routes->post('/show-souscategory', 'articleController::addarticle');
-$routes->get('/showarticle', 'showarticlesController::showarticle');
-$routes->post('/votestar', 'showarticlesController::votestar');
-$routes->post('/addfavorite', 'showarticlesController::addfavorite');
-$routes->post('/deletefavorite', 'showarticlesController::deletefavorite');
-$routes->post('/validatearticle', 'validatearticleController::validatearticle');
-$routes->get('/validatearticle', 'validatearticleController::home');
+
+// ROUTE acceuil
+$routes->get('/aceuil', 'HomeController::Home');
+
+// ROUTE MON COMPTE
+$routes->post('/moncompte', 'moncompteController::moncompte');
+$routes->get('/moncompte', 'moncompteController::moncompte');
+
+// GESTION MEMBRES
 $routes->get('/showmembres', 'controlmembreController::home');
 $routes->post('/showmembres', 'controlmembreController::updatemembres');
 $routes->post('/updaterole', 'controlmembreController::updaterole');
 $routes->post('/deleteuser', 'controlmembreController::deleteuser');
-$routes->post('/chat', 'chatController::chat');
-$routes->get('/chat', 'chatController::chat');
-$routes->post('/addchat', 'chatController::addchat');
-$routes->get('/get-messages', 'chatController::getmessages');
-$routes->get('/getSessionData', 'chatController::getSessionData');
-$routes->get('/list', 'listController::list');
-$routes->get('/showlist', 'listController::showlist');
+
+// ROUTE MESSAGERIE
 $routes->get('/messagerie', 'messagerieController::messagerie');
 $routes->post('/messagerie', 'messagerieController::messagerie');
 $routes->post('/messagerieaddfavorite', 'messagerieController::addfavorite');
 $routes->post('/messageriedeletevaforite', 'messagerieController::deletefavorite');
 $routes->post('/deletemsg', 'messagerieController::deletemsg');
 $routes->post('/readok', 'messagerieController::readok');
+
+//ROUTES CHAT
+$routes->post('/chat', 'chatController::chat');
+$routes->get('/chat', 'chatController::chat');
+$routes->post('/addchat', 'chatController::addchat');
+$routes->get('/get-messages', 'chatController::getmessages');
+$routes->get('/getSessionData', 'chatController::getSessionData');
+
+
+$routes->get('/list', 'listController::list');
+$routes->get('/showlist', 'listController::showlist');
+
 $routes->get('/propagande', 'propagandeController::propagande');
 $routes->post('/propagande', 'propagandeController::propagande');
 $routes->get('/showarticleadmin', 'showarticlesController::showarticleadmin');

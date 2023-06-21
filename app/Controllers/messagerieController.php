@@ -68,13 +68,23 @@ class messagerieController extends BaseController
 
         $message = "";
 
+        if(isset($_POST['emaildelete'])){
+
+            $data = ['hidden' => 1];
+            $updated = $this->db->table('messages_prives')->whereIn('id', $_POST['emaildelete'])->update($data);
+            header("Location: /messagerie");
+            exit(0);
+
+        }
+
+
         if (isset($_POST['sendMessage'])) {
             if (isset($_POST['destinataire']) && isset($_POST['sujet']) && isset($_POST['contenu'])) {
 
                 $builder = $this->db->table('users');
                 $destinataireIsset = $builder->getWhere(['pseudo' => $_POST['destinataire']])->getResult();
 
-                if ($destinataireIsset) {
+                if ($destinataireIsset && $_SESSION['pseudo'] != $_POST['destinataire']) {
                     $data = [
                         'pseudo_emetteur' => $_SESSION['pseudo'],
                         'pseudo_destinataire' => $_POST['destinataire'],
