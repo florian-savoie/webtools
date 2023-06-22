@@ -99,6 +99,7 @@ $routes->get('/propagande', 'propagandeController::propagande');
 $routes->post('/propagande', 'propagandeController::propagande');
 $routes->get('/showarticleadmin', 'showarticlesController::showarticleadmin');
 $routes->post('/showarticleadmin', 'showarticlesController::showarticleadmin');
+$routes->post('/testtt', 'showarticlesController::testtt');
 
 
 

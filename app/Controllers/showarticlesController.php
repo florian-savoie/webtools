@@ -318,4 +318,66 @@ class showarticlesController extends BaseController
         echo json_encode($response);
         return;
     }
+
+    function testtt (){
+
+        $title = $_POST['title'];
+        $url = $_POST['url'];
+        $content = $_POST['description'];
+        $category_id = $_POST['category'];
+        $souscat = $_POST['souscat'];
+        $idarticle = $_POST['id'];
+
+        if( isset($_POST['image']) ){
+            $compressedImage = $_POST['image'];
+
+            // Générer un nom de fichier unique pour chaque image
+            $fileName = uniqid('') . '.jpg';
+
+            // Convertir les données Base64 en binaire
+            $imageData = base64_decode(str_replace('data:image/jpeg;base64,', '', $compressedImage));
+
+            // Chemin de destination pour enregistrer l'image
+            $destinationPath ='assets/imgArticle/' . $fileName;
+
+            // supprimer l'anciene image
+            $builder = $this->db->table('articles');
+            $query = $builder->getWhere(['id' => $idarticle], 1);
+            $articles = $query->getResultArray();
+
+            unlink($articles['0']['image']);
+            // Enregistrer l'image sur le serveur
+            file_put_contents($destinationPath, $imageData);
+            $response = "image";
+
+            $data = ['title' => $title,
+                'content' => $content,
+                'category_id' => $category_id,
+                'subcategory_id' => $souscat,
+                'link' => $url,
+                'image' => $destinationPath,
+            ];
+            $updated = $this->db->table('articles')->update($data, ['id' => $idarticle]);
+        }
+        else {
+            $data = ['title' => $title,
+                'content' => $content,
+                'category_id' => $category_id,
+                'subcategory_id' => $souscat,
+                'link' => $url
+            ];
+            $updated = $this->db->table('articles')->update($data, ['id' => $idarticle]);
+
+
+
+
+            $response = "pas d'image";
+        }
+
+        // Renvoyer la réponse au format JSON
+        header('Content-Type: application/json');
+        echo json_encode($response);
+        return;
+    }
+
 }
