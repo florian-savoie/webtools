@@ -2,16 +2,16 @@
 {% extends "./layout/layout_nav.html.twig" %}
 {% block css %}
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-    <link rel="stylesheet" href="../../assets/vendor/libs/node-waves/node-waves.css" />
-    <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
-    <link rel="stylesheet" href="../../assets/vendor/libs/quill/katex.css" />
-    <link rel="stylesheet" href="../../assets/vendor/libs/quill/editor.css" />
-    <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
+    <link rel="stylesheet" href="./assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="./assets/vendor/libs/node-waves/node-waves.css" />
+    <link rel="stylesheet" href="./assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="./assets/vendor/libs/quill/katex.css" />
+    <link rel="stylesheet" href="./assets/vendor/libs/quill/editor.css" />
+    <link rel="stylesheet" href="./assets/vendor/libs/select2/select2.css" />
 
     <!-- Page CSS -->
 
-    <link rel="stylesheet" href="../../assets/vendor/css/pages/app-email.css" />
+    <link rel="stylesheet" href="./assets/vendor/css/pages/app-email.css" />
     <style>
         .app-email-view-envoye {
             overflow: scroll;
@@ -359,7 +359,7 @@
                                                     height="40"
                                                     width="40"/>
                                             <div class="flex-grow-1 ms-1">
-                                                <h6 class="m-0">{{ envoye.destinataire }}</h6>
+                                                <h6 class="m-0">{{ envoye.pseudo_destinataire }}</h6>
                                             </div>
                                         </div>
                                         <div class="d-flex align-items-center">
@@ -500,12 +500,12 @@
     {% block js %}
 
         <!-- Vendors JS -->
-        <script src="../../assets/vendor/libs/quill/katex.js"></script>
-        <script src="../../assets/vendor/libs/quill/quill.js"></script>
-        <script src="../../assets/vendor/libs/select2/select2.js"></script>
-        <script src="../../assets/vendor/libs/block-ui/block-ui.js"></script>
+        <script src="./assets/vendor/libs/quill/katex.js"></script>
+        <script src="./assets/vendor/libs/quill/quill.js"></script>
+        <script src="./assets/vendor/libs/select2/select2.js"></script>
+        <script src="./assets/vendor/libs/block-ui/block-ui.js"></script>
         <!-- Page JS -->
-        <script src="../../assets/js/app-email.js"></script>
+        <script src="./assets/js/app-email.js"></script>
         <script>
             document.addEventListener("DOMContentLoaded", function () {
                 let elementToClick = document.querySelector('#clique');
