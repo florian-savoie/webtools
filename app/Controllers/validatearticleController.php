@@ -48,13 +48,11 @@ class validatearticleController extends BaseController
     {
         $sessionExistsAndTrue = false;
 
-        $autoriser = $this->session->get('Autoriser');
-
         // Vérifier si la session existe et est vraie
-        if ( $autoriser === true) {
+        if (!empty($_SESSION['role']) && $_SESSION['role'] == 'admin' || $_SESSION['role'] == 'moderateur') {
             $sessionExistsAndTrue = true;
         }else {
-            header("Location: /login");
+            header("Location: /showarticle");
             exit(0);
         }
 

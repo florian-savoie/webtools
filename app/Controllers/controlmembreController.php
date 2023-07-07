@@ -47,17 +47,15 @@ class controlmembreController extends BaseController
     public function home()
     {
         $sessionExistsAndTrue = false;
-
-        $autoriser = $_SESSION['Autoriser'];
-        $role = $_SESSION['role'];
-
         // Vérifier si la session existe et est vraie
-        if ( $autoriser === true && $role === "admin") {
+        if (!empty($_SESSION['role']) && $_SESSION['role'] == 'admin') {
             $sessionExistsAndTrue = true;
         }else {
             header("Location: /showarticle");
             exit(0);
         }
+
+
 
         $idUser = $_SESSION['iduser'] ;
         $builder = $this->db->table('users');

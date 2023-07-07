@@ -64,7 +64,7 @@ $routes->post('/update-souscategory', 'showcategoryController::updatesouscategor
 $routes->post('/show-souscategory', 'articleController::addarticle');
 
 // ROUTE acceuil
-$routes->get('/aceuil', 'HomeController::Home');
+$routes->get('/', 'HomeController::Home');
 
 // ROUTE MON COMPTE
 $routes->post('/moncompte', 'moncompteController::moncompte');

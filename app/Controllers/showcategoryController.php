@@ -47,6 +47,13 @@ class ShowcategoryController extends BaseController
     public function category()
     {
         $sessionExistsAndTrue = false;
+        // Vérifier si la session existe et est vraie
+        if (!empty($_SESSION['role']) && $_SESSION['role'] == 'admin' || $_SESSION['role'] == 'moderateur') {
+            $sessionExistsAndTrue = true;
+        }else {
+            header("Location: /showarticle");
+            exit(0);
+        }
         $role = $_SESSION["role"];
         $autoriser = $this->session->get('Autoriser');
 

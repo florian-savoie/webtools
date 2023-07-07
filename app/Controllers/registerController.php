@@ -47,6 +47,10 @@ class registerController extends BaseController
     public function register()
     {
         $message = "";
+        if (!empty($_SESSION['role'])) {
+            header("Location: /");
+            exit(0);
+        }
         if (isset($_POST['register'])) {
             if (
                 isset($_POST['email']) && !empty($_POST['email']) &&
@@ -72,6 +76,7 @@ class registerController extends BaseController
                         'pseudo' => $_POST['pseudo'],
                         'email' => $_POST['email'],
                         'password' => sha1($_POST['password']),
+                        'profile_image' => '0.jpg',
                     ];
 
 
@@ -79,6 +84,17 @@ class registerController extends BaseController
                     $insert = $builder->insert($data);
                     $message = "Enregistrement réussi.";
 
+                          // Vérifier si le pseudo ou le mail est déjà utilisé
+                    $builder = $this->db->table('users');
+                    $builder->select('*');
+                    $builder->where('pseudo', $_POST['pseudo']); // Remplacez $_POST['pseudo'] par la variable qui contient le pseudo soumis par le formulaire.
+                        $utilisateur = $builder->get()->getResultArray();
+
+                        $profilregister = "Data/img_profil_users/0.jpg"; // dossier cible pour enregistrer le fichier
+                        $profilregisterid = 'Data/img_profil_users/'.$utilisateur['0']['id'].'.jpg';
+                        copy($profilregister, $profilregisterid);
+
+                        $updated = $this->db->table('users')->update($data, ['profile_image' => $utilisateur['0']['id']]);
 // Ajouter membre a la liste des recherches rapide
                         $listeMembres = file_get_contents("assets/json/menbres/listemenbres.json");
                         $nouveauxMembres = json_decode($listeMembres, true);

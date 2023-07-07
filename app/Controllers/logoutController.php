@@ -43,7 +43,7 @@ class logoutController extends BaseController
         session_destroy();
 
         // Rediriger vers la page de connexion ou une autre page appropriée
-        header("Location: /aceuil");
+        header("Location: /");
         exit();
     }
 }

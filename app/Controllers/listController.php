@@ -48,13 +48,13 @@ class listController extends BaseController
     {
         $sessionExistsAndTrue = false;
 
-        $autoriser = $this->session->get('Autoriser');
-
         // Vérifier si la session existe et est vraie
-        if ( $autoriser === true) {
+        if (!empty($_SESSION['role']) && $_SESSION['role'] == 'admin' ) {
             $sessionExistsAndTrue = true;
+        }else {
+            header("Location: /showarticle");
+            exit(0);
         }
-
 
         $dir ="assets/json/menbres/listemenbres.json";
         $existingContent = file_get_contents($dir);

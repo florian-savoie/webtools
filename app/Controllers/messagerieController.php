@@ -46,11 +46,12 @@ class messagerieController extends BaseController
     public function messagerie()
     {
         $sessionExistsAndTrue = false;
-        $autoriser = $this->session->get('Autoriser');
-
         // Vérifier si la session existe et est vraie
-        if ($autoriser === true) {
+        if (!empty($_SESSION['role'])) {
             $sessionExistsAndTrue = true;
+        }else {
+            header("Location: /showarticle");
+            exit(0);
         }
 
         $builder = $this->db->table('messages_prives');

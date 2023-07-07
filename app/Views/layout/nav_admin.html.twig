@@ -66,13 +66,57 @@
                                 <small class="text-muted mb-0">publier votre articles</small>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </li>
             <!-- quick affichage classique -->
 
+            <!-- quick gestion  -->
+            <li class="nav-item dropdown-shortcuts navbar-dropdown dropdown me-1 me-xl-0">
+                <a class="nav-link btn btn-text-secondary rounded-pill btn-icon dropdown-toggle hide-arrow"
+                   href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside"
+                   aria-expanded="false">
+                    <span class="mdi mdi-shield-crown"></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end py-0">
+                    <div class="dropdown-menu-header border-bottom">
+                        <div class="dropdown-header d-flex align-items-center py-3">
+                            <h5 class="text-body mb-0 me-auto">gestion administrateur</h5>
+                            <a href="javascript:void(0)" class="dropdown-shortcuts-add text-muted" data-bs-toggle="tooltip"
+                               data-bs-placement="top" title="add shortcuts"><i
+                                        class="mdi mdi-view-grid-plus-outline mdi-24px"></i></a>
+                        </div>
+                    </div>
+                    <div class="dropdown-shortcuts-list scrollable-container">
+                        <div class="row row-bordered overflow-visible g-0">
+                            <div class="dropdown-shortcuts-item col">
+                        <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
+<span class="mdi mdi-check-outline"></span>
+                        </span>
+                                <a href="./validatearticle" class="stretched-link">validation des articles</a>
+                                <small class="text-muted mb-0">valider les articles en attente</small>
+                            </div>
+                            <div class="dropdown-shortcuts-item col">
+                        <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
+<span class="mdi mdi-email-open-outline"></span>
+                        </span>
+                                <a href="./showcategory" class="stretched-link">gestion des categories</a>
+                                <small class="text-muted mb-0">ajouter modifier ou supprimer une categorie</small>
+                            </div>
+                        </div>
+                        <div class="row row-bordered overflow-visible g-0">
+                            <div class="dropdown-shortcuts-item col">
+                        <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
+<span class="mdi mdi-account-details"></span>
+                        </span>
+                                <a href="./showmembres" class="stretched-link">liste des menbres</a>
+                            </div>
+                        </div>
 
+                    </div>
+                </div>
+            </li>
+            <!-- quick gestion -->
 
             <!-- quick communication  -->
             <li class="nav-item dropdown-shortcuts navbar-dropdown dropdown me-1 me-xl-0">
@@ -321,8 +365,9 @@
                         <div class="d-flex">
                             <div class="flex-shrink-0 me-3">
                                 <div class="avatar avatar-online">
-                                    <img src="Data/img_profil_users/{{ session.profile_image }}" alt
+                                  <img src="Data/img_profil_users/{{ session.profile_image }}" alt
                                          class="w-px-40 h-auto rounded-circle"/>
+
                                 </div>
                             </div>
                             <div class="flex-grow-1">

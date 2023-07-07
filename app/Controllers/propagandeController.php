@@ -48,11 +48,12 @@ class propagandeController extends BaseController
     {
         $sessionExistsAndTrue = false;
 
-        $autoriser = $this->session->get('Autoriser');
-
         // Vérifier si la session existe et est vraie
-        if ($autoriser === true) {
+        if (!empty($_SESSION['role'])) {
             $sessionExistsAndTrue = true;
+        }else {
+            header("Location: /showarticle");
+            exit(0);
         }
         $existingContent = file_get_contents(self::PROPAGANDE_PATH . "propagande.json");
         // Convertir le contenu existant en tableau associatif ou objet

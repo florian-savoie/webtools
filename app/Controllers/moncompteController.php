@@ -48,13 +48,11 @@ class moncompteController extends BaseController
     {
         $sessionExistsAndTrue = false;
 
-        $autoriser = $this->session->get('Autoriser');
-
         // Vérifier si la session existe et est vraie
-        if ( $autoriser === true) {
+        if (!empty($_SESSION['role'])) {
             $sessionExistsAndTrue = true;
         }else {
-            header("Location: /login");
+            header("Location: /showarticle");
             exit(0);
         }
 

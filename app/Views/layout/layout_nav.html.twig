@@ -94,12 +94,17 @@
 <!-- Layout wrapper -->
 
 
-{% if sessionExistsAndTrue %}
+{% if sessionExistsAndTrue  and session.role == 'admin' %}
     <!-- barre de navigation en ligne -->
-    {% include "./layout/nav_online.html.twig" %}
-{% else %}
+    {% include "./layout/nav_admin.html.twig" %}
+{% elseif  sessionExistsAndTrue  and session.role == 'moderateur' %}
     <!-- barre de navigation hors ligne -->
+    {% include "./layout/nav.moderateur.html.twig" %}
+    {% elseif  sessionExistsAndTrue  and session.role == 'user' %}
+        {% include "./layout/nav_online.html.twig" %}
+{% else %}
     {% include "./layout/nav_offline.html.twig" %}
+
 {% endif %}
 
 <div class="container d-flex justify-content-center">
@@ -301,7 +306,7 @@
             error: function(xhr, status, error) {
                 console.log(error);
                 // Gérer l'erreur
-            }
+            %}
         });
         console.log('test');
     }

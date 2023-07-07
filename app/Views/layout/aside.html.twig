@@ -37,7 +37,7 @@
 
                     <a href="?category={{ categorie.id }}"
                        class="menu-link menu-link {% if souscat %} menu-toggle {% endif %}">
-                        <div style="color: {{ categorie.color }}">{{ categorie.name }}</div>
+                        <div style="color: {{ categorie.color }}" onclick="window.location.href = '?category={{ categorie.id }}';">{{ categorie.name }}</div>
                     </a>
 
                     {% if souscat %}
@@ -59,13 +59,14 @@
             <li class="menu-item">
                <a href="javascript:void(0)" class="menu-link menu-toggle">
                      <!--<i class="menu-icon tf-icons mdi mdi-star-outline"></i>-->
-                    <div>Favoris</div>
-                </a>
+                   <div style="color: {{ categorie.color }}" onclick="window.location.href = '?category=favoris';">Favoris</div>
+
+               </a>
                 <ul class="menu-sub">
                     {% for favorite in likes %}
                         <li class="menu-item">
-                            <a href="extended-ui-avatar.html" class="menu-link">
-                                <div>{{ favorite.id }}</div>
+                            <a href="{{ favorite.link }}" target="_blank" class="menu-link">
+                                <div>{{ favorite.title }}</div>
                             </a>
                         </li>
                     {% endfor %}

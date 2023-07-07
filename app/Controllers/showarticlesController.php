@@ -61,9 +61,13 @@ class showarticlesController extends BaseController
         $idUser = $_SESSION['iduser'] ;
 
 
+
         $builder = $this->db->table('favorites');
+        $builder->select('favorites.*, articles.title as title , articles.link as link');
+        $builder->join('articles', 'favorites.article_id = articles.id', 'left');
+        $builder->where('favorites.user_id', $idUser);
+        $builder->where('articles.is_approved', 1);
         $builder->orderBy('id', 'DESC');
-        $builder->where('user_id', $idUser); // Remplacez $id par l'ID que vous voulez rechercher
         $query = $builder->get();
         $likes = $query->getResultArray();
 
@@ -94,7 +98,7 @@ class showarticlesController extends BaseController
             $query = $builder->get();
             $articles = $query->getResultArray();
 
-        }else if (isset($_GET['category']) ){
+        }else if (isset($_GET['category']) && $_GET['category'] != "favoris" ){
             $category_id = (int)$_GET['category'];
 
             $builder = $this->db->table('articles');
@@ -105,6 +109,26 @@ class showarticlesController extends BaseController
             $builder->orderBy('id', 'DESC');
             $query = $builder->get();
             $articles = $query->getResultArray();
+
+
+
+
+
+        }else if (isset($_GET['category']) == "favoris" ){
+            $category_id = (int)$_GET['category'];
+
+            $builder = $this->db->table('favorites');
+            $builder->select('favorites.*, articles.title as title , articles.link as link , articles.image as image, articles.content as content, articles.title as title, articles.submission_date as submission_date,categories.name as category_name, categories.color as category_color,subcategories.name as subcategories_name');
+            $builder->join('articles', 'favorites.article_id = articles.id', 'left');
+            $builder->join('categories', 'categories.id = articles.category_id', 'left');
+            $builder->join('subcategories', 'subcategories.id = articles.subcategory_id', 'left');
+            $builder->where('favorites.user_id', $idUser);
+            $builder->where('articles.is_approved', 1);
+            $builder->orderBy('id', 'DESC');
+            $query = $builder->get();
+            $articles = $query->getResultArray();
+
+
         }else{
             if (empty($articles)) { // Ajout de la vérification si $articles est vide
                 $builder = $this->db->table('articles');

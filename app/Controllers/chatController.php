@@ -47,7 +47,13 @@ class chatController extends BaseController
     public function chat()
     {
         $sessionExistsAndTrue = false;
-
+        // Vérifier si la session existe et est vraie
+        if (!empty($_SESSION['role'])) {
+            $sessionExistsAndTrue = true;
+        }else {
+            header("Location: /showarticle");
+            exit(0);
+        }
         $autoriser = $this->session->get('Autoriser');
 
         // Vérifier si la session existe et est vraie
@@ -71,10 +77,12 @@ class chatController extends BaseController
     if (isset($_POST['action']) && $_POST['action'] === 'add-chat') {
         $message = $_POST['message'];
 
+
+
         $builder = $this->db->table('chat');
         $insertok = $builder->insert([
             'message' => $message,
-            'id_user' => $_SESSION['iduser']
+            'id_user' => $_SESSION['iduser'],
         ]);
 
 
