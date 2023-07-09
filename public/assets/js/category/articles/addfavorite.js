@@ -5,7 +5,7 @@ function addfavorite(id) {
     addfavorite.hidden = true;
     deletefavorite.hidden = false;
     $.ajax({
-        url: '/addfavorite',
+        url: './addfavorite',
         method: 'POST',
         data: {
             idarticle:  id,

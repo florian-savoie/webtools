@@ -52,7 +52,7 @@ class propagandeController extends BaseController
         if (!empty($_SESSION['role'])) {
             $sessionExistsAndTrue = true;
         }else {
-            header("Location: /showarticle");
+            header("Location: ./showarticle");
             exit(0);
         }
         $existingContent = file_get_contents(self::PROPAGANDE_PATH . "propagande.json");
@@ -126,7 +126,7 @@ class propagandeController extends BaseController
                 $this->session->setFlashData('message', "success");
 
 
-                header("Location: /propagande");
+                header("Location: ./propagande");
                 exit(0);
             } else {
                 $this->session->setFlashData('message', "error");

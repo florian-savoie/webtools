@@ -8,9 +8,9 @@
 
     <!-- Flipster CSS -->
     <link rel="stylesheet" href="dist/jquery.flipster.min.css">
-    <link rel="stylesheet" href="../assets/vendor/css/pages/app-chat.css" />
+    <link rel="stylesheet" href="./assets/vendor/css/pages/app-chat.css" />
 
-    <link rel="stylesheet" href="../assets/css/chat.css">
+    <link rel="stylesheet" href="./assets/css/chat.css">
     <!-- Flipster Js -->
     <script src="dist/jquery.flipster.min.js"></script>
 {% endblock %}
@@ -70,11 +70,7 @@
 
     {% block js %}
 
-        <script src="../assets/js/time-line/client/caroussel.js"></script>
-        <script src="../assets/js/time-line/artisan/delete-like-photo.js"></script>
-        <script src="../assets/js/time-line/artisan/like-photo.js"></script>
-        <script src="../assets/js/time-line/artisan/envent-form.js"></script>
-        <script src="../assets/js/time-line/artisan/compression-photo.js"></script>
+       
         <script src="./assets/vendor/assets/js/form-basic-inputs.js"></script>
         <script src="./assets/vendor/assets/js/extended-ui-timeline.js"></script>
         <script src="./assets/vendor/libs/swiper/swiper.js"></script>
@@ -102,7 +98,7 @@
                 console.log(test);
                 $('#inputchat').val('');
                 $.ajax({
-                    url: '/addchat',
+                    url: './addchat',
                     type: 'post',
                     dataType: 'json',
                     data: {
@@ -126,7 +122,7 @@
             let idUser = "";
             $.ajax({
                 type: 'GET',
-                url: '/getSessionData', // endpoint créé dans l'étape précédente
+                url: './getSessionData', // endpoint créé dans l'étape précédente
                 success: function(data) {
                     // data contient les données de session récupérées
                     var mesDonnees = JSON.parse(data);
@@ -142,7 +138,7 @@
             function getMessages() {
                 let urlchat = $('#chaturl');
                 $.ajax({
-                    url: '/get-messages',
+                    url: './get-messages',
                     method: 'GET',
                     success: function(response) {
                         var messages = JSON.parse(response);

@@ -101,7 +101,13 @@ $routes->get('/showarticleadmin', 'showarticlesController::showarticleadmin');
 $routes->post('/showarticleadmin', 'showarticlesController::showarticleadmin');
 $routes->post('/testtt', 'showarticlesController::testtt');
 
+// route FORGET PASSWORD
+$routes->get('/forgot-password', 'forgetPasswordController::forgetpassword');
+$routes->post('/forgot-password', 'forgetPasswordController::forgetpassword');
 
+// route reset PASSWORD
+$routes->get('/reset-password', 'resetpasswordController::resetpassword');
+$routes->post('/reset-password', 'resetpasswordController::resetpassword');
 
 /*
  * --------------------------------------------------------------------

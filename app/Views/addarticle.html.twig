@@ -7,10 +7,9 @@
 
     <!-- Flipster CSS -->
     <link rel="stylesheet" href="dist/jquery.flipster.min.css">
-    <link rel="stylesheet" href="../assets/vendor/css/pages/app-chat.css" />
+    <link rel="stylesheet" href="./assets/vendor/css/pages/app-chat.css" />
 
-    <link rel="stylesheet" href="../assets/css/chat.css">
-
+    <link rel="stylesheet" href="./assets/css/chat.css">
     <link rel="stylesheet" href="./assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="./assets/vendor/libs/node-waves/node-waves.css" />
     <link rel="stylesheet" href="./assets/vendor/libs/typeahead-js/typeahead.css" />
@@ -131,7 +130,7 @@ category.onchange = function() {
 
     // Effectuer la requête Ajax
     $.ajax({
-        url: '/show-souscategory',
+        url: './show-souscategory',
         method: 'POST',
         data: {
             action: 'show-souscategory',
@@ -170,7 +169,7 @@ $('.addsouscategory').click(function() {
     let idcategory = $(this).data('idcategory');
 
     $.ajax({
-        url: '/addsouscategory',
+        url: './addsouscategory',
         type: 'post',
         dataType: 'json',
         data: {
@@ -266,18 +265,20 @@ function processForm(event) {
         img.onload = function () {
             compressAndAddImage(img, formData, function () {
                 const xhr = new XMLHttpRequest();
-                xhr.open("POST", "/addarticleajax");
+                xhr.open("POST", "./addarticleajax");
                 xhr.onload = function () {
-                    if (xhr.status === 200) {
+                    if (xhr.status === 200) {succesSendMessage()
                         var response = JSON.parse(xhr.response); // Analyser la réponse JSON
+                        
+
                         console.log(response);
                         document.getElementById("image-form").reset();
-                        succesSendMessage();
+                        
+
                     } else {
                         console.error(xhr.response);
                         succesSendMessageerror();
-
-                    }
+         }
                 };
                 xhr.send(formData);
             });
@@ -285,7 +286,10 @@ function processForm(event) {
         img.src = event.target.result;
     };
     reader.readAsDataURL(file);
-  // window.location.reload();
+    
+setTimeout(function() {
+    console.log("Après 1 seconde");
+}, 1000);
 }
 
 const form = document.getElementById("image-form");

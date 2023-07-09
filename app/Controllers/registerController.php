@@ -48,7 +48,7 @@ class registerController extends BaseController
     {
         $message = "";
         if (!empty($_SESSION['role'])) {
-            header("Location: /");
+            header("Location: ./");
             exit(0);
         }
         if (isset($_POST['register'])) {
@@ -68,7 +68,7 @@ class registerController extends BaseController
                     $query = $builder->get();
 
                     if ($query->getNumRows() > 0) {
-                        $message = "Email ou mot de passe deja utilisé";
+                        $message = "Email ou pseudo deja utilisé";
                     } else {
 
 
@@ -104,7 +104,7 @@ class registerController extends BaseController
                         file_put_contents("assets/json/menbres/listemenbres.json", json_encode($nouveauxMembres));
 
                         // Rediriger vers la page de connexion ou une autre page appropriée
-                    header("Location: /login");
+                    header("Location: ./login");
                     exit(); }
                 } else {
                     $message = "Les mots de passe ne correspondent pas.";

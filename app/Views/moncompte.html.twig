@@ -9,7 +9,6 @@
     <!-- Flipster CSS -->
     <link rel="stylesheet" href="dist/jquery.flipster.min.css">
 
-    <link rel="stylesheet" href="../assets/css/time-line.css">
     <!-- Flipster Js -->
     <script src="dist/jquery.flipster.min.js"></script>
 {% endblock %}
@@ -27,7 +26,7 @@
                         ><i class="mdi mdi-account-outline mdi-20px me-1"></i>Votre compte</a
                         >
                     </li>
-                    <li class="nav-item">
+                        <!-- Account  <li class="nav-item">
                         <a class="nav-link" href="pages-account-settings-security.html"
                         ><i class="mdi mdi-lock-open-outline mdi-20px me-1"></i>Mots de passe</a
                         >
@@ -41,7 +40,7 @@
                         <a class="nav-link" href="pages-account-settings-connections.html"
                         ><i class="mdi mdi-link mdi-20px me-1"></i>Liste d'amis</a
                         >
-                    </li>
+                    </li>-->   
                 </ul>
 
 
@@ -155,7 +154,7 @@
                         </div>
                     </div>
                 </div>
-
+ <!-- /Delete count
                 <div class="card">
                     <h5 class="card-header">Suprimer votre compte</h5>
                     <div class="card-body">
@@ -179,7 +178,7 @@
                             <button type="submit" class="btn btn-danger deactivate-account">suprimer le compte</button>
                         </form>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -192,13 +191,14 @@
 
     {% block js %}
 
-        <script src="../assets/js/time-line/client/caroussel.js"></script>
-        <script src="../assets/js/time-line/artisan/delete-like-photo.js"></script>
-        <script src="../assets/js/time-line/artisan/like-photo.js"></script>
-        <script src="../assets/js/time-line/artisan/envent-form.js"></script>
-        <script src="../assets/js/time-line/artisan/compression-photo.js"></script>
+
         <script src="./assets/vendor/assets/js/form-basic-inputs.js"></script>
         <script src="./assets/vendor/assets/js/extended-ui-timeline.js"></script>
         <script src="./assets/vendor/libs/swiper/swiper.js"></script>
-
+<script>
+// Sélectionnez tous les éléments ayant la classe "example"
+setTimeout(function() {
+  $(".template-customizer-open-btn").hide();
+}, 000001);
+</script>
     {% endblock %}

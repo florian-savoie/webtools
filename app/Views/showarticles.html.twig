@@ -1,477 +1,482 @@
 {% set title = 'Artciles' %}
 {% extends "./layout/layout_nav.html.twig" %}
 {% block css %}
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
-    <!-- Flipster CSS -->
-    <link rel="stylesheet" href="dist/jquery.flipster.min.css">
-    <link rel="stylesheet" href="../assets/vendor/css/pages/app-chat.css" />
+	<!-- Flipster CSS -->
+	<link rel="stylesheet" href="dist/jquery.flipster.min.css">
+	<link rel="stylesheet" href="./assets/vendor/css/pages/app-chat.css"/>
 
-    <link rel="stylesheet" href="../assets/css/chat.css">
+	<link rel="stylesheet" href="./assets/css/chat.css">
 
-    <link rel="stylesheet" href="./assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-    <link rel="stylesheet" href="./assets/vendor/libs/node-waves/node-waves.css" />
-    <link rel="stylesheet" href="./assets/vendor/libs/typeahead-js/typeahead.css" />
-    <link rel="stylesheet" href="./assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css" />
-    <link rel="stylesheet" href="./assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css" />
-    <!-- Flipster Js -->
-    <script src="dist/jquery.flipster.min.js"></script>
+	<link rel="stylesheet" href="./assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
+	<link rel="stylesheet" href="./assets/vendor/libs/node-waves/node-waves.css"/>
+	<link rel="stylesheet" href="./assets/vendor/libs/typeahead-js/typeahead.css"/>
+	<link rel="stylesheet" href="./assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css"/>
+	<link rel="stylesheet" href="./assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css"/>
+	<!-- Flipster Js -->
 
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="./assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
-    <link rel="stylesheet" href="./assets/vendor/libs/node-waves/node-waves.css"/>
-    <link rel="stylesheet" href="./assets/vendor/libs/typeahead-js/typeahead.css"/>
-    <link rel="stylesheet" href="./assets/vendor/libs/bs-stepper/bs-stepper.css"/>
-    <link rel="stylesheet" href="./assets/vendor/libs/select2/select2.css"/>
-    <link rel="stylesheet" href="./assets/vendor/libs/tagify/tagify.css"/>
-    <link rel="stylesheet" href="./assets/vendor/libs/flatpickr/flatpickr.css"/>
-    <link rel="stylesheet" href="./assets/vendor/libs/formvalidation/dist/css/formValidation.min.css"/>
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="./assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-    <link rel="stylesheet" href="./assets/vendor/libs/node-waves/node-waves.css" />
-    <link rel="stylesheet" href="./assets/vendor/libs/typeahead-js/typeahead.css" />
-    <link rel="stylesheet" href="./assets/vendor/libs/rateyo/rateyo.css"/>
-<style>
-    .article:hover{
-        transform: scale(1.03);    }
-</style>
+	<!-- Vendors CSS -->
+
+	<link rel="stylesheet" href="./assets/vendor/libs/bs-stepper/bs-stepper.css"/> <link rel="stylesheet" href="./assets/vendor/libs/select2/select2.css"/>
+	<link rel="stylesheet" href="./assets/vendor/libs/tagify/tagify.css"/>
+	<link rel="stylesheet" href="./assets/vendor/libs/flatpickr/flatpickr.css"/>
+	<link
+	rel="stylesheet" href="./assets/vendor/libs/formvalidation/dist/css/formValidation.min.css"/>
+	<!-- Vendors CSS -->
+	<link rel="stylesheet" href="./assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
+	<link rel="stylesheet" href="./assets/vendor/libs/node-waves/node-waves.css"/>
+	<link rel="stylesheet" href="./assets/vendor/libs/typeahead-js/typeahead.css"/>
+	<link rel="stylesheet" href="./assets/vendor/libs/rateyo/rateyo.css"/>
+	<style>
+		.article:hover {
+			transform: scale(1.03);
+		}
+	</style>
 
 {% endblock %}
 {% block contenu %}
-    <!-- Content -->
-    <!-- Users List Table -->
-    {% include "./layout/aside.html.twig" %}
+	<!-- Content -->
+	<!-- Users List Table -->
+	{% include "./layout/aside.html.twig" %}
 
-    <div class="row col-12 " style="background: radial-gradient(circle, rgb(251,252,253) 94%, rgba(251,251,251,1) 100%);
-">
+		<div class="row col-12 " style="background: radial-gradient(circle, rgb(251,252,253) 94%, rgba(251,251,251,1) 100%);
+			"> <div class="col-1"></div>
+		<div class="col-11 mt-5">
+			<div class="d-flex justify-content-end align-items-center my-3">
+				<label for="search-box" class=" col-form-label">Rechercher :
+				</label>
+				<div class="col-md-5 col-lg-2">
+					<input class="form-control" type="text" placeholder="Rechercher un article" id="search-box">
+				</div>
+			</div>
+			<div
+				class="row">
+				<!-- Finance App -->
+				{% for article in articles %}
+					<!-- Modal edit-->
+					<div class="modal fade" id="modalCenterEdit{{ article.id }}" tabindex="-1" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+							<div class="modal-content" style="height: 800px !important;">
+								<div class="modal-header">
+									<h4 class="modal-title" id="modalCenterTitle">Modification de l'article</h4>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<div class="row">
 
+										<div class="row">
+											<div class="col-6 d-flex justify-content-center">
+												<img class="card-img-top" style="height: 200px ;min-height: 200px;max-width: 200px " src="{{ article.image }}" alt="iPhone-bg"/></div>
+											<div class="col-6">
+												<label for="nameWithTitle">Canger l'image</label>
 
-        <div class="col-1"></div>
-        <div class="col-11 mt-5">
-            <div class="d-flex justify-content-end align-items-center my-3">
-                <label for="search-box" class=" col-form-label">Rechercher : </label>
-                <div class="col-2">
-                    <input class="form-control" type="text" placeholder="Rechercher un article" id="search-box">
-                </div>
-            </div>
-            <div class="row">
-                <!-- Finance App -->
-                {% for article in articles %}
-                    <!-- Modal edit-->
-                    <div class="modal fade" id="modalCenterEdit{{ article.id }}" tabindex="-1" aria-hidden="true" >
-                        <div class="modal-dialog modal-dialog-centered modal-xl" role="document" >
-                            <div class="modal-content" style="height: 800px !important;">
-                                <div class="modal-header">
-                                    <h4 class="modal-title" id="modalCenterTitle">Modification de l'article</h4>
-                                    <button
-                                            type="button"
-                                            class="btn-close"
-                                            data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row">
+												<div class="form-floating form-floating-outline mb-4">
+													<input type="file" class="form-control" id="file-input{{ article.id }}" name="file-input{ article.id }}" accept="image/*" required/>
+													<label for="file-input{{ article.id }}">Ajouter une photo</label>
+												</div>
 
-                                        <div class="row">
-                                            <div class="col-6 d-flex justify-content-center">  <img class="card-img-top" style="height: 200px ;min-height: 200px;max-width: 200px "
-                                                 src="{{ article.image }}" alt="iPhone-bg"/></div>
-                                            <div class="col-6">                                              <label for="nameWithTitle">Canger l'image</label>
-
-                                                <div class="form-floating form-floating-outline mb-4">
-                                                    <input type="file" class="form-control" id="file-input{{ article.id }}" name="file-input{ article.id }}" accept="image/*" required />
-                                                    <label for="file-input{{ article.id }}">Ajouter une photo</label>
-                                                </div>
-
-                                                <div class="form-floating form-floating-outline">
-                                                    <select id="category{{ article.id }}" name="category{{ article.id }}" onchange="souscatinput({{ article.id }})" class="select2 form-select my-3" data-allow-clear="true">
-                                                        {% for category in categories %}
-                                                            {%  if  article.category_id == category.id %}
-                                                                <option style="color:{{ category.color }}"  value="{{ category.id }}" selected>{{ category.name }}</option>
-                                                            {% else %}
-                                                            <option style="color:{{ category.color }}"  value="{{ category.id }}">{{ category.name }}</option>{% endif %}
-                                                        {% endfor %}
-                                                    </select>
-                                                    <label for="multicol-country">Choisir une catégorie</label>
-                                                </div>
-                                                <div class="col-md-6 mb-4 my-3"id="selectsouscat{{ article.id }}" hidden>
-                                                    <div class="form-floating form-floating-outline">
-                                                        <select id="souscategory{{ article.id }}" name="souscat"  class="select2 form-select" data-allow-clear="true">
-                                                        </select>
-                                                        <label for="souscategory">Choisir une sous-catégorie</label>
-                                                    </div>
-                                                </div>
-                                        </div>
+												<div class="form-floating form-floating-outline">
+													<select id="category{{ article.id }}" name="category{{ article.id }}" onchange="souscatinput({{ article.id }})" class="select2 form-select my-3" data-allow-clear="true">
+														{% for category in categories %}
+															{%  if  article.category_id == category.id %}
+																<option style="color:{{ category.color }}" value="{{ category.id }}" selected>{{ category.name }}</option>
+															{% else %}
+																<option style="color:{{ category.color }}" value="{{ category.id }}">{{ category.name }}</option>
+															{% endif %}
+														{% endfor %}
+													</select>
+													<label for="multicol-country">Choisir une catégorie</label>
+												</div>
+												<div class="col-md-6 mb-4 my-3" id="selectsouscat{{ article.id }}" hidden>
+													<div class="form-floating form-floating-outline">
+														<select id="souscategory{{ article.id }}" name="souscat" class="select2 form-select" data-allow-clear="true"></select>
+														<label for="souscategory">Choisir une sous-catégorie</label>
+													</div>
+												</div>
+											</div>
 
 
-                                    </div>
-                                        <div class="col mb-4 mt-2">
-                                            <div class="form-floating form-floating-outline">
-                                                <input
-                                                        type="text"
-                                                        id="title{{ article.id }}"
-                                                        class="form-control"
-                                                        placeholder="{{ article.title }}"
-                                                value="{{ article.title }}"
-                                                name="title{{ article.id }}"/>
-                                                <label for="nameWithTitle">Titre</label>
-                                            </div>
-                                        </div>  <div class="col mb-4 mt-2">
-                                            <div class="form-floating form-floating-outline">
-                                                <input
-                                                        type="text"
-                                                        id="url{{ article.id }}"
-                                                        class="form-control"
-                                                        placeholder="{{ article.title }}"
-                                                value="{{ article.title }}"
-                                                name="url{{ article.id }}"/>
-                                                <label for="nameWithTitle">Url</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row g-2">
-                                        <textarea
-                                                id="description{{ article.id }}"
-                                                class="form-control"
-                                                name="description{{ article.id }}"
-                                                placeholder="{{ article.content }}"
-                                                value="{{ article.content }}"
-                                                style="height: 250px"
-                                                required
-                                        >{{ article.content }}</textarea>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
-                                        Fermer
-                                    </button>
-                                    <button class="btn btn-warning" onclick="processForm(event,{{ article.id }})">Modifier</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Modal edit-->
+										</div>
+										<div class="col mb-4 mt-2">
+											<div class="form-floating form-floating-outline">
+												<input type="text" id="title{{ article.id }}" class="form-control" placeholder="{{ article.title }}" value="{{ article.title }}" name="title{{ article.id }}"/>
+												<label for="nameWithTitle">Titre</label>
+											</div>
+										</div>
+										<div class="col mb-4 mt-2">
+											<div class="form-floating form-floating-outline">
+												<input type="text" id="url{{ article.id }}" class="form-control" placeholder="{{ article.title }}" value="{{ article.title }}" name="url{{ article.id }}"/>
+												<label for="nameWithTitle">Url</label>
+											</div>
+										</div>
+									</div>
+									<div class="row g-2">
+										<textarea id="description{{ article.id }}" class="form-control" name="description{{ article.id }}" placeholder="{{ article.content }}" value="{{ article.content }}" style="height: 250px" required>{{ article.content }}</textarea>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
+										Fermer
+									</button>
+									<button class="btn btn-warning" onclick="processForm(event,{{ article.id }})">Modifier</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Modal edit-->
 
-                    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-5 article" style="height: 500px;">
-                        <div class="row"><div class="col-8"></div>
-                           {% if session.role == 'admin' or session.role == 'moderateur' %} <button class=" col-3 btn btn-warning btn-xs p-1 " data-bs-toggle="modal"
-                                                                           data-bs-target="#modalCenterEdit{{ article.id }}" onclick="souscatinput({{ article.id }})">>Editer
-                            </button>{% endif %}
-                            <div class="col-1"></div> </div>
-                        <a href="{{ article.link }}" target="_blank">
-                        <div class="card h-100 ">
-                            <img class="card-img-top" style="height: 190px ;min-height: 190px "
-                                 src="{{ article.image }}" alt="iPhone-bg"/>
-                            <div class="card-body ">
-                                <div class="d-flex align-items-center justify-content-between "
-                                     style="height: 35px">
-                                    <div class="d-flex ">
-                                        <div class="badge rounded-pill me-3" style="background-color: {{ article.category_color }};font-size: 12px">{{ article.category_name }}</div>
+					<div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-5 article" style="height: 500px;">
+						<div class="row">
+							<div class="col-8"></div>
+							{% if session.role == 'admin' or session.role == 'moderateur' %}
+								<button class=" col-3 btn btn-warning btn-xs p-1 " data-bs-toggle="modal" data-bs-target="#modalCenterEdit{{ article.id }}" onclick="souscatinput({{ article.id }})">>Editer
+								</button>
+							{% endif %}
+							<div class="col-1"></div>
+						</div>
+						<a href="{{ article.link }}" target="_blank">
+							<div class="card h-100 ">
+								<img class="card-img-top" style="height: 190px ;min-height: 190px " src="{{ article.image }}" alt="iPhone-bg"/>
+								<div class="card-body ">
+									<div class="d-flex align-items-center justify-content-between " style="height: 35px">
+										<div class="d-flex ">
+											<div class="badge rounded-pill me-3" style="background-color: {{ article.category_color }};font-size: 12px">{{ article.category_name }}</div>
 
-                                    </div>
-                                    <div>
-                                        <p class="text-muted fw-semibold mt-2">{{ article.submission_date |date("m/d/Y") }}</p>
-                                    </div>
+										</div>
+										<div>
+											<p class="text-muted fw-semibold mt-2">{{ article.submission_date |date("m/d/Y") }}</p>
+										</div>
 
 
-                                </div>                                        <div class="badge  rounded-pill" style="background-color: {{ article.category_color }};font-size: 12px">{{ article.subcategories_name }}</div>
+									</div>
+									<div class="badge  rounded-pill" style="background-color: {{ article.category_color }};font-size: 12px">{{ article.subcategories_name }}</div>
 
-                                <h4 class="mb-1 text-center" style="height: 40px;overflow: hidden;font-size: 18px">{{ article.title }}</h4>
-                                <p class="text-muted my-2" style=" height: 115px; overflow: hidden ;font-size: 14px">
-                                    {{ article.content }}
-                                </p>
-
-
-                                <!-- Events-->
-                        </a>
-                                <div class="row mb-1 col-12 ">
-                                    <div class="col-12 d-flex flex-column justify-content-center  mb-sm-0 mb-3">
-                                        <small class="text-light fw-semibold">Note :{{ article.rating }}</small>
-                                        <div class="col-12 d-flex justify-content-between ">
-                                            {% set voted = false %}
-                                            {% set voteValue = 0 %}
-
-                                            {% for vote in votes %}
-                                                {% if vote.article_id == article.id or vote.article_id == favarticle.id %}
-                                                    {% set voted = true %}
-                                                    {% set voteValue = vote.vote %}
-                                                {% endif %}
-                                            {% endfor %}
-
-                                            {% if voted %}
-                                                <div class="onset-event-ratings" data-idArticle="{{ article.id }}"
-                                                     data-note="{{ voteValue }}"></div>
-                                            {% else %}
-                                                <div class="onset-event-ratings" data-idArticle="{{ article.id }}"
-                                                     data-note="0"></div>
-                                            {% endif %}
-
-                                            <div class="d-flex align-items-center justify-content-end">
-
-                                                {% set liked = false %}
-
-                                                {% for like in likes %}
-                                                    {% if like.article_id == article.id %}          {% set liked = true %}
-                                                    {% endif %}
+									<h4 class="mb-1 text-center" style="height: 40px;overflow: hidden;font-size: 18px">{{ article.title }}</h4>
+									<p class="text-muted my-2" style=" height: 115px; overflow: hidden ;font-size: 14px">
+										{{ article.content }}
+									</p>
 
 
-                                                {% endfor %}   {% if liked %}
-                                                    <span onclick="deletefavorite({{ article.id }})"
-                                                          id="deletefavorite{{ article.id }}">💛</span>
-                                                    <span onclick="addfavorite({{ article.id }})"
-                                                          id="addfavorite{{ article.id }}" hidden>🤍 </span>
-                                                {% else %}
-                                                    <span onclick="deletefavorite({{ article.id }})"
-                                                          id="deletefavorite{{ article.id }}" hidden>💛</span>
-                                                    <span onclick="addfavorite({{ article.id }})"
-                                                          id="addfavorite{{ article.id }}">🤍</span>
+									<!-- Events-->
+								</a>
+								<div class="row mb-1 col-12 ">
+									<div class="col-12 d-flex flex-column justify-content-center  mb-sm-0 mb-3">
+										<small class="text-light fw-semibold">Note :{{ article.rating }}</small>
+										<div class="col-12 d-flex justify-content-between ">
+											{% set voted = false %}
+											{% set voteValue = 0 %}
 
-                                                {% endif %}
+											{% for vote in votes %}
+												{% if vote.article_id == article.id %}
+													{% set voted = true %}
+													{% set voteValue = vote.vote %}
+												{% endif %}
+											{% endfor %}
+
+											{% if voted %}
+												<div class="onset-event-ratings" data-idarticle=" {{ article.id }}" data-note="{{ voteValue }}"></div>
+											{% else %}
+												<div class="onset-event-ratings" data-idarticle="{{ article.id }}" data-note="0"></div>
+											{% endif %}
+
+											<div class="d-flex align-items-center justify-content-end">
+
+												{% set liked = false %}
+
+												{% for like in likes %}
+													{% if like.article_id == article.id %}
+														{% set liked = true %}
+													{% endif %}
 
 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+												{% endfor %}
+												{% if liked %}
+													<span onclick="deletefavorite({{ article.id }})" id="deletefavorite{{ article.id }}">💛</span>
+													<span onclick="addfavorite({{ article.id }})" id="addfavorite{{ article.id }}" hidden>🤍
+													</span>
+												{% else %}
+													<span onclick="deletefavorite({{ article.id }})" id="deletefavorite{{ article.id }}" hidden>💛</span>
+													<span onclick="addfavorite({{ article.id }})" id="addfavorite{{ article.id }}">🤍</span>
 
-                                <!-- /Events-->
-
-                            </div>
-                        </div>
-                    </div>
-                    <!--/ Finance App -->
-                {% endfor %}
-            </div>
-        </div>
-    </div>
+												{% endif %}
 
 
+											</div>
+										</div>
+									</div>
+								</div>
 
+								<!-- /Events-->
+
+							</div>
+						</div>
+					</div>
+					<!--/ Finance App -->
+				{% endfor %}
+			</div>
+		</div>
+	</div>
 
 
 {% endblock %}
 
-        {% block js %}
+{% block js %}
 
 
-
-            <!-- endbuild -->
-
+	<!-- endbuild -->
 
 
-            <!-- endbuild -->
+	<!-- endbuild -->
 
-            <!-- Vendors JS -->
-            <script src="./assets/vendor/libs/rateyo/rateyo.js"></script>
+	<!-- Vendors JS --><script src="./assets/vendor/libs/rateyo/rateyo.js"> </script>
 
-            <!-- Main JS -->
-            <script src="./assets/js/main.js"></script>
+	<!-- Main JS -->
+	<script src="./assets/js/main.js"></script>
 
-            <!-- Page JS -->
-            <script src="./assets/js/extended-ui-star-ratings.js"></script>
-            <!-- Page JS -->
+	<!-- Page JS -->
+	<script src="./assets/js/extended-ui-star-ratings.js"></script>
+	<!-- Page JS -->
 
-            <script>
-                const searchBox = $('#search-box');
-                const articles = $('.article');
-
-                searchBox.on('input', function() {
-                    const searchTerm = searchBox.val().toLowerCase();
-
-                    // parcours chaque élément article
-                    articles.each(function() {
-                        const card = $(this);
-                        const contenttitle = card.find('h4').text().toLowerCase();
-                        const content = card.find('p').text().toLowerCase();
-
-                        // affiche ou masque la carte en fonction de la recherche
-                        if (content.includes(searchTerm) || contenttitle.includes(searchTerm)) {
-                            card.show();
-                        } else {
-                            card.hide();
-                        }
-                    });
-                });
+	<script>
 
 
+$(document).ready(function() {
+  // Vérifier la largeur de la fenêtre au chargement de la page
+  if ($(window).width() > 1200) {
+    // Afficher l'élément
+    $('#sliders').hide();
+  } else {
+    // Cacher l'élément
+    $('#sliders').slow();
+
+  }
+
+  // Vérifier la largeur de la fenêtre lors du redimensionnement
+  $(window).resize(function() {
+    if ($(window).width() > 1200) {
+      // Afficher l'élément
+      $('#sliders').hide();
+    } else {
+      // Cacher l'élément
+      $('#sliders').slow();
+
+    }
+  });
+});
+function Changetextaide(){
+		  if ( $('#textaside').text() == "Ouvrir le slide"){
+			$('#textaside').text("Fermer le slide");
+			$('#totateaside').css('transform', 'rotate(360deg)');
+		  }else{
+						$('#textaside').text("Ouvrir le slide");
+						$('#totateaside').css('transform', 'rotate(180deg)');
+
+		  }
+
+}
+
+	
+		const searchBox = $('#search-box');
+const articles = $('.article');
+
+searchBox.on('input', function () {
+const searchTerm = searchBox.val().toLowerCase();
+
+// parcours chaque élément article
+articles.each(function () {
+const card = $(this);
+const contenttitle = card.find('h4').text().toLowerCase();
+const content = card.find('p').text().toLowerCase();
+
+// affiche ou masque la carte en fonction de la recherche
+if (content.includes(searchTerm) || contenttitle.includes(searchTerm)) {
+card.show();
+} else {
+card.hide();
+}
+});
+});
 
 
-                function souscatinput(idarticle) {
-                    let category = document.getElementById("category"+idarticle);
-                    let souscategory = document.getElementById("souscategory"+idarticle);
-                    let divsouscat = document.getElementById("selectsouscat"+idarticle);
-                    console.log(category);
-
-                    let idcategory = category.value;
+function souscatinput(idarticle) {
+let category = document.getElementById("category" + idarticle);
+let souscategory = document.getElementById("souscategory" + idarticle);
+let divsouscat = document.getElementById("selectsouscat" + idarticle);
 console.log(category);
-                    // Effectuer la requête Ajax
-                    $.ajax({
-                        url: '/show-souscategory',
-                        method: 'POST',
-                        data: {
-                            action: 'show-souscategory',
-                            idcategory: idcategory,
-                        },
-                        dataType: 'json', // Attendre une réponse JSON du serveur
-                        success: function (response) {
-                            if (response.hasOwnProperty('error')) {
-                                // Erreur lors de l'ajout du vote
-                                console.log('Erreur lors de l\'ajout du vote :', response.error);
-                            } else {
-                                souscategory.innerHTML = '';
-                                if (response.length > 0) {
-                                    for (let i = 0; i < response.length; i++) {
-                                        divsouscat.hidden = false;
-                                        let sousCat = response[i];
-                                        souscategory.innerHTML += `<option value="${sousCat.id}">${sousCat.name}</option>`;
-                                    }
 
-                                } else {
-                                    divsouscat.hidden = true ;
-                                }
-                            }
-                        },
-                        error: function (xhr, status, error) {
-                            // Gérer les erreurs lors de la requête Ajax
-                            console.error('Une erreur s\'est produite lors de la requête :', error);
-                        }
-                    });
-                };
+let idcategory = category.value;
+console.log(category);
+// Effectuer la requête Ajax
+$.ajax({
+url: './show-souscategory',
+method: 'POST',
+data: {
+action: 'show-souscategory',
+idcategory: idcategory
+},
+dataType: 'json', // Attendre une réponse JSON du serveur
+success: function (response) {
+if (response.hasOwnProperty('error')) { // Erreur lors de l'ajout du vote
+console.log('Erreur lors de l\'ajout du vote :', response.error);
+} else {
+souscategory.innerHTML = '';
+if (response.length > 0) {
+for (let i = 0; i < response.length; i++) {
+divsouscat.hidden = false;
+let sousCat = response[i];
+souscategory.innerHTML += `<option value="${
+sousCat.id
+}">${
+sousCat.name
+}</option>`;
+}
 
-
-
-
-                function compressAndAddImage(img, formData, callback) {
-                    // Créer un canvas qui permet de dessiner l'image réduite
-                    const canvas = document.createElement("canvas");
-                    // Définir la largeur et la hauteur maximales de l'image
-                    let maxWidth = 640;
-                    let maxHeight = 400;
-
-                    // Récupérer les dimensions de l'image
-                    let width = img.width;
-                    let height = img.height;
-
-                    // Si la largeur de l'image est supérieure à la largeur maximale
-                    if (width > maxWidth) {
-                        // Ajuster la hauteur de l'image de façon proportionnelle
-                        height *= maxWidth / width;
-                        // Mettre la largeur de l'image à la largeur maximale
-                        width = maxWidth;
-                    }
-
-                    // Si la hauteur de l'image est supérieure à la hauteur maximale
-                    if (height > maxHeight) {
-                        // Ajuster la largeur de l'image de façon proportionnelle
-                        width *= maxHeight / height;
-                        // Mettre la hauteur de l'image à la hauteur maximale
-                        height = maxHeight;
-                    }
-
-                    // Fixer la largeur et la hauteur du canvas
-                    canvas.width = width;
-                    canvas.height = height;
-
-                    // Dessiner l'image sur le canvas avec les dimensions réduites
-                    const ctx = canvas.getContext("2d");
-                    ctx.drawImage(img, 0, 0, width, height);
-
-                    // Convertir le canvas en données d'URL pour obtenir l'image compressée
-                    const compressedImageData = canvas.toDataURL("image/jpeg", 0.9);
-
-                    // Ajouter les données de l'image compressée à FormData
-                    formData.append("image", compressedImageData);
-
-                    // Appeler la fonction de rappel
-                    callback();
-                }
-
-                function processForm(event,idarticle) {
-                    event.preventDefault();
-                    console.log(idarticle);
-
-                    const fileInput = document.getElementById("file-input"+idarticle);
-                    console.log(fileInput);
-                    const file = fileInput.files[0];
-
-                    if (!file) {
-                        const formData = new FormData();
-                        formData.append("description", document.querySelector("#description" + idarticle).value);
-                        formData.append("url", document.querySelector("#url" + idarticle).value);
-                        formData.append("category", document.querySelector("#category" + idarticle).value);
-                        formData.append("title", document.querySelector("#title" + idarticle).value);
-                        formData.append("id", idarticle);
-
-                        let souscat = document.querySelector("#souscategory" + idarticle).value;
-                        if (souscat == 0 || souscat === undefined || souscat === "" || souscat === null || souscat == 0) {
-                            souscat = 0;
-                        }
-
-                        formData.append("souscat", souscat);
-
-                        const xhr = new XMLHttpRequest();
-                        xhr.open("POST", "/testtt");
-                        xhr.onload = function () {
-                            if (xhr.status === 200) {
-                                var response = JSON.parse(xhr.response); // Analyser la réponse JSON
-                                console.log(response);
-                            } else {
-                                console.error(xhr.response);
-                            }
-                        };
-                        xhr.send(formData);
-                        window.location.reload();
-                    } else{
+} else {
+divsouscat.hidden = true;
+}
+}
+},
+error: function (xhr, status, error) { // Gérer les erreurs lors de la requête Ajax
+console.error('Une erreur s\'est produite lors de la requête :', error);
+}
+});
+};
 
 
-                    const formData = new FormData();
-                    formData.append("description", document.querySelector("#description"+idarticle).value);
-                    formData.append("url", document.querySelector("#url"+idarticle).value);
-                    formData.append("category", document.querySelector("#category"+idarticle).value);
-                    formData.append("title", document.querySelector("#title"+idarticle).value);
-                    formData.append("id", idarticle);
+function compressAndAddImage(img, formData, callback) { // Créer un canvas qui permet de dessiner l'image réduite
+const canvas = document.createElement("canvas");
+// Définir la largeur et la hauteur maximales de l'image
+let maxWidth = 640;
+let maxHeight = 400;
 
-                    let souscat = document.querySelector("#souscategory"+idarticle).value;
-                    if (souscat == 0 || souscat === undefined || souscat === "" || souscat === null || souscat == 0){
-                        souscat = 0 ;
-                    }
+// Récupérer les dimensions de l'image
+let width = img.width;
+let height = img.height;
 
-                    formData.append("souscat", souscat);
+// Si la largeur de l'image est supérieure à la largeur maximale
+if (width > maxWidth) { // Ajuster la hauteur de l'image de façon proportionnelle
+height *= maxWidth / width;
+// Mettre la largeur de l'image à la largeur maximale
+width = maxWidth;
+}
 
-                    const reader = new FileReader();
-                    reader.onload = function (event) {
-                        const img = new Image();
-                        img.onload = function () {
-                            compressAndAddImage(img, formData, function () {
-                                const xhr = new XMLHttpRequest();
-                                xhr.open("POST", "/testtt");
-                                xhr.onload = function () {
-                                    if (xhr.status === 200) {
-                                        var response = JSON.parse(xhr.response); // Analyser la réponse JSON
-                                        console.log(response);
-                                    } else {
-                                        console.error(xhr.response);
+// Si la hauteur de l'image est supérieure à la hauteur maximale
+if (height > maxHeight) { // Ajuster la largeur de l'image de façon proportionnelle
+width *= maxHeight / height;
+// Mettre la hauteur de l'image à la hauteur maximale
+height = maxHeight;
+}
 
-                                    }
-                                };
-                                xhr.send(formData);
-                            });
-                        };
-                        img.src = event.target.result;
-                    };
-                    reader.readAsDataURL(file);
-                   window.location.reload();
-                }
-                }
+// Fixer la largeur et la hauteur du canvas
+canvas.width = width;
+canvas.height = height;
+
+// Dessiner l'image sur le canvas avec les dimensions réduites
+const ctx = canvas.getContext("2d");
+ctx.drawImage(img, 0, 0, width, height);
+
+// Convertir le canvas en données d'URL pour obtenir l'image compressée
+const compressedImageData = canvas.toDataURL("image/jpeg", 0.9);
+
+// Ajouter les données de l'image compressée à FormData
+formData.append("image", compressedImageData);
+
+// Appeler la fonction de rappel
+callback();
+}
+
+function processForm(event, idarticle) {
+event.preventDefault();
+console.log(idarticle);
+
+const fileInput = document.getElementById("file-input" + idarticle);
+console.log(fileInput);
+const file = fileInput.files[0];
+
+if (! file) {
+const formData = new FormData();
+formData.append("description", document.querySelector("#description" + idarticle).value);
+formData.append("url", document.querySelector("#url" + idarticle).value);
+formData.append("category", document.querySelector("#category" + idarticle).value);
+formData.append("title", document.querySelector("#title" + idarticle).value);
+formData.append("id", idarticle);
+
+let souscat = document.querySelector("#souscategory" + idarticle).value;
+if (souscat == 0 || souscat === undefined || souscat === "" || souscat === null || souscat == 0) {
+souscat = 0;
+}
+
+formData.append("souscat", souscat);
+
+const xhr = new XMLHttpRequest();
+xhr.open("POST", "/testtt");
+xhr.onload = function () {
+if (xhr.status === 200) {
+var response = JSON.parse(xhr.response); // Analyser la réponse JSON
+console.log(response);
+} else {
+console.error(xhr.response);
+}
+};
+xhr.send(formData);
+window.location.reload();
+} else {
 
 
+const formData = new FormData();
+formData.append("description", document.querySelector("#description" + idarticle).value);
+formData.append("url", document.querySelector("#url" + idarticle).value);
+formData.append("category", document.querySelector("#category" + idarticle).value);
+formData.append("title", document.querySelector("#title" + idarticle).value);
+formData.append("id", idarticle);
 
-            </script>
+let souscat = document.querySelector("#souscategory" + idarticle).value;
+if (souscat == 0 || souscat === undefined || souscat === "" || souscat === null || souscat == 0) {
+souscat = 0;
+}
 
-            <script src="./assets/js/category/articles/votestar.js"></script>
-            <script src="./assets/js/category/articles/addfavorite.js"></script>
-            <script src="./assets/js/category/articles/deletefavorite.js"></script>
-            <script src="./assets/js/form-basic-inputs.js"></script>
+formData.append("souscat", souscat);
+
+const reader = new FileReader();
+reader.onload = function (event) {
+const img = new Image();
+img.onload = function () {
+compressAndAddImage(img, formData, function () {
+const xhr = new XMLHttpRequest();
+xhr.open("POST", "./testtt");
+xhr.onload = function () {
+if (xhr.status === 200) {
+var response = JSON.parse(xhr.response); // Analyser la réponse JSON
+console.log(response);
+} else {
+console.error(xhr.response);
+
+}
+};
+xhr.send(formData);
+});
+};
+img.src = event.target.result;
+};
+reader.readAsDataURL(file);
+window.location.reload();
+}
+}
+	</script>
+
+	<script src="./assets/js/category/articles/votestar.js"></script>
+	<script src="./assets/js/category/articles/addfavorite.js"></script>
+	<script src="./assets/js/category/articles/deletefavorite.js"></script>
+	<script src="./assets/js/form-basic-inputs.js"></script>
+	<script>
+		// Sélectionnez tous les éléments ayant la classe "example"
+setTimeout(function () {
+$(".template-customizer-open-btn").hide();
+}, 000001);
 
 
-        {% endblock %}
+	</script>
+
+{% endblock %}

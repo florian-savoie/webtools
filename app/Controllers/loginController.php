@@ -1,6 +1,6 @@
 <?php
 namespace App\Controllers;
-include '/home/webtools/app/Libraries/Objettest.php';
+/* include '/home/webtools/app/Libraries/Objettest.php';*/
 
 use Config\Database;
 use Libraries\Objettest;
@@ -52,7 +52,7 @@ class loginController extends BaseController
 /*  echo App::TEST ; 
 die();  */
 if (!empty($_SESSION['role'])) {
-    header("Location: /");
+    header("Location: ./");
     exit(0);
 }
 
@@ -78,7 +78,7 @@ $message = "";
                     $this->session->setFlashData('message', "success");
 
                     // Rediriger vers la page de connexion ou une autre page appropriée
-                    header("Location: /");
+                    header("Location: ./");
                     exit();
 
                 } else {

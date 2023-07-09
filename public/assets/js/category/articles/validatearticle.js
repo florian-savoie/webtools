@@ -20,7 +20,7 @@ console.log(valeur);
         statusElement.style.color = "red";
     }
     $.ajax({
-        url: '/validatearticle',
+        url: './validatearticle',
         method: 'POST',
         data: {
             hidden:  valeur,

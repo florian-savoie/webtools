@@ -50,7 +50,7 @@ class messagerieController extends BaseController
         if (!empty($_SESSION['role'])) {
             $sessionExistsAndTrue = true;
         }else {
-            header("Location: /showarticle");
+            header("Location: ./showarticle");
             exit(0);
         }
 
@@ -97,7 +97,7 @@ class messagerieController extends BaseController
                     $builder = $this->db->table('messages_prives');
                     $insert = $builder->insert($data);
                     $this->session->setFlashData('message', "success");
-                    header("Location: /messagerie");
+                    header("Location: ./messagerie");
                     exit();
                 } else {
                     $this->session->setFlashData('message', "error");
@@ -122,7 +122,7 @@ class messagerieController extends BaseController
             $builder = $this->db->table('messages_prives');
             $insert = $builder->insert($data);
             $this->session->setFlashData('message', "success");
-            header("Location: /messagerie");
+            header("Location: ./messagerie");
             exit();
 
         }

@@ -51,7 +51,7 @@ class chatController extends BaseController
         if (!empty($_SESSION['role'])) {
             $sessionExistsAndTrue = true;
         }else {
-            header("Location: /showarticle");
+            header("Location: ./showarticle");
             exit(0);
         }
         $autoriser = $this->session->get('Autoriser');

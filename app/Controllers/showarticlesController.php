@@ -54,7 +54,7 @@ class showarticlesController extends BaseController
         if ( $autoriser === true) {
             $sessionExistsAndTrue = true;
         }else {
-            header("Location: /login");
+            header("Location: ./login");
             exit(0);
         }
 
@@ -117,9 +117,9 @@ class showarticlesController extends BaseController
         }else if (isset($_GET['category']) == "favoris" ){
             $category_id = (int)$_GET['category'];
 
-            $builder = $this->db->table('favorites');
-            $builder->select('favorites.*, articles.title as title , articles.link as link , articles.image as image, articles.content as content, articles.title as title, articles.submission_date as submission_date,categories.name as category_name, categories.color as category_color,subcategories.name as subcategories_name');
-            $builder->join('articles', 'favorites.article_id = articles.id', 'left');
+            $builder = $this->db->table('articles');
+            $builder->select('articles.id as id,articles.rating as rating, articles.title as title , articles.link as link , articles.image as image, articles.content as content, articles.title as title, articles.submission_date as submission_date,categories.name as category_name, categories.color as category_color,subcategories.name as subcategories_name');
+            $builder->join('favorites', 'favorites.article_id = articles.id', 'left');
             $builder->join('categories', 'categories.id = articles.category_id', 'left');
             $builder->join('subcategories', 'subcategories.id = articles.subcategory_id', 'left');
             $builder->where('favorites.user_id', $idUser);
@@ -168,7 +168,7 @@ class showarticlesController extends BaseController
         if ( $autoriser === true && $_SESSION['role'] == 'admin') {
             $sessionExistsAndTrue = true;
         }else {
-            header("Location: /login");
+            header("Location: ./login");
             exit(0);
         }
 
@@ -259,10 +259,18 @@ class showarticlesController extends BaseController
             $result = $query->getResultArray();
 
             if($result){
+
+                $dernierVote = $result[0]['vote'];
                 $data = ['vote' => $note
                 ];
                 $updated = $this->db->table('votes')->update($data, ['article_id' => $idarticle, 'user_id' => $_SESSION['iduser'] ]);
+
+
+                $sql = "UPDATE articles SET rating = ((rating * vote_ranted) - $dernierVote + $note) / vote_ranted WHERE id = ?";
+                $updated = $this->db->query($sql, [$idarticle]);
+
             }else {
+
                 $data = [
                     'article_id' => $idarticle,
                     'vote' => $note,
@@ -270,6 +278,10 @@ class showarticlesController extends BaseController
                 ];
                 $builder = $this->db->table('votes');
                 $insert = $builder->insert($data);
+                $sql = "UPDATE articles SET rating = CASE WHEN vote_ranted = 0 THEN $note ELSE (rating * vote_ranted + $note) / (vote_ranted + 1) END, vote_ranted = vote_ranted + 1 WHERE id = ?";
+                $updated = $this->db->query($sql, [$idarticle]);
+                
+
             }
 
 

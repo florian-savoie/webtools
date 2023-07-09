@@ -39,11 +39,10 @@ class logoutController extends BaseController
     public function logout()
     {
         // Détruire la session existante
-        session_start();
         session_destroy();
 
         // Rediriger vers la page de connexion ou une autre page appropriée
-        header("Location: /");
+        header("Location: ./");
         exit();
     }
 }

@@ -213,7 +213,7 @@
 <script src="./assets/vendor/libs/hammer/hammer.js"></script>
 <script src="./assets/vendor/libs/i18n/i18n.js"></script>
 <script src="./assets/vendor/libs/typeahead-js/typeahead.js"></script>
-<link rel="stylesheet" href="../assets/vendor/css/pages/app-chat.css"/>
+<link rel="stylesheet" href="./assets/vendor/css/pages/app-chat.css"/>
 
 <script src="./assets/vendor/js/menu.js"></script>
 <!-- endbuild -->
@@ -232,7 +232,6 @@
 <!-- Page JS -->
 <script src="./assets/js/ui-toasts.js"></script>
 <script>
-
     const li = document.querySelectorAll('.marquee-item'); // Sélectionne les éléments li représentant les messages
     let totalWidth = 0;
 
@@ -286,11 +285,11 @@
     });
     // Définir la fonction pour ajouter le message
     function sendMessage() {
+
         let test = $('#inputchat').val();
-        console.log(test);
         $('#inputchat').val('');
         $.ajax({
-            url: '/addchat',
+            url: './addchat',
             type: 'post',
             dataType: 'json',
             data: {
@@ -306,7 +305,7 @@
             error: function(xhr, status, error) {
                 console.log(error);
                 // Gérer l'erreur
-            %}
+            }
         });
         console.log('test');
     }
@@ -314,7 +313,7 @@
     let idUser = "";
     $.ajax({
         type: 'GET',
-        url: '/getSessionData', // endpoint créé dans l'étape précédente
+        url: './getSessionData', // endpoint créé dans l'étape précédente
         success: function(data) {
             // data contient les données de session récupérées
             var mesDonnees = JSON.parse(data);
@@ -330,7 +329,7 @@
     function getMessages() {
         let urlchat = $('#chaturl');
         $.ajax({
-            url: '/get-messages',
+            url: './get-messages',
             method: 'GET',
             success: function(response) {
                 var messages = JSON.parse(response);

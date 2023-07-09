@@ -19,7 +19,7 @@ if (onSetEvents.length > 0) {
                 console.log($(this).data('idarticle'));
                 // Effectuer la requête Ajax
                 $.ajax({
-                    url: '/votestar',
+                    url: './votestar',
                     method: 'POST',
                     data: {
                         note: data.rating,

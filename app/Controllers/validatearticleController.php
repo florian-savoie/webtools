@@ -52,7 +52,7 @@ class validatearticleController extends BaseController
         if (!empty($_SESSION['role']) && $_SESSION['role'] == 'admin' || $_SESSION['role'] == 'moderateur') {
             $sessionExistsAndTrue = true;
         }else {
-            header("Location: /showarticle");
+            header("Location: ./showarticle");
             exit(0);
         }
 
@@ -95,7 +95,7 @@ class validatearticleController extends BaseController
             $builder = $this->db->table('articles');
             $builder->where('id', $_POST['idDeleteArticle']);
             $builder->delete();
-            header("Location: /validatearticle");
+            header("Location: ./validatearticle");
             exit(0);
         }
 

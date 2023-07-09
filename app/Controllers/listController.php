@@ -52,7 +52,7 @@ class listController extends BaseController
         if (!empty($_SESSION['role']) && $_SESSION['role'] == 'admin' ) {
             $sessionExistsAndTrue = true;
         }else {
-            header("Location: /showarticle");
+            header("Location: ./showarticle");
             exit(0);
         }
 
