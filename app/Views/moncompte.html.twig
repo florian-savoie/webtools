@@ -1,204 +1,206 @@
 {% set title = 'client acceuil' %}
 {% extends "./layout/layout_nav.html.twig" %}
 {% block css %}
-    <link rel="stylesheet" href="./assets/vendor/css/pages/ui-carousel.css"/>
-    <link rel="stylesheet" href="./assets/vendor/libs/swiper/swiper.css"/>
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<link rel="stylesheet" href="./assets/vendor/css/pages/ui-carousel.css"/>
+	<link
+	rel="stylesheet" href="./assets/vendor/libs/swiper/swiper.css"/>
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
-    <!-- Flipster CSS -->
-    <link rel="stylesheet" href="dist/jquery.flipster.min.css">
+	<!-- Flipster CSS -->
+	<link
+	rel="stylesheet" href="dist/jquery.flipster.min.css">
 
-    <!-- Flipster Js -->
-    <script src="dist/jquery.flipster.min.js"></script>
+	<!-- Flipster Js -->
+	<script src="dist/jquery.flipster.min.js"></script>
 {% endblock %}
 {% block contenu %}
-    <!-- Content -->
+	<!-- Content -->
 
-    <div class="container-xxl flex-grow-1 container-p-y mt-5">
-        <h4 class="fw-bold py-3 mb-4">Parametre du compte</h4>
+	<div class="container-xxl flex-grow-1 container-p-y mt-5">
+		<h4 class="fw-bold py-3 mb-4">Parametre du compte</h4>
 
-        <div class="row">
-            <div class="col-md-12">
-                <ul class="nav nav-pills flex-column flex-md-row mb-3 gap-2 gap-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="javascript:void(0);"
-                        ><i class="mdi mdi-account-outline mdi-20px me-1"></i>Votre compte</a
-                        >
-                    </li>
-                          <li class="nav-item">
-                        <a class="nav-link" href="./change-password"
-                        ><i class="mdi mdi-lock-open-outline mdi-20px me-1"></i>Mots de passe</a
-                        >
-                    </li>
-               <!-- Account     <li class="nav-item">
-                        <a class="nav-link" href="pages-account-settings-billing.html"
-                        ><i class="mdi mdi-bookmark-outline mdi-20px me-1"></i>activités</a
-                        >
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="pages-account-settings-connections.html"
-                        ><i class="mdi mdi-link mdi-20px me-1"></i>Liste d'amis</a
-                        >
-                    </li>-->   
-                </ul>
-
-
-                <div class="card mb-4">
-                    <h4 class="card-header">Details du profil</h4>
-                    <h4 class="card-header">{{ user.profile_image }}</h4>
-                    <!-- Account -->
-                    <div class="card-body">
-                        <div class="row mt-2 gy-4">
-                            <div class="col-md-12 col-lg-6 mt-5">
-                                <h2 class=" text-center"> Changer votre photo de profil</h2>
-                                <div class="d-flex align-items-start align-items-sm-center gap-4 "  style="background-image: url('../assets/img/webtools/panel.webp');height: 300px;background-position: center;">
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="nav nav-pills flex-column flex-md-row mb-3 gap-2 gap-lg-0">
+					<li class="nav-item">
+						<a class="nav-link active" href="javascript:void(0);">
+							<i class="mdi mdi-account-outline mdi-20px me-1"></i>Votre compte</a>
+						<!--  </li>
+						                          <li class="nav-item">
+						                        <a class="nav-link" href="./change-password"
+						                        ><i class="mdi mdi-lock-open-outline mdi-20px me-1"></i>Mots de passe</a
+						                        >
+						                    </li>
+						                Account     <li class="nav-item">
+						                        <a class="nav-link" href="pages-account-settings-billing.html"
+						                        ><i class="mdi mdi-bookmark-outline mdi-20px me-1"></i>activités</a
+						                        >
+						                    </li>
+						                    <li class="nav-item">
+						                        <a class="nav-link" href="pages-account-settings-connections.html"
+						                        ><i class="mdi mdi-link mdi-20px me-1"></i>Liste d'amis</a
+						                        >
+						                    </li>-->
+					</li>
+				</ul>
 
 
-                                    <img src="Data/img_profil_users/{{ user[0].profile_image }}" alt="user-avatar" class="d-block w-px-120 h-px-120 rounded" id="uploadedAvatar"/>
-
-                                    <div class="button-wrapper">
-                                        <form method="post" enctype="multipart/form-data">
-
-
-                                            <div class="input-group">
-                                                <input type="file" class="form-control" id="upload" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="PhotoProfil">
-                                                <button class="btn btn-primary waves-effect" type="submit" id="inputGroupFileAddon04" name="postPhotoProfil">Envoyer</button>
-                                            </div> <div class="text-dark " style="background-color: rgba(224, 227, 231, 0.5)"><strong>Format accepté : JPG . Taille maximale</strong>
-                                                : 800 Ko
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
- <hr>
-                             <!--   <div class="col-6">
-                                    <div class="card-body pt-2 mt-1">
-                                        <form id="formAccountSettings" method="POST" onsubmit="return false">
-                                            <div class="form-floating form-floating-outline">
-                                                <input class="form-control" type="email" id="email" name="email"
-                                                       placeholder="modifier l'adresse email"/>
-                                                <label for="email">E-mail</label>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-
-                                <div class="mt-4">
-                                    <button type="submit" class="btn btn-primary me-2">Sauvegarder les changements
-                                    </button>
-                                </div>-->
-                            </div>
-                            <div class="col-md-12 col-lg-6">
-                                <!-- User Card -->
-                                <div class="card mb-5">
-                                    <div class="card-body">
-                                        <div class="user-avatar-section">
-                                            <div class="d-flex align-items-center flex-column">
-                                                <h4>Bonjour {{ user[0].pseudo }}</h4>
-
-                                                <img
-                                                        class="img-fluid rounded mb-3 mt-4"
-                                                        src="Data/img_profil_users/{{ user[0].profile_image }}"
-                                                        height="120"
-                                                        width="120"
-                                                        alt="User avatar" style="border-radius: 50%;border: black solid 1px"/>
-                                                <div class="user-info text-center">
-                                                    <span class="badge bg-label-danger">{{ user[0].role }}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-between flex-wrap my-2 py-3">
-                                            <div class="d-flex align-items-center me-4 mt-3 gap-3">
-                                                <div class="avatar">
-                                                    <div class="avatar-initial bg-label-primary rounded">
-                                                        <i class="mdi mdi-check mdi-24px"></i>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <h4 class="mb-0 fw-normal">{{ user[0].article_count }}</h4>
-                                                    <span>articles publié</span>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <h5 class="pb-3 border-bottom mb-3">information</h5>
-                                        <div class="info-container">
-                                            <ul class="list-unstyled mb-4">
-                                                <li class="mb-3">
-                                                    <span class="fw-semibold text-heading me-2">pseudo</span>
-                                                    <span>{{ user[0].pseudo }}</span>
-                                                </li>
-                                                <li class="mb-3">
-                                                    <span class="fw-semibold text-heading me-2">Email:</span>
-                                                    <span>{{ user[0].email }}</span>
-                                                </li>
-                                                <li class="mb-3">
-                                                    <span class="fw-semibold text-heading me-2">role</span>
-                                                    <span class="badge bg-label-success">{{ user[0].role }}</span>
-                                                </li>    <li class="mb-3">
-                                                    <span class="fw-semibold text-heading me-2">Propagande publié</span>
-                                                    <span class="badge bg-label-success">{{ user[0].propagande_count }}</span>
-                                                </li>
-                                                <li class="mb-3">
-                                                    <span class="fw-semibold text-heading me-2">date d'inscription</span>
-                                                    <span>{{ user[0].registration_date }}</span>
-                                                </li>
-
-                                            </ul>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /User Card -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
- <!-- /Delete count
-                <div class="card">
-                    <h5 class="card-header">Suprimer votre compte</h5>
-                    <div class="card-body">
-                        <div class="mb-3 col-12 mb-0">
-                            <div class="alert alert-warning">
-                                <h6 class="alert-heading mb-1">etes vous sur de vouloir supprimer votre compte?</h6>
-                                <p class="mb-0">la supression du compte est irreversible .</p>
-                            </div>
-                        </div>
-                        <form id="formAccountDeactivation" onsubmit="return false">
-                            <div class="form-check mb-3">
-                                <input
-                                        class="form-check-input"
-                                        type="checkbox"
-                                        name="accountActivation"
-                                        id="accountActivation"/>
-                                <label class="form-check-label" for="accountActivation"
-                                >je confirme la supression du compte</label
-                                >
-                            </div>
-                            <button type="submit" class="btn btn-danger deactivate-account">suprimer le compte</button>
-                        </form>
-                    </div>
-                </div> -->
-            </div>
-        </div>
-    </div>
-    <!-- / Content -->
+				<div class="card mb-4">
+					<h4 class="card-header">Details du profil</h4>
+					<h4 class="card-header">{{ user.profile_image }}</h4>
+					<!-- Account -->
+					<div class="card-body">
+						<div class="row mt-2 gy-4">
+							<div class="col-md-12 col-lg-6 mt-5">
+								<h2 class=" text-center">
+									Changer votre photo de profil</h2>
+								<div class="d-flex align-items-start align-items-sm-center gap-4 " style="background-image: url('./assets/img/webtools/panel.webp');height: 300px;background-position: center;">
 
 
+									<img src="Data/img_profil_users/{{ user[0].profile_image }}" alt="user-avatar" class="d-block w-px-120 h-px-120 rounded" id="uploadedAvatar"/>
+
+									<div class="button-wrapper ">
+										<form method="post" enctype="multipart/form-data">
+
+
+											<div class="input-group">
+												<input type="file" class="form-control" id="upload" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="PhotoProfil">
+												<button class="btn btn-primary waves-effect btn-sm" type="submit" id="inputGroupFileAddon04" name="postPhotoProfil">Envoyer</button>
+											</div>
+											<div class="text-dark " style="background-color: rgba(224, 227, 231, 0.5)">
+												<strong>Format accepté : JPG . Taille maximale</strong>
+												: 800 Ko
+											</div>
+										</form>
+									</div>
+								</div>
+								<hr>
+								<!--   <div class="col-6">
+								                                    <div class="card-body pt-2 mt-1">
+								                                        <form id="formAccountSettings" method="POST" onsubmit="return false">
+								                                            <div class="form-floating form-floating-outline">
+								                                                <input class="form-control" type="email" id="email" name="email"
+								                                                       placeholder="modifier l'adresse email"/>
+								                                                <label for="email">E-mail</label>
+								                                            </div>
+								                                        </form>
+								                                    </div>
+								                                </div>
+								
+								                                <div class="mt-4">
+								                                    <button type="submit" class="btn btn-primary me-2">Sauvegarder les changements
+								                                    </button>
+								                                </div>-->
+							</div>
+							<div
+								class="col-md-12 col-lg-6">
+								<!-- User Card -->
+								<div class="card mb-5">
+									<div class="card-body">
+										<div class="user-avatar-section">
+											<div class="d-flex align-items-center flex-column">
+												<h4>Bonjour
+													{{ user[0].pseudo }}</h4>
+
+												<img class="img-fluid rounded mb-3 mt-4" src="Data/img_profil_users/{{ user[0].profile_image }}" height="120" width="120" alt="User avatar" style="border-radius: 50%;border: black solid 1px"/>
+												<div class="user-info text-center">
+													<span class="badge bg-label-danger">{{ user[0].role }}</span>
+												</div>
+											</div>
+										</div>
+										<div class="d-flex justify-content-between flex-wrap my-2 py-3">
+											<div class="d-flex align-items-center me-4 mt-3 gap-3">
+												<div class="avatar">
+													<div class="avatar-initial bg-label-primary rounded">
+														<i class="mdi mdi-check mdi-24px"></i>
+													</div>
+												</div>
+												<div>
+													<h4 class="mb-0 fw-normal">{{ user[0].article_count }}</h4>
+													<span>articles publié</span>
+												</div>
+											</div>
+
+										</div>
+										<h5 class="pb-3 border-bottom mb-3">information</h5>
+										<div class="info-container">
+											<ul class="list-unstyled mb-4">
+												<li class="mb-3">
+													<span class="fw-semibold text-heading me-2">pseudo</span>
+													<span>{{ user[0].pseudo }}</span>
+												</li>
+												<li class="mb-3">
+													<span class="fw-semibold text-heading me-2">Email:</span>
+													<span>{{ user[0].email }}</span>
+												</li>
+												<li class="mb-3">
+													<span class="fw-semibold text-heading me-2">role</span>
+													<span class="badge bg-label-success">{{ user[0].role }}</span>
+												</li>
+												<li class="mb-3">
+													<span class="fw-semibold text-heading me-2">Propagande publié</span>
+													<span class="badge bg-label-success">{{ user[0].propagande_count }}</span>
+												</li>
+												<li class="mb-3">
+													<span class="fw-semibold text-heading me-2">date d'inscription</span>
+													<span>{{ user[0].registration_date }}</span>
+												</li>
+
+											</ul>
+
+										</div>
+									</div>
+								</div>
+								<!-- /User Card -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /Delete count
+				                <div class="card">
+				                    <h5 class="card-header">Suprimer votre compte</h5>
+				                    <div class="card-body">
+				                        <div class="mb-3 col-12 mb-0">
+				                            <div class="alert alert-warning">
+				                                <h6 class="alert-heading mb-1">etes vous sur de vouloir supprimer votre compte?</h6>
+				                                <p class="mb-0">la supression du compte est irreversible .</p>
+				                            </div>
+				                        </div>
+				                        <form id="formAccountDeactivation" onsubmit="return false">
+				                            <div class="form-check mb-3">
+				                                <input
+				                                        class="form-check-input"
+				                                        type="checkbox"
+				                                        name="accountActivation"
+				                                        id="accountActivation"/>
+				                                <label class="form-check-label" for="accountActivation"
+				                                >je confirme la supression du compte</label
+				                                >
+				                            </div>
+				                            <button type="submit" class="btn btn-danger deactivate-account">suprimer le compte</button>
+				                        </form>
+				                    </div>
+				                </div> -->
+			</div>
+		</div>
+	</div>
+	<!-- / Content -->
 
 
 {% endblock %}
 
-    {% block js %}
+{% block js %}
 
 
-        <script src="./assets/vendor/assets/js/form-basic-inputs.js"></script>
-        <script src="./assets/vendor/assets/js/extended-ui-timeline.js"></script>
-        <script src="./assets/vendor/libs/swiper/swiper.js"></script>
-<script>
-// Sélectionnez tous les éléments ayant la classe "example"
-setTimeout(function() {
-  $(".template-customizer-open-btn").hide();
+	<script src="./assets/vendor/assets/js/form-basic-inputs.js"></script>
+	<script src="./assets/vendor/assets/js/extended-ui-timeline.js"></script>
+	<script src="./assets/vendor/libs/swiper/swiper.js"></script>
+	<script>
+		// Sélectionnez tous les éléments ayant la classe "example"
+setTimeout(function () {
+$(".template-customizer-open-btn").hide();
 }, 000001);
-</script>
-    {% endblock %}
+	</script>
+{% endblock %}
+

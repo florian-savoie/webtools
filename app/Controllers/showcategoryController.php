@@ -51,7 +51,7 @@ class ShowcategoryController extends BaseController
         if (!empty($_SESSION['role']) && $_SESSION['role'] == 'admin' || $_SESSION['role'] == 'moderateur') {
             $sessionExistsAndTrue = true;
         }else {
-            header("Location: ./showarticle");
+            header("Location: ./");
             exit(0);
         }
         $role = $_SESSION["role"];

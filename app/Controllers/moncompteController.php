@@ -53,7 +53,7 @@ class moncompteController extends BaseController
         if (!empty($_SESSION['role'])) {
             $sessionExistsAndTrue = true;
         }else {
-            header("Location: ./showarticle");
+            header("Location: ./");
             exit(0);
         }
 
