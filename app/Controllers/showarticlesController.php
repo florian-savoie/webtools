@@ -56,80 +56,53 @@ class showarticlesController extends BaseController
             $sessionExistsAndTrue = true;
         } else {
             $sessionExistsAndTrue = false;
-        $builder = $this->db->table('categories');
-        $query = $builder->get();
-        $categories = $query->getResultArray();
-
-        $builder = $this->db->table('subcategories');
-        $query = $builder->get();
-        $souscategories = $query->getResultArray();
-
-        if (isset($_GET['category']) && isset($_GET['souscat'])) {
-            if (!empty($_GET['pages'])) {
-                $show = (int) ($_GET['pages'] * 18) - 18;
-            } else {
-                $show = 0;
-            }
-            $category_id = (int) $_GET['category'];
-            $subcategory_id = (int) $_GET['souscat'];
-
-            $builder = $this->db->table('articles');
-            $builder->select('articles.*, categories.name as category_name, categories.color as category_color');
-            $builder->join('categories', 'categories.id = articles.category_id', 'left');
-            $builder->where('category_id', $category_id);
-            $builder->where('subcategory_id', $subcategory_id);
-            $builder->orderBy('id', 'DESC');
-
-            $queryTotal = clone $builder; // Clonez le constructeur de requête pour obtenir le nombre total d'articles
-            $numArticles = $queryTotal->countAllResults();
-
-            $builder->limit($articlesPage, $show); // Limite les résultats à 18 éléments, en commençant par l'élément 18
+            $builder = $this->db->table('categories');
             $query = $builder->get();
-            $articles = $query->getResultArray();
+            $categories = $query->getResultArray();
 
-            $pages = ceil($numArticles / 18); // Calcule le nombre total de pages en fonction du nombre total d'articles
-        } else if (isset($_GET['category']) && $_GET['category'] != "favoris") {
-            if (!empty($_GET['pages'])) {
-                $show = (int) ($_GET['pages'] * 18) - 18;
-            } else {
-                $show = 0;
-            }
-            $category_id = (int) $_GET['category'];
-            $category_id = (int) $_GET['category'];
-
-            $builder = $this->db->table('articles');
-            $builder->select('articles.*, categories.name as category_name, categories.color as category_color');
-            $builder->join('categories', 'categories.id = articles.category_id', 'left');
-            $builder->where('is_approved', 1);
-            $builder->where('category_id', $category_id);
-            $builder->orderBy('id', 'DESC');
-
-            $queryTotal = clone $builder; // Clonez le constructeur de requête pour obtenir le nombre total d'articles
-            $numArticles = $queryTotal->countAllResults();
-
-            $builder->limit($articlesPage, $show); // Limite les résultats à 18 éléments, en commençant par l'élément 18
+            $builder = $this->db->table('subcategories');
             $query = $builder->get();
-            $articles = $query->getResultArray();
+            $souscategories = $query->getResultArray();
 
-            $pages = ceil($numArticles / 18); // Calcule le nombre total de pages en fonction du nombre total d'articles
-
-
-
-
-        }  else {
-            if (empty($articles)) { // Ajout de la vérification si $articles est vide
-
+            if (isset($_GET['category']) && isset($_GET['souscat'])) {
                 if (!empty($_GET['pages'])) {
                     $show = (int) ($_GET['pages'] * 18) - 18;
                 } else {
                     $show = 0;
                 }
+                $category_id = (int) $_GET['category'];
+                $subcategory_id = (int) $_GET['souscat'];
+
                 $builder = $this->db->table('articles');
-                $builder->select('articles.*, categories.name as category_name, categories.color as category_color, subcategories.name as subcategories_name');
+                $builder->select('articles.*, categories.name as category_name, categories.color as category_color');
                 $builder->join('categories', 'categories.id = articles.category_id', 'left');
-                $builder->join('subcategories', 'subcategories.id = articles.subcategory_id', 'left');
-                $builder->where('articles.is_approved', 1);
-                $builder->orderBy('articles.id', 'DESC');
+                $builder->where('category_id', $category_id);
+                $builder->where('subcategory_id', $subcategory_id);
+                $builder->orderBy('id', 'DESC');
+
+                $queryTotal = clone $builder; // Clonez le constructeur de requête pour obtenir le nombre total d'articles
+                $numArticles = $queryTotal->countAllResults();
+
+                $builder->limit($articlesPage, $show); // Limite les résultats à 18 éléments, en commençant par l'élément 18
+                $query = $builder->get();
+                $articles = $query->getResultArray();
+
+                $pages = ceil($numArticles / 18); // Calcule le nombre total de pages en fonction du nombre total d'articles
+            } else if (isset($_GET['category']) && $_GET['category'] != "favoris") {
+                if (!empty($_GET['pages'])) {
+                    $show = (int) ($_GET['pages'] * 18) - 18;
+                } else {
+                    $show = 0;
+                }
+                $category_id = (int) $_GET['category'];
+                $category_id = (int) $_GET['category'];
+
+                $builder = $this->db->table('articles');
+                $builder->select('articles.*, categories.name as category_name, categories.color as category_color');
+                $builder->join('categories', 'categories.id = articles.category_id', 'left');
+                $builder->where('is_approved', 1);
+                $builder->where('category_id', $category_id);
+                $builder->orderBy('id', 'DESC');
 
                 $queryTotal = clone $builder; // Clonez le constructeur de requête pour obtenir le nombre total d'articles
                 $numArticles = $queryTotal->countAllResults();
@@ -140,22 +113,49 @@ class showarticlesController extends BaseController
 
                 $pages = ceil($numArticles / 18); // Calcule le nombre total de pages en fonction du nombre total d'articles
 
-            }
-        }
-        $existingContent = file_get_contents("assets/json/propagande/propagande.json");
-        // Convertir le contenu existant en tableau associatif ou objet
-        $existingData = json_decode($existingContent, true);
-        return $this->twig->render('showarticles.html.twig', [
-            'sessionExistsAndTrue' => $sessionExistsAndTrue,
-            'articles' => $articles,
-            'categories' => $categories,
-            'souscategories' => $souscategories,
-            'propagande' => $existingData['Propagande'],
-            'pages' => $pages,
-            'numberpage' => $_GET['pages'] ?? 1
 
-        ]);
-        die();
+
+
+            } else {
+                if (empty($articles)) { // Ajout de la vérification si $articles est vide
+
+                    if (!empty($_GET['pages'])) {
+                        $show = (int) ($_GET['pages'] * 18) - 18;
+                    } else {
+                        $show = 0;
+                    }
+                    $builder = $this->db->table('articles');
+                    $builder->select('articles.*, categories.name as category_name, categories.color as category_color, subcategories.name as subcategories_name');
+                    $builder->join('categories', 'categories.id = articles.category_id', 'left');
+                    $builder->join('subcategories', 'subcategories.id = articles.subcategory_id', 'left');
+                    $builder->where('articles.is_approved', 1);
+                    $builder->orderBy('articles.id', 'DESC');
+
+                    $queryTotal = clone $builder; // Clonez le constructeur de requête pour obtenir le nombre total d'articles
+                    $numArticles = $queryTotal->countAllResults();
+
+                    $builder->limit($articlesPage, $show); // Limite les résultats à 18 éléments, en commençant par l'élément 18
+                    $query = $builder->get();
+                    $articles = $query->getResultArray();
+
+                    $pages = ceil($numArticles / 18); // Calcule le nombre total de pages en fonction du nombre total d'articles
+
+                }
+            }
+            $existingContent = file_get_contents("assets/json/propagande/propagande.json");
+            // Convertir le contenu existant en tableau associatif ou objet
+            $existingData = json_decode($existingContent, true);
+            return $this->twig->render('showarticles.html.twig', [
+                'sessionExistsAndTrue' => $sessionExistsAndTrue,
+                'articles' => $articles,
+                'categories' => $categories,
+                'souscategories' => $souscategories,
+                'propagande' => $existingData['Propagande'],
+                'pages' => $pages,
+                'numberpage' => $_GET['pages'] ?? 1
+
+            ]);
+            die();
         }
 
         $idUser = $_SESSION['iduser'];

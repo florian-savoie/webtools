@@ -46,7 +46,7 @@ $routes->get('/logout', 'logoutController::logout');
 $routes->get('/addarticle', 'articleController::addarticle');
 $routes->post('/addarticle', 'articleController::addarticle');
 $routes->post('/addarticleajax', 'articleController::addarticleajax');
-$routes->get('/showarticle', 'showarticlesController::showarticle');
+$routes->get('/', 'showarticlesController::showarticle');
 $routes->post('/votestar', 'showarticlesController::votestar');
 $routes->post('/addfavorite', 'showarticlesController::addfavorite');
 $routes->post('/deletefavorite', 'showarticlesController::deletefavorite');
@@ -65,7 +65,7 @@ $routes->post('/update-souscategory', 'showcategoryController::updatesouscategor
 $routes->post('/show-souscategory', 'articleController::addarticle');
 
 // ROUTE acceuil
-$routes->get('/', 'HomeController::Home');
+$routes->get('/roadmap', 'HomeController::Home');
 
 // ROUTE MON COMPTE
 $routes->post('/moncompte', 'moncompteController::moncompte');

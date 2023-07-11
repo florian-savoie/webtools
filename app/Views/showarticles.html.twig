@@ -166,7 +166,7 @@
 								</a>
 								<div class="row mb-1 col-12 ">
 									<div class="col-12 d-flex flex-column justify-content-center  mb-sm-0 mb-3">
-										<small class="text-light fw-semibold">Note :{{ article.rating }}</small>
+										<small class="text-black fw-bold">Note : {% if article.rating != 0 %}{{ article.rating }} {% endif %}</small>
 {% if sessionExistsAndTrue %}
 										<div class="col-12 d-flex justify-content-between ">
 											{% set voted = false %}

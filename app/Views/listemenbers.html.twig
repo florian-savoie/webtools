@@ -2,135 +2,137 @@
 {% extends "./layout/layout_nav.html.twig" %}
 {% block css %}
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
-    <!-- Flipster CSS -->
-    <link rel="stylesheet" href="dist/jquery.flipster.min.css">
-    <link rel="stylesheet" href="./assets/vendor/css/pages/app-chat.css" />
+	<!-- Flipster CSS -->
+	<link rel="stylesheet" href="dist/jquery.flipster.min.css">
+	<link rel="stylesheet" href="./assets/vendor/css/pages/app-chat.css"/>
 
-    <link rel="stylesheet" href="./assets/css/chat.css">
+	<link rel="stylesheet" href="./assets/css/chat.css">
 
-    <link rel="stylesheet" href="./assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-    <link rel="stylesheet" href="./assets/vendor/libs/node-waves/node-waves.css" />
-    <link rel="stylesheet" href="./assets/vendor/libs/typeahead-js/typeahead.css" />
-    <link rel="stylesheet" href="./assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css" />
-    <link rel="stylesheet" href="./assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css" />
-    <!-- Flipster Js -->
-    <script src="dist/jquery.flipster.min.js"></script>
+	<link rel="stylesheet" href="./assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
+	<link rel="stylesheet" href="./assets/vendor/libs/node-waves/node-waves.css"/>
+	<link rel="stylesheet" href="./assets/vendor/libs/typeahead-js/typeahead.css"/>
+	<link rel="stylesheet" href="./assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css"/>
+	<link
+	rel="stylesheet" href="./assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css"/>
+	<!-- Flipster Js -->
+	<script src="dist/jquery.flipster.min.js"></script>
 
 {% endblock %}
 {% block contenu %}
-    <!-- Content -->
-    <!-- Users List Table -->
-    <div class="container mt-5">
-        <div class="row mt-5"></div>
+	<!-- Content -->
+	<!-- Users List Table -->
+		<div class="container mt-5"> <div class="row mt-5"></div>
 
-        <!-- Users List Table -->
-        <div class="card">
-            <div class="card-header">
+		<!-- Users List Table -->
+		<div class="card">
+			<div class="card-header">
 
-                <div class="d-flex justify-content-between align-items-center my-3">
-                    <div class="row col-12">
-                   <div class="row col-md-12 col-lg-9"> <h2>Liste des membres</h2></div>
-                    <div class="row col-md-12 col-lg-3 d-flex justify-content-center">
-                      <div class="col-md-12 col-lg-5">  <label for="search-box" class=" col-form-label">Rechercher : </label></div>
-                        <div class="col-md-12 col-lg-7">  <input class="form-control me-5" type="text" placeholder="Rechercher un membres" id="search-box"></div>
-                </div>
-                </div>
-                </div>                <div class="d-flex justify-content-between align-items-center row py-3 gap-3 gap-md-0">
-                    <div class="col-md-4 user_role"></div>
-                    <div class="col-md-4 user_plan"></div>
-                    <div class="col-md-4 user_status"></div>
-                </div>
-            </div>
-            <div class="card-datatable table-responsive">
-<div class="table-responsive">
-  <table class="datatables-users table">
-    <thead class="table-light">
-      <tr>
-        <th style="width: 10%">Utilisateur</th>
-        <th style="width: 30%">Role</th>
-        <th style="width: 30%">Nombres de publication</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for user in users %}
-      <tr class="membres">
-        <td style="width: 10%">{{ user.pseudo }}</td> <!-- Nom de l'utilisateur -->
-        <td style="width: 30%">
-          <div class="row">
-            <div class="col-sm-4 col-lg-6">
-              <select class="form-select" id="selectrole{{ user.id }}">
-                <option disabled selected>{{ user.role }}</option>
-                <option>user</option>
-                <option>moderateur</option>
-                <option>admin</option>
-                <option>bloquer</option>
-              </select>
-            </div>
-            <div class="col-6">
-              <button class="btn btn-sm btn-success" onclick="updaterole({{ user.id }})">
-                Changer
-              </button>
-            </div>
-          </div>
-        </td> <!-- Rôle de l'utilisateur -->
-        <td style="width: 30%">{{ user.article_count }}</td> <!-- Nombre de publications de l'utilisateur -->
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
+				<div class="d-flex justify-content-between align-items-center my-3">
+					<div class="row col-12">
+						<div class="row col-md-12 col-lg-9">
+							<h2>Liste des membres</h2>
+						</div>
+						<div class="row col-md-12 col-lg-3 d-flex justify-content-center">
+							<div class="col-md-12 col-lg-5">
+								<label for="search-box" class=" col-form-label">Rechercher :
+								</label>
+							</div>
+							<div class="col-md-12 col-lg-7">
+								<input class="form-control me-5" type="text" placeholder="Rechercher un membres" id="search-box"></div>
+						</div>
+					</div>
+				</div>
+				<div class="d-flex justify-content-between align-items-center row py-3 gap-3 gap-md-0">
+					<div class="col-md-4 user_role"></div>
+					<div class="col-md-4 user_plan"></div>
+					<div class="col-md-4 user_status"></div>
+				</div>
+			</div>
+			<div class="card-datatable table-responsive">
+				<div class="table-responsive">
+					<table class="datatables-users table">
+						<thead class="table-light">
+							<tr>
+								<th style="width: 10%">Utilisateur</th>
+								<th style="width: 30%">Role</th>
+								<th style="width: 30%">Nombres de publication</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for user in users %}
+								<tr class="membres">
+									<td style="width: 10%">{{ user.pseudo }}</td>
+									<!-- Nom de l'utilisateur -->
+									<td style="width: 30%">
+										<div class="row">
+											<div class="col-sm-4 col-lg-6">
+												<select class="form-select" id="selectrole{{ user.id }}">
+													<option disabled selected>{{ user.role }}</option>
+													<option>user</option>
+													<option>moderateur</option>
+													<option>admin</option>
+													<option>bloquer</option>
+												</select>
+											</div>
+											<div class="col-6">
+												<button class="btn btn-sm btn-success" onclick="updaterole({{ user.id }})">
+													Changer
+												</button>
+											</div>
+										</div>
+									</td>
+									<!-- Rôle de l'utilisateur -->
+									<td style="width: 30%">{{ user.article_count }}</td>
+									<!-- Nombre de publications de l'utilisateur -->
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
 
 
-            </div>
-            <!-- Offcanvas to add new user -->
+			</div>
+			<!-- Offcanvas to add new user -->
 
-        </div>
-
-
-    </div>
+		</div>
 
 
-
+	</div>
 
 
 {% endblock %}
 
-        {% block js %}
+{% block js %}
 
 
-            <script src="./assets/vendor/assets/js/form-basic-inputs.js"></script>
+	<script src="./assets/vendor/assets/js/form-basic-inputs.js"></script>
 
 
-            <script src="./assets/js/users/role.js"></script>
-            <script src="./assets/js/users/deleteUser.js"></script>
-            <script>
-                const searchBox = $('#search-box');
-                const membres = $('.membres');
+	<script src="./assets/js/users/role.js"></script>
+	<script src="./assets/js/users/deleteUser.js"></script>
+	<script>
+		const searchBox = $('#search-box');
+const membres = $('.membres');
 
-                searchBox.on('input', function() {
-                    const searchTerm = searchBox.val().toLowerCase();
+searchBox.on('input', function () {
+const searchTerm = searchBox.val().toLowerCase();
 
-                    // parcours chaque élément article
-                    membres.each(function() {
-                        const card = $(this);
-                        const content = card.find('td').text().toLowerCase();
+// parcours chaque élément article
+membres.each(function () {
+const card = $(this);
+const content = card.find('td').text().toLowerCase();
 
-                        // affiche ou masque la carte en fonction de la recherche
-                        if (content.includes(searchTerm) ) {
-                            card.show();
-                        } else {
-                            card.hide();
-                        }
-                    });
-                });
+// affiche ou masque la carte en fonction de la recherche
+if (content.includes(searchTerm)) {
+card.show();
+} else {
+card.hide();
+}
+});
+});
+	</script>
 
-
-
-
-
-            </script>
-
-        {% endblock %}
+{% endblock %}
