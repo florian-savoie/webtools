@@ -104,11 +104,13 @@ class chatController extends BaseController
     public function getmessages()
     {
 
+   
+
         $builder = $this->db->table('chat');
-        $builder->orderBy('id', 'asc');
+        $builder->select('chat.*, users.pseudo as pseudo');
+        $builder->join('users', 'chat.id_user = users.id', 'left');
+        $builder->orderBy('chat.id', 'ASC');
         $chats = $builder->get()->getResultArray();
-
-
         // Renvoyer la réponse au format JSON
         header('Content-Type: application/json');
         echo json_encode($chats);

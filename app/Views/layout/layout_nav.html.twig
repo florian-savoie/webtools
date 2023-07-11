@@ -131,7 +131,7 @@
         <div class="drag-target"></div>
         <!-- Fullscreen Modal -->
 
-        {% if not vuechat is defined %}
+        {% if  vuechat != true %}
 
         <button
                 type="button"
@@ -353,7 +353,7 @@
                        <p class="mb-0">`+ chat.message+ `</p>
                    </div>
                    <div class="text-muted">
-                       <small>`+ chat.date+ `</small>
+                       <small>`+  chat.pseudo +" " + chat.date + `</small>
                    </div>
                </div>
            </div>
@@ -371,7 +371,7 @@
                        <p class="mb-0">`+ chat.message+ `</p>
                    </div>
                    <div class="text-muted">
-                       <small>`+ chat.date+ `</small>
+                       <small>`+ chat.pseudo +" " + chat.date +`</small>
                    </div>
                </div>
            </div>

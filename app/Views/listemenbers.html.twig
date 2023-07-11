@@ -45,42 +45,45 @@
                 </div>
             </div>
             <div class="card-datatable table-responsive">
-                <table class="datatables-users table">
-                    <thead class="table-light">
-                    <tr>
-                        <th>id</th>
-                        <th>Utilisateur</th>
-                        <th>Role</th>
-                        <th>Nombres de publication</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for user in users %}
-                        <tr class="membres">
-                            <td>{{ user.id }}</td> <!-- Colonne vide -->
-                            <td>{{ user.pseudo }}</td> <!-- Nom de l'utilisateur -->
-                            <td>
-                                <div class="row">
-                                    <div class="col-sm-4 col-lg-6"><select class="form-select" id="selectrole{{ user.id }}">
-                                            <option disabled selected>{{ user.role }}</option>
-                                            <option>user</option>
-                                            <option>moderateur</option>
-                                            <option>admin</option>
-                                            <option>bloquer</option>
-                                        </select></div>
-                                    <div class="col-6">
-                                        <button class="btn  btn-sm btn-success" onclick="updaterole({{ user.id }})">
-                                            Changer
-                                        </button>
-                                    </div>
-                                </div>
-                            </td> <!-- Rôle de l'utilisateur -->
-                            <td>{{ user.article_count }}</td> <!-- Nombre de publications de l'utilisateur -->
+<div class="table-responsive">
+  <table class="datatables-users table">
+    <thead class="table-light">
+      <tr>
+        <th style="width: 10%">Utilisateur</th>
+        <th style="width: 30%">Role</th>
+        <th style="width: 30%">Nombres de publication</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      <tr class="membres">
+        <td style="width: 10%">{{ user.pseudo }}</td> <!-- Nom de l'utilisateur -->
+        <td style="width: 30%">
+          <div class="row">
+            <div class="col-sm-4 col-lg-6">
+              <select class="form-select" id="selectrole{{ user.id }}">
+                <option disabled selected>{{ user.role }}</option>
+                <option>user</option>
+                <option>moderateur</option>
+                <option>admin</option>
+                <option>bloquer</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <button class="btn btn-sm btn-success" onclick="updaterole({{ user.id }})">
+                Changer
+              </button>
+            </div>
+          </div>
+        </td> <!-- Rôle de l'utilisateur -->
+        <td style="width: 30%">{{ user.article_count }}</td> <!-- Nombre de publications de l'utilisateur -->
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+
             </div>
             <!-- Offcanvas to add new user -->
 

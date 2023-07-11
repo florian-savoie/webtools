@@ -30,6 +30,7 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
+
 // ROUTE LOGIN
 $routes->get('/login', 'loginController::login');
 $routes->post('/login', 'loginController::login');
@@ -108,6 +109,10 @@ $routes->post('/forgot-password', 'forgetPasswordController::forgetpassword');
 // route reset PASSWORD
 $routes->get('/reset-password', 'resetpasswordController::resetpassword');
 $routes->post('/reset-password', 'resetpasswordController::resetpassword');
+
+// changer PASSWORD
+$routes->get('/change-password', 'mdpchangeController::home');
+$routes->post('/change-password', 'mdpchangeController::home');
 
 /*
  * --------------------------------------------------------------------

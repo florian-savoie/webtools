@@ -7,7 +7,7 @@ $(document).ready(function() {
         console.log(namecategory);
         // Effectuer la requête Ajax
         $.ajax({
-            url: '/add-category',
+            url: './add-category',
             method: 'POST',
             data: {
                 action: 'add-category',
@@ -23,7 +23,7 @@ $(document).ready(function() {
                 } else {
                     // La catégorie a été ajoutée avec succès
                     console.log(response);
-                    window.location.href = "/showcategory";
+                    window.location.href = "./showcategory";
 
 
                 }

@@ -94,7 +94,10 @@ class registerController extends BaseController
                         $profilregisterid = 'Data/img_profil_users/'.$utilisateur['0']['id'].'.jpg';
                         copy($profilregister, $profilregisterid);
 
-                        $updated = $this->db->table('users')->update($data, ['profile_image' => $utilisateur['0']['id']]);
+                        $data = [
+                            'profile_image' => $utilisateur['0']['id'].'.jpg',
+                        ];
+                        $updated = $this->db->table('users')->update($data, ['id' => $utilisateur['0']['id']]);
 // Ajouter membre a la liste des recherches rapide
                         $listeMembres = file_get_contents("assets/json/menbres/listemenbres.json");
                         $nouveauxMembres = json_decode($listeMembres, true);

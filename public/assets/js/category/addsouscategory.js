@@ -3,7 +3,7 @@ $('.addsouscategory').click(function() {
     let idcategory = $(this).data('idcategory');
 
     $.ajax({
-        url: '/add-souscategory',
+        url: './add-souscategory',
         type: 'post',
         dataType: 'json',
         data: {
@@ -13,7 +13,7 @@ $('.addsouscategory').click(function() {
         },
         success: function(response) {
             console.log(response);
-                                                                                        window.location.href = "/showcategory";
+                                                                                        window.location.href = "./showcategory";
 
         },
         error: function(xhr, status, error) {

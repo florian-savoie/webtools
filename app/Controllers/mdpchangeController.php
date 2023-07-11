@@ -4,7 +4,7 @@ namespace App\Controllers;
 use Config\Database;
 
 
-class HomeController extends BaseController
+class mdpchangeController extends BaseController
 {
 
     /**
@@ -12,7 +12,7 @@ class HomeController extends BaseController
      */
     protected $twig;
 
- 
+
 
     /**
      * @var \CodeIgniter\Session\Session
@@ -44,34 +44,29 @@ class HomeController extends BaseController
         }
     }
 
-    public function Home()
+    public function home()
     {
         $sessionExistsAndTrue = false;
-        $vuechat = true;
-
-        $autoriser = $this->session->get('Autoriser');
-
         // Vérifier si la session existe et est vraie
-        if ( $autoriser === true) {
+        if (!empty($_SESSION['role'])) {
             $sessionExistsAndTrue = true;
+        }else {
+            header("Location: ./showarticle");
+            exit(0);
         }
-        if ( !empty($_SESSION['role']) ) {
-            $sessionExistsAndTrue = true;
-            $vuechat = false;
 
-        }
+
         $existingContent = file_get_contents("assets/json/propagande/propagande.json");
         // Convertir le contenu existant en tableau associatif ou objet
         $existingData = json_decode($existingContent, true);
-        return $this->twig->render('aceuil.html.twig', [
-            'sessionExistsAndTrue' => $sessionExistsAndTrue,
+        return $this->twig->render('changepassword.html.twig', [
+            'sessionExistsAndTrue' => $sessionExistsAndTrue ,
             'session' => $_SESSION,
             'propagande' => $existingData['Propagande'],
-             'messageFlash' =>  $this->session->getFlashData('message'),
-             'vuechat' => $vuechat
 
 
         ]);
     }
+
 
 }

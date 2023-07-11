@@ -3,7 +3,7 @@ function deleteUser(id) {
 
 
     $.ajax({
-        url: '/deleteuser',
+        url: './deleteuser',
         method: 'POST',
         data: {
             idmember: idmember,

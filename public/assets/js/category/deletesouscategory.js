@@ -10,7 +10,7 @@ document.querySelectorAll('.modalCenterdellsouscat').forEach(function (modaldele
 
 
 $.ajax({
-    url: '/delete-souscategory',
+    url: './delete-souscategory',
     method: 'POST',
     data: {
         action: 'delete-souscategory',
@@ -23,7 +23,7 @@ $.ajax({
             console.log('Erreur lors de la modification :', response.error);
         } else {
             console.log(response);
-            window.location.href = "/showcategory";
+            window.location.href = "./showcategory";
         }
     },
     error: function(xhr, status, error) {

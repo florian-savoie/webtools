@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Effectuer la requête Ajax
             $.ajax({
-                url: '/update-category',
+                url: './update-category',
                 method: 'POST',
                 data: {
                     action: 'update-category',
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         console.log('Erreur lors de la modification :', response.error);
                     } else {
                         console.log(response);
-                                                window.location.href = "/showcategory";
+                                                window.location.href = "./showcategory";
 
                     }
                 },

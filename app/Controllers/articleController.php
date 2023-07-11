@@ -46,6 +46,7 @@ class articleController extends BaseController
 
     public function addarticle()
     {
+     
         $sessionExistsAndTrue = false;
         $autoriser = $this->session->get('Autoriser');
         // Vérifier si la session existe et est vraie

@@ -107,7 +107,7 @@
 										</div>
 										<div class="col mb-4 mt-2">
 											<div class="form-floating form-floating-outline">
-												<input type="text" id="url{{ article.id }}" class="form-control" placeholder="{{ article.title }}" value="{{ article.title }}" name="url{{ article.id }}"/>
+												<input type="text" id="url{{ article.id }}" class="form-control" placeholder="{{ article.link }}" value="{{ article.link }}" name="url{{ article.id }}"/>
 												<label for="nameWithTitle">Url</label>
 											</div>
 										</div>
@@ -127,7 +127,7 @@
 					</div>
 					<!-- Modal edit-->
 
-					<div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-5 article" style="height: 500px;">
+					<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-5 article" style="height: 500px;">
 						<div class="row">
 							<div class="col-8"></div>
 							{% if session.role == 'admin' or session.role == 'moderateur' %}
@@ -140,7 +140,7 @@
 							<div class="card h-100 ">
 								<img class="card-img-top" style="height: 190px ;min-height: 190px " src="{{ article.image }}" alt="iPhone-bg"/>
 								<div class="card-body ">
-									<div class="d-flex align-items-center justify-content-between " style="height: 35px">
+									<div class="row mb-2" style="height: 40px;"><div class="d-flex align-items-center justify-content-between " style="height: 23px">
 										<div class="d-flex ">
 											<div class="badge rounded-pill me-3" style="background-color: {{ article.category_color }};font-size: 12px">{{ article.category_name }}</div>
 
@@ -151,8 +151,11 @@
 
 
 									</div>
-									<div class="badge  rounded-pill" style="background-color: {{ article.category_color }};font-size: 12px">{{ article.subcategories_name }}</div>
-
+									{% if article.subcategories_name is defined and article.subcategories_name != '' %}
+									<div class="ms-2 badge d-inline-block w-auto rounded-pill" style="background-color: {{ article.category_color }}; font-size: 12px">{{ article.subcategories_name }}</div>
+								{% endif %}
+								
+								</div>
 									<h4 class="mb-1 text-center" style="height: 40px;overflow: hidden;font-size: 18px">{{ article.title }}</h4>
 									<p class="text-muted my-2" style=" height: 115px; overflow: hidden ;font-size: 14px">
 										{{ article.content }}
@@ -164,6 +167,7 @@
 								<div class="row mb-1 col-12 ">
 									<div class="col-12 d-flex flex-column justify-content-center  mb-sm-0 mb-3">
 										<small class="text-light fw-semibold">Note :{{ article.rating }}</small>
+{% if sessionExistsAndTrue %}
 										<div class="col-12 d-flex justify-content-between ">
 											{% set voted = false %}
 											{% set voteValue = 0 %}
@@ -193,18 +197,21 @@
 
 												{% endfor %}
 												{% if liked %}
-													<span onclick="deletefavorite({{ article.id }})" id="deletefavorite{{ article.id }}">💛</span>
-													<span onclick="addfavorite({{ article.id }})" id="addfavorite{{ article.id }}" hidden>🤍
+													<span onclick="deletefavorite({{ article.id }})" id="deletefavorite{{ article.id }}" style="cursor:pointer">💛</span>
+													<span onclick="addfavorite({{ article.id }})" id="addfavorite{{ article.id }}" style="cursor:pointer" hidden>🤍
 													</span>
 												{% else %}
-													<span onclick="deletefavorite({{ article.id }})" id="deletefavorite{{ article.id }}" hidden>💛</span>
-													<span onclick="addfavorite({{ article.id }})" id="addfavorite{{ article.id }}">🤍</span>
+													<span onclick="deletefavorite({{ article.id }})" id="deletefavorite{{ article.id }}" style="cursor:pointer" hidden>💛</span>
+													<span onclick="addfavorite({{ article.id }})" id="addfavorite{{ article.id }}" style="cursor:pointer">🤍</span>
 
 												{% endif %}
+											
 
 
 											</div>
 										</div>
+	{% endif %}
+
 									</div>
 								</div>
 
@@ -215,6 +222,24 @@
 					</div>
 					<!--/ Finance App -->
 				{% endfor %}
+				<nav aria-label="Page navigation">
+					<ul class="pagination justify-content-center">
+						{% set n = pages %} {# Supposons que vous ayez défini la valeur de n à 5 #}
+ <li class="page-item prev">
+                              <a class="page-link waves-effect" href="javascript:void(0);"><i class="tf-icon mdi mdi-chevron-double-left"></i></a>
+                            </li>
+						{% for i in 1..n %}
+                           
+                            <li class="page-item {% if i == numberpage %} active {% endif %}">
+                              <a class="page-link waves-effect" onclick="ShowPage('{{ i }}')">{{ i }}</a>
+                            </li>
+                        
+                          
+						{% endfor %}  <li class="page-item next">
+                              <a class="page-link waves-effect" href="javascript:void(0);"><i class="tf-icon mdi mdi-chevron-double-right"></i></a>
+                            </li>
+					</ul>
+				  </nav>
 			</div>
 		</div>
 	</div>
@@ -240,6 +265,41 @@
 	<!-- Page JS -->
 
 	<script>
+
+function ShowPage(page) {
+  // Récupère l'URL actuelle
+  var currentUrl = window.location.href;
+
+  // Vérifie si l'URL actuelle contient déjà des paramètres
+  if (currentUrl.indexOf('?') !== -1) {
+    // Sépare l'URL en base et paramètres
+    var urlParts = currentUrl.split('?');
+    var baseUrl = urlParts[0];
+    var paramsString = urlParts[1];
+
+    // Crée un objet URLSearchParams pour manipuler les paramètres
+    var params = new URLSearchParams(paramsString);
+
+    // Met à jour la valeur du paramètre 'pages'
+    params.set('pages', page);
+
+    // Récupère les valeurs des autres paramètres
+    var category = params.get('category');
+    var subcategory = params.get('subcategory');
+
+    // Construit la nouvelle URL avec les paramètres mis à jour
+    var newUrl = baseUrl + '?' + params.toString();
+
+    // Redirige vers la nouvelle URL
+    window.location.href = newUrl;
+  } else {
+    // S'il n'y a pas de paramètres dans l'URL, ajoute le paramètre 'pages'
+    var newUrl = currentUrl + '?pages=' + page;
+
+    // Redirige vers la nouvelle URL
+    window.location.href = newUrl;
+  }
+}
 
 
 $(document).ready(function() {
@@ -411,7 +471,7 @@ souscat = 0;
 formData.append("souscat", souscat);
 
 const xhr = new XMLHttpRequest();
-xhr.open("POST", "/testtt");
+xhr.open("POST", "./testtt");
 xhr.onload = function () {
 if (xhr.status === 200) {
 var response = JSON.parse(xhr.response); // Analyser la réponse JSON

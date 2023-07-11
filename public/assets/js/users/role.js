@@ -6,7 +6,7 @@ function updaterole(id) {
     console.log(idmember);
 
     $.ajax({
-        url: '/updaterole',
+        url: './updaterole',
         method: 'POST',
         data: {
             idmember: idmember,

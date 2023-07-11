@@ -4,7 +4,7 @@ document.querySelectorAll('.modaldeletecategory').forEach(function (modaldelet) 
         console.log(idligne);
         // Effectuer la requête Ajax
         $.ajax({
-            url: '/delete-category',
+            url: './delete-category',
             method: 'POST',
             data: {
                 action: 'delete-category',
@@ -20,7 +20,7 @@ document.querySelectorAll('.modaldeletecategory').forEach(function (modaldelet) 
                     // Le vote a été ajouté avec succès
 
                     console.log(response);
-                                                                window.location.href = "/showcategory";
+                                                                window.location.href = "./showcategory";
 
                 }
             },

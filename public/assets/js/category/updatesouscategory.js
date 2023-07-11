@@ -11,7 +11,7 @@ console.log(name);
 console.log(categoryId);
             // Effectuer la requête Ajax
             $.ajax({
-                url: '/update-souscategory',
+                url: './update-souscategory',
                 method: 'POST',
                 data: {
                     action: 'update-souscategory',
@@ -25,7 +25,7 @@ console.log(categoryId);
                         console.log('Erreur lors de la modification :', response.error);
                     } else {
                         console.log(response);
-                        window.location.href = "/showcategory";
+                        window.location.href = "./showcategory";
                     }
                 },
                 error: function(xhr, status, error) {
