@@ -58,7 +58,7 @@ class articleController extends BaseController
 
         if ($this->request->isAJAX()) {
             if ($this->request->getPost('action') === 'show-souscategory') {
-                $idcategory = $this->request->getPost('idcategory');
+                $idcategory = $this->request->getPost('idCategory');
                 $builder = $this->db->table('subcategories');
                 $query = $builder->getWhere(['category_id' => $idcategory]);
                 $souscategorys = $query->getResultArray();

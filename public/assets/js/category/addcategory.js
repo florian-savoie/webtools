@@ -4,7 +4,6 @@ $(document).ready(function() {
         // Récupération de la valeur de l'input category-input
         var namecategory = $('#category-input').val();
         var colortegory = $('#category-color').val();
-        console.log(namecategory);
         // Effectuer la requête Ajax
         $.ajax({
             url: './add-category',
@@ -22,10 +21,7 @@ $(document).ready(function() {
                     console.log('Erreur lors de l\'ajout de la catégorie :', response.error);
                 } else {
                     // La catégorie a été ajoutée avec succès
-                    console.log(response);
                     window.location.href = "./showcategory";
-
-
                 }
             },
             error: function (xhr, status, error) {

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- Métadonnées -->
+    <meta charset="UTF-8"> <!-- Définit l'encodage des caractères -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Définit l'affichage responsive pour les appareils mobiles -->
+    
+    <!-- Titre de la page -->
+    <title>Nom de votre page</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="./assets/img/webtools/logowebtools.png" type="image/x-icon"> <!-- Incluez le chemin vers votre icône du site -->
+    
+    <!-- Chargement de fichiers externes -->
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    
+    <!-- Feuilles de style CSS -->
+        <!-- vendor CSS -->
+    <link rel="stylesheet" href="./assets/vendor/css/pages/app-chat.css"/> <!-- Chargement de la feuille de style pour le chat -->
+    
+    <!-- sheet style CSS -->
+    <link rel="stylesheet" href="./assets/css/chat.css"> <!-- Chargement de la feuille de style pour le chat -->
+    <link rel="stylesheet" href="./assets/css/showArticle.css"> <!-- Chargement de la feuille de style pour l'affichage des articles -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+     <!-- Chargement de la feuille de style Bootstrap -->
+    
+</head>
+<body>
+<!-- Conteneur pour les articles -->
+<div class="container-fluid">
+    <!-- Ligne contenant les articles -->
+    <div class="row">
+        <!-- Carte (card) contenant les articles -->
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-xl-2 mb-5 article">
+            <!-- Contenu de la carte de l'article -->
+
+
+        <div class="row">
+    <!-- Scripts JavaScript -->
+    </div>
+</body>
+</html>
+
+<script>
+
+
+// Fonction pour charger les sous-catégories en fonction de la catégorie sélectionnée
+function showsouscat(idarticle) {
+  // Récupérer les éléments HTML nécessaires
+  let category = document.getElementById("category" + idarticle);
+  let selectSousCategory = document.getElementById("souscategory" + idarticle);
+  let divSousCat = document.getElementById("selectsouscat" + idarticle);
+
+  // Récupérer l'ID de la catégorie sélectionnée
+  let idCategory = category.value;
+
+  // Effectuer la requête Ajax
+  $.ajax({
+    url: './show-souscategory',
+    method: 'POST',
+    data: {
+      action: 'show-souscategory',
+      idCategory: idCategory
+    },
+    dataType: 'json', // Attendre une réponse JSON du serveur
+    success: function (response) {
+      // Vérifier s'il y a une erreur
+      if (response.hasOwnProperty('error')) {
+        showError('Erreur lors de la récupération des sous-catégories.');
+      } else {
+        // Effacer les options actuelles de la sous-catégorie
+        selectSousCategory.innerHTML = '';
+        if (response.length > 0) {
+          // Afficher la div de la sous-catégorie
+          divSousCat.hidden = false;
+
+          // Ajouter les options de la sous-catégorie
+          response.forEach(function (sousCat) {
+            selectSousCategory.innerHTML += `<option value="${sousCat.id}">${sousCat.name}</option>`;
+          });
+        } else {
+          // Cacher la div de la sous-catégorie si aucune sous-catégorie disponible
+          divSousCat.hidden = true;
+        }
+      }
+    },
+    error: function (xhr, status, error) {
+      showError('Erreur lors de la requête Ajax.');
+    }
+  });
+}
+
+
+// Fonction pour afficher un message d'erreur
+function showError(message) {
+  // Créer un élément div pour le message d'erreur
+  let errorDiv = document.createElement('div');
+  errorDiv.classList.add('error-message');
+  errorDiv.textContent = message;
+
+  // Insérer le message d'erreur avant la zone de sélection des sous-catégories
+  let sousCategoryContainer = document.getElementById('selectsouscat' + idarticle);
+  sousCategoryContainer.parentNode.insertBefore(errorDiv, sousCategoryContainer);
+}
+
+    
+</script>

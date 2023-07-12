@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="./assets/vendor/css/pages/app-chat.css"/>
 
 	<link rel="stylesheet" href="./assets/css/chat.css">
+	<link rel="stylesheet" href="./assets/css/showArticle.css">
 
 	<link rel="stylesheet" href="./assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
 	<link rel="stylesheet" href="./assets/vendor/libs/node-waves/node-waves.css"/>
@@ -29,11 +30,7 @@
 	<link rel="stylesheet" href="./assets/vendor/libs/node-waves/node-waves.css"/>
 	<link rel="stylesheet" href="./assets/vendor/libs/typeahead-js/typeahead.css"/>
 	<link rel="stylesheet" href="./assets/vendor/libs/rateyo/rateyo.css"/>
-	<style>
-		.article:hover {
-			transform: scale(1.03);
-		}
-	</style>
+
 
 {% endblock %}
 {% block contenu %}
@@ -42,7 +39,7 @@
 	{% include "./layout/aside.html.twig" %}
 
 		<div class="row col-12 " style="background: radial-gradient(circle, rgb(251,252,253) 94%, rgba(251,251,251,1) 100%);
-			"> <div class="col-1"></div>
+						"> <div class="col-1"></div>
 		<div class="col-11 mt-5">
 			<div class="d-flex justify-content-end align-items-center my-3">
 				<label for="search-box" class=" col-form-label">Rechercher :
@@ -78,7 +75,8 @@
 												</div>
 
 												<div class="form-floating form-floating-outline">
-													<select id="category{{ article.id }}" name="category{{ article.id }}" onchange="souscatinput({{ article.id }})" class="select2 form-select my-3" data-allow-clear="true">
+													<select id="category{{ article.id }}" name="category{{ article.id }}" onchange="showsouscat({{ article.id }})" 
+													         class="select2 form-select my-3" data-allow-clear="true">
 														{% for category in categories %}
 															{%  if  article.category_id == category.id %}
 																<option style="color:{{ category.color }}" value="{{ category.id }}" selected>{{ category.name }}</option>
@@ -95,6 +93,7 @@
 														<label for="souscategory">Choisir une sous-catégorie</label>
 													</div>
 												</div>
+												<div id="divError{{ article.id }}"></div>
 											</div>
 
 
@@ -125,37 +124,38 @@
 							</div>
 						</div>
 					</div>
-					<!-- Modal edit-->
+					<!-- Card contenant l'article -->
 
-					<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-5 article" style="height: 500px;">
+					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-xl-2 mb-5 article">
 						<div class="row">
 							<div class="col-8"></div>
 							{% if session.role == 'admin' or session.role == 'moderateur' %}
-								<button class=" col-3 btn btn-warning btn-xs p-1 " data-bs-toggle="modal" data-bs-target="#modalCenterEdit{{ article.id }}" onclick="souscatinput({{ article.id }})">>Editer
+								<button class=" col-3 btn btn-warning btn-xs p-1 " data-bs-toggle="modal" data-bs-target="#modalCenterEdit{{ article.id }}" onclick="showsouscat({{ article.id }})">>Editer
 								</button>
 							{% endif %}
 							<div class="col-1"></div>
 						</div>
 						<a href="{{ article.link }}" target="_blank">
 							<div class="card h-100 ">
-								<img class="card-img-top" style="height: 190px ;min-height: 190px " src="{{ article.image }}" alt="iPhone-bg"/>
+								<img class="card-img-top" src="{{ article.image }}" alt="iPhone-bg"/>
 								<div class="card-body ">
-									<div class="row mb-2" style="height: 40px;"><div class="d-flex align-items-center justify-content-between " style="height: 23px">
-										<div class="d-flex ">
-											<div class="badge rounded-pill me-3" style="background-color: {{ article.category_color }};font-size: 12px">{{ article.category_name }}</div>
+									<div class="row mb-2" style="height: 40px;">
+										<div class="d-flex align-items-center justify-content-between " style="height: 23px">
+											<div class="d-flex ">
+												<div class="badge rounded-pill me-3" style="background-color: {{ article.category_color }};font-size: 12px">{{ article.category_name }}</div>
+
+											</div>
+											<div>
+												<p class="text-muted fw-semibold mt-2">{{ article.submission_date |date("m/d/Y") }}</p>
+											</div>
+
 
 										</div>
-										<div>
-											<p class="text-muted fw-semibold mt-2">{{ article.submission_date |date("m/d/Y") }}</p>
-										</div>
-
+										{% if article.subcategories_name is defined and article.subcategories_name != '' %}
+											<div class="ms-2 badge d-inline-block w-auto rounded-pill" style="background-color: {{ article.category_color }}; font-size: 12px">{{ article.subcategories_name }}</div>
+										{% endif %}
 
 									</div>
-									{% if article.subcategories_name is defined and article.subcategories_name != '' %}
-									<div class="ms-2 badge d-inline-block w-auto rounded-pill" style="background-color: {{ article.category_color }}; font-size: 12px">{{ article.subcategories_name }}</div>
-								{% endif %}
-								
-								</div>
 									<h4 class="mb-1 text-center" style="height: 40px;overflow: hidden;font-size: 18px">{{ article.title }}</h4>
 									<p class="text-muted my-2" style=" height: 115px; overflow: hidden ;font-size: 14px">
 										{{ article.content }}
@@ -166,51 +166,54 @@
 								</a>
 								<div class="row mb-1 col-12 ">
 									<div class="col-12 d-flex flex-column justify-content-center  mb-sm-0 mb-3">
-										<small class="text-black fw-bold">Note : {% if article.rating != 0 %}{{ article.rating }} {% endif %}</small>
-{% if sessionExistsAndTrue %}
-										<div class="col-12 d-flex justify-content-between ">
-											{% set voted = false %}
-											{% set voteValue = 0 %}
-
-											{% for vote in votes %}
-												{% if vote.article_id == article.id %}
-													{% set voted = true %}
-													{% set voteValue = vote.vote %}
-												{% endif %}
-											{% endfor %}
-
-											{% if voted %}
-												<div class="onset-event-ratings" data-idarticle=" {{ article.id }}" data-note="{{ voteValue }}"></div>
-											{% else %}
-												<div class="onset-event-ratings" data-idarticle="{{ article.id }}" data-note="0"></div>
+										<small class="text-black fw-bold">Note :
+											{% if article.rating != 0 %}
+												{{ article.rating }}
 											{% endif %}
+										</small>
+										{% if sessionExistsAndTrue %}
+											<div class="col-12 d-flex justify-content-between ">
+												{% set voted = false %}
+												{% set voteValue = 0 %}
 
-											<div class="d-flex align-items-center justify-content-end">
+												{% for vote in votes %}
+													{% if vote.article_id == article.id %}
+														{% set voted = true %}
+														{% set voteValue = vote.vote %}
+													{% endif %}
+												{% endfor %}
 
-												{% set liked = false %}
+												{% if voted %}
+													<div class="onset-event-ratings" data-idarticle=" {{ article.id }}" data-note="{{ voteValue }}"></div>
+												{% else %}
+													<div class="onset-event-ratings" data-idarticle="{{ article.id }}" data-note="0"></div>
+												{% endif %}
 
-												{% for like in likes %}
-													{% if like.article_id == article.id %}
-														{% set liked = true %}
+												<div class="d-flex align-items-center justify-content-end">
+
+													{% set liked = false %}
+
+													{% for like in likes %}
+														{% if like.article_id == article.id %}
+															{% set liked = true %}
+														{% endif %}
+
+
+													{% endfor %}
+													{% if liked %}
+														<span onclick="deletefavorite({{ article.id }})" id="deletefavorite{{ article.id }}" style="cursor:pointer">💛</span>
+														<span onclick="addfavorite({{ article.id }})" id="addfavorite{{ article.id }}" style="cursor:pointer" hidden>🤍
+														</span>
+													{% else %}
+														<span onclick="deletefavorite({{ article.id }})" id="deletefavorite{{ article.id }}" style="cursor:pointer" hidden>💛</span>
+														<span onclick="addfavorite({{ article.id }})" id="addfavorite{{ article.id }}" style="cursor:pointer">🤍</span>
+
 													{% endif %}
 
 
-												{% endfor %}
-												{% if liked %}
-													<span onclick="deletefavorite({{ article.id }})" id="deletefavorite{{ article.id }}" style="cursor:pointer">💛</span>
-													<span onclick="addfavorite({{ article.id }})" id="addfavorite{{ article.id }}" style="cursor:pointer" hidden>🤍
-													</span>
-												{% else %}
-													<span onclick="deletefavorite({{ article.id }})" id="deletefavorite{{ article.id }}" style="cursor:pointer" hidden>💛</span>
-													<span onclick="addfavorite({{ article.id }})" id="addfavorite{{ article.id }}" style="cursor:pointer">🤍</span>
-
-												{% endif %}
-											
-
-
+												</div>
 											</div>
-										</div>
-	{% endif %}
+										{% endif %}
 
 									</div>
 								</div>
@@ -224,22 +227,28 @@
 				{% endfor %}
 				<nav aria-label="Page navigation">
 					<ul class="pagination justify-content-center">
-						{% set n = pages %} {# Supposons que vous ayez défini la valeur de n à 5 #}
- <li class="page-item prev">
-                              <a class="page-link waves-effect" href="javascript:void(0);"><i class="tf-icon mdi mdi-chevron-double-left"></i></a>
-                            </li>
+						{% set n = pages %}
+						{# Supposons que vous ayez défini la valeur de n à 5 #}
+						<li class="page-item prev">
+							<a class="page-link waves-effect" href="javascript:void(0);">
+								<i class="tf-icon mdi mdi-chevron-double-left"></i>
+							</a>
+						</li>
 						{% for i in 1..n %}
-                           
-                            <li class="page-item {% if i == numberpage %} active {% endif %}">
-                              <a class="page-link waves-effect" onclick="ShowPage('{{ i }}')">{{ i }}</a>
-                            </li>
-                        
-                          
-						{% endfor %}  <li class="page-item next">
-                              <a class="page-link waves-effect" href="javascript:void(0);"><i class="tf-icon mdi mdi-chevron-double-right"></i></a>
-                            </li>
+
+							<li class="page-item {% if i == numberpage %} active {% endif %}">
+								<a class="page-link waves-effect" onclick="ShowPage('{{ i }}')">{{ i }}</a>
+							</li>
+
+
+						{% endfor %}
+						<li class="page-item next">
+							<a class="page-link waves-effect" href="javascript:void(0);">
+								<i class="tf-icon mdi mdi-chevron-double-right"></i>
+							</a>
+						</li>
 					</ul>
-				  </nav>
+				</nav>
 			</div>
 		</div>
 	</div>
@@ -266,79 +275,71 @@
 
 	<script>
 
-function ShowPage(page) {
-  // Récupère l'URL actuelle
-  var currentUrl = window.location.href;
+		function ShowPage(page) { // Récupère l'URL actuelle
+var currentUrl = window.location.href;
 
-  // Vérifie si l'URL actuelle contient déjà des paramètres
-  if (currentUrl.indexOf('?') !== -1) {
-    // Sépare l'URL en base et paramètres
-    var urlParts = currentUrl.split('?');
-    var baseUrl = urlParts[0];
-    var paramsString = urlParts[1];
+// Vérifie si l'URL actuelle contient déjà des paramètres
+if (currentUrl.indexOf('?') !== -1) { // Sépare l'URL en base et paramètres
+var urlParts = currentUrl.split('?');
+var baseUrl = urlParts[0];
+var paramsString = urlParts[1];
 
-    // Crée un objet URLSearchParams pour manipuler les paramètres
-    var params = new URLSearchParams(paramsString);
+// Crée un objet URLSearchParams pour manipuler les paramètres
+var params = new URLSearchParams(paramsString);
 
-    // Met à jour la valeur du paramètre 'pages'
-    params.set('pages', page);
+// Met à jour la valeur du paramètre 'pages'
+params.set('pages', page);
 
-    // Récupère les valeurs des autres paramètres
-    var category = params.get('category');
-    var subcategory = params.get('subcategory');
+// Récupère les valeurs des autres paramètres
+var category = params.get('category');
+var subcategory = params.get('subcategory');
 
-    // Construit la nouvelle URL avec les paramètres mis à jour
-    var newUrl = baseUrl + '?' + params.toString();
+// Construit la nouvelle URL avec les paramètres mis à jour
+var newUrl = baseUrl + '?' + params.toString();
 
-    // Redirige vers la nouvelle URL
-    window.location.href = newUrl;
-  } else {
-    // S'il n'y a pas de paramètres dans l'URL, ajoute le paramètre 'pages'
-    var newUrl = currentUrl + '?pages=' + page;
+// Redirige vers la nouvelle URL
+window.location.href = newUrl;
+} else { // S'il n'y a pas de paramètres dans l'URL, ajoute le paramètre 'pages'
+var newUrl = currentUrl + '?pages=' + page;
 
-    // Redirige vers la nouvelle URL
-    window.location.href = newUrl;
-  }
+// Redirige vers la nouvelle URL
+window.location.href = newUrl;
+}
 }
 
 
-$(document).ready(function() {
-  // Vérifier la largeur de la fenêtre au chargement de la page
-  if ($(window).width() > 1200) {
-    // Afficher l'élément
-    $('#sliders').hide();
-  } else {
-    // Cacher l'élément
-    $('#sliders').slow();
+$(document).ready(function () { // Vérifier la largeur de la fenêtre au chargement de la page
+if ($(window).width() > 1200) { // Afficher l'élément
+$('#sliders').hide();
+} else { // Cacher l'élément
+$('#sliders').slow();
 
-  }
+}
 
-  // Vérifier la largeur de la fenêtre lors du redimensionnement
-  $(window).resize(function() {
-    if ($(window).width() > 1200) {
-      // Afficher l'élément
-      $('#sliders').hide();
-    } else {
-      // Cacher l'élément
-      $('#sliders').slow();
+// Vérifier la largeur de la fenêtre lors du redimensionnement
+$(window).resize(function () {
+if ($(window).width() > 1200) { // Afficher l'élément
+$('#sliders').hide();
+} else { // Cacher l'élément
+$('#sliders').slow();
 
-    }
-  });
+}
 });
-function Changetextaide(){
-		  if ( $('#textaside').text() == "Ouvrir le slide"){
-			$('#textaside').text("Fermer le slide");
-			$('#totateaside').css('transform', 'rotate(360deg)');
-		  }else{
-						$('#textaside').text("Ouvrir le slide");
-						$('#totateaside').css('transform', 'rotate(180deg)');
-
-		  }
+});
+function Changetextaide() {
+if ($('#textaside').text() == "Ouvrir le slide") {
+$('#textaside').text("Fermer le slide");
+$('#totateaside').css('transform', 'rotate(360deg)');
+} else {
+$('#textaside').text("Ouvrir le slide");
+$('#totateaside').css('transform', 'rotate(180deg)');
 
 }
 
-	
-		const searchBox = $('#search-box');
+}
+
+
+const searchBox = $('#search-box');
 const articles = $('.article');
 
 searchBox.on('input', function () {
@@ -360,49 +361,66 @@ card.hide();
 });
 
 
-function souscatinput(idarticle) {
-let category = document.getElementById("category" + idarticle);
-let souscategory = document.getElementById("souscategory" + idarticle);
-let divsouscat = document.getElementById("selectsouscat" + idarticle);
-console.log(category);
 
-let idcategory = category.value;
-console.log(category);
-// Effectuer la requête Ajax
-$.ajax({
-url: './show-souscategory',
-method: 'POST',
-data: {
-action: 'show-souscategory',
-idcategory: idcategory
-},
-dataType: 'json', // Attendre une réponse JSON du serveur
-success: function (response) {
-if (response.hasOwnProperty('error')) { // Erreur lors de l'ajout du vote
-console.log('Erreur lors de l\'ajout du vote :', response.error);
-} else {
-souscategory.innerHTML = '';
-if (response.length > 0) {
-for (let i = 0; i < response.length; i++) {
-divsouscat.hidden = false;
-let sousCat = response[i];
-souscategory.innerHTML += `<option value="${
-sousCat.id
-}">${
-sousCat.name
-}</option>`;
+
+
+// Fonction pour charger les sous-catégories en fonction de la catégorie sélectionnée
+function showsouscat(idarticle) {
+  // Récupérer les éléments HTML nécessaires
+  let category = document.getElementById("category" + idarticle);
+  let selectSousCategory = document.getElementById("souscategory" + idarticle);
+  let divSousCat = document.getElementById("selectsouscat" + idarticle);
+
+  // Récupérer l'ID de la catégorie sélectionnée
+  let idCategory = category.value;
+
+  // Effectuer la requête Ajax
+  $.ajax({
+    url: './show-souscategory',
+    method: 'POST',
+    data: {
+      action: 'show-souscategory',
+      idCategory: idCategory
+    },
+    dataType: 'json', // Attendre une réponse JSON du serveur
+    success: function (response) {
+      // Vérifier s'il y a une erreur
+      if (response.hasOwnProperty('error')) {
+        showError('Erreur lors de la récupération des sous-catégories.', idarticle);
+      } else {
+        // Effacer les options actuelles de la sous-catégorie
+        selectSousCategory.innerHTML = '';
+
+        if (response.length > 0) {
+          // Afficher la div de la sous-catégorie
+          divSousCat.hidden = false;
+
+          // Ajouter les options de la sous-catégorie
+          response.forEach(function (sousCat) {
+            selectSousCategory.innerHTML += `<option value="${sousCat.id}">${sousCat.name}</option>`;
+          });
+        } else {
+          // Cacher la div de la sous-catégorie si aucune sous-catégorie disponible
+          divSousCat.hidden = true;
+        }
+      }
+    },
+    error: function (xhr, status, error) {
+      showError('Erreur lors de la requête Ajax.', idarticle);
+    }
+  });
 }
 
-} else {
-divsouscat.hidden = true;
+// Fonction pour afficher un message d'erreur
+function showError(message, idarticle) {
+  // Insérer le message d'erreur dans la div située dans la zone de sélection des sous-catégories
+  let divError = document.getElementById('divError' + idarticle);
+  divError.style.color = "red";
+  divError.textContent = message;
 }
-}
-},
-error: function (xhr, status, error) { // Gérer les erreurs lors de la requête Ajax
-console.error('Une erreur s\'est produite lors de la requête :', error);
-}
-});
-};
+
+
+
 
 
 function compressAndAddImage(img, formData, callback) { // Créer un canvas qui permet de dessiner l'image réduite
@@ -535,8 +553,9 @@ window.location.reload();
 
 setTimeout(function () {
 $(".template-customizer-open-btn").hide();
-}, 000001);</script>
+}, 000001);
 
 	</script>
 
-{% endblock %}
+</script>{% endblock %}
+

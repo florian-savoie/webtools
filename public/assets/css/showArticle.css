@@ -1,0 +1,12 @@
+
+.article {
+    height: 500px;
+
+}
+.article:hover {
+    transform: scale(1.03);
+}
+.card-img-top{
+    height: 190px ;
+    min-height: 190px;
+}
