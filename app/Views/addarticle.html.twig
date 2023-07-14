@@ -126,15 +126,15 @@ let category = document.getElementById("category");
 let souscategory = document.getElementById("souscategory");
 let divsouscat = document.getElementById("selectsouscat");
 category.onchange = function() {
-    let idcategory = category.value;
+    let idCategory = category.value;
 
     // Effectuer la requête Ajax
     $.ajax({
         url: './show-souscategory',
         method: 'POST',
         data: {
-            action: 'show-souscategory',
-            idcategory: idcategory,
+           action: 'show-souscategory',
+      idCategory: idCategory
         },
         dataType: 'json', // Attendre une réponse JSON du serveur
         success: function (response) {
