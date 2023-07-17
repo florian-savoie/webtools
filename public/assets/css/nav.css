@@ -1,0 +1,11 @@
+/* Style pour la classe .logoNav */
+.logoNav {
+    height: 80px;
+    padding: 10px;
+}
+
+/* Style pour la balise <nav> */
+nav {
+    background: linear-gradient(to right, #5485f3, #a0b3f3);
+}
+
